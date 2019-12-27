@@ -10,13 +10,13 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: aclocal
-    run: aclocal
+      run: aclocal
     - name: autoheader
-    run: autoheader
+      run: autoheader
     - name: automake
-    run: automake --force-missing --add-missing
-    -name: autoconf
-    run: autoconf
+      run: automake --force-missing --add-missing
+    - name: autoconf
+      run: autoconf
     - name: configure
       run: ./configure
     - name: make
