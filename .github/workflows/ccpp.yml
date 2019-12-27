@@ -9,6 +9,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
+    - name: libtool
+      run: libtoolize --force
     - name: aclocal
       run: aclocal
     - name: autoheader
