@@ -36,9 +36,8 @@ sqfs_err sqfs_cache_init(sqfs_cache *cache, size_t size, size_t count,
 	cache->next = 0;
 	
 #ifdef CACHE_THREAD
-	if (thrd_success != mtx_init(&cache->mtx, mtx_plain))
+	if (LOCK_SUCCESS != init_mutex(&cache->mtx))
 	{
-		fprintf(stderr, "Error: mtx_init failed!!!\n");
 		return SQFS_ERR;
 	}
 #endif
@@ -70,23 +69,28 @@ void sqfs_cache_destroy(sqfs_cache *cache) {
 
 void *sqfs_cache_get(sqfs_cache *cache, sqfs_cache_idx idx) {
 	size_t i;
+	void *retVal = NULL;
 #ifdef CACHE_THREAD
-	if ( thrd_success != mtx_lock(&cache->mtx) )
+	if (LOCK_SUCCESS != lock(&cache->mtx) )
 	{
-		fprintf(stderr, "Error: mtx_lock failed!!!\n");
 		return NULL;
 	}
 #endif	
 	for (i = 0; i < cache->count; ++i) {
-		if (cache->idxs[i] == idx)
-			return sqfs_cache_entry(cache, i);
+		if (cache->idxs[i] == idx) {
+			retVal = sqfs_cache_entry(cache, i);
+		}
 	}
-	return NULL;
+#ifdef CACHE_THREAD
+	unlock(&cache->mtx);
+#endif
+	return retVal;
 }
 
 void *sqfs_cache_add(sqfs_cache *cache, sqfs_cache_idx idx) {
+	void *retVal = NULL;
 #ifdef CACHE_THREAD
-	if (thrd_success == mtx_lock(&cache->mtx))
+	if (LOCK_SUCCESS == lock(&cache->mtx))
 	{
 
 #endif	
@@ -97,15 +101,12 @@ void *sqfs_cache_add(sqfs_cache *cache, sqfs_cache_idx idx) {
 		cache->dispose(sqfs_cache_entry(cache, i));
 
 	cache->idxs[i] = idx;
-	return sqfs_cache_entry(cache, i);
+	retVal = sqfs_cache_entry(cache, i);
 #ifdef CACHE_THREAD
+	unlock(&cache->mtx);
 	}
-	else
-	{
-		fprintf(stderr, "Error: mtx_lock failed!!!\n");
-		return NULL;
-	}
-#endif	
+#endif
+	return retVal;
 }
 
 /* sqfs_cache_add can be called but the caller can fail to fill it (IO
@@ -115,7 +116,7 @@ void *sqfs_cache_add(sqfs_cache *cache, sqfs_cache_idx idx) {
  */
 void sqfs_cache_invalidate(sqfs_cache *cache, sqfs_cache_idx idx) {
 #ifdef CACHE_THREAD
-	if (thrd_success != mtx_lock(&cache->mtx))
+	if (LOCK_SUCCESS != lock(&cache->mtx))
 	{
 		return;
 	}
@@ -124,6 +125,9 @@ void sqfs_cache_invalidate(sqfs_cache *cache, sqfs_cache_idx idx) {
 	for (i = 0; i < cache->count; ++i) {
 		if (cache->idxs[i] == idx) {
 			cache->idxs[i] = SQFS_CACHE_IDX_INVALID;
+#ifdef CACHE_THREAD
+			unlock(&cache->mtx);
+#endif
 			return;
 		}
 	}
