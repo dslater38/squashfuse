@@ -28,6 +28,7 @@
 #include "common.h"
 
 #include "squashfs_fs.h"
+#include <fuse.h>
 
 typedef struct {
 	sqfs_md_cursor cur;
@@ -49,7 +50,7 @@ typedef char sqfs_name[SQUASHFS_NAME_LEN + 1];
 /* Begin a directory traversal, initializing the dir structure.
    If offset is non-zero, fast-forward to that offset in the directory. */
 sqfs_err 	sqfs_dir_open(sqfs *fs, sqfs_inode *inode, sqfs_dir *dir,
-	off_t offset);
+	fuse_off_t offset);
 
 /* Initialize a dir_entry structure before use.
 	'namebuf' should be a character buffer of enough size to hold any name,

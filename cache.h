@@ -27,6 +27,10 @@
 
 #include "common.h"
 
+#ifdef CACHE_THREAD
+#include <threads.h>
+#endif
+
 /* Really simplistic cache
  *  - Linear search
  *  - Linear eviction
@@ -46,6 +50,9 @@ typedef struct {
 	
 	size_t size, count;
 	size_t next; /* next block to evict */
+#ifdef CACHE_THREAD
+	mtx_t	mtx;
+#endif
 } sqfs_cache;
 
 sqfs_err sqfs_cache_init(sqfs_cache *cache, size_t size, size_t count,

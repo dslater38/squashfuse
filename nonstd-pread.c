@@ -33,7 +33,7 @@
 		ov.Offset = (DWORD)off;
 		ov.OffsetHigh = (DWORD)(off >> 32);
 
-		if (ReadFile(file, buf, count, &bread, &ov) == FALSE)
+		if (ReadFile(file, buf, (DWORD)count, &bread, &ov) == FALSE)
 			return -1;
 		return bread;
 	}

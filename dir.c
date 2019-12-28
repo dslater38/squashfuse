@@ -54,7 +54,7 @@ static sqfs_err sqfs_dir_md_read(sqfs *fs, sqfs_dir *dir, void *buf,
 
 
 sqfs_err sqfs_dir_open(sqfs *fs, sqfs_inode *inode, sqfs_dir *dir,
-		off_t offset) {
+	fuse_off_t offset) {
 	if (!S_ISDIR(inode->base.mode))
 		return SQFS_ERR;
 

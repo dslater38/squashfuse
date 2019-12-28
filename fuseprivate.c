@@ -32,14 +32,19 @@
 
 #include "nonstd.h"
 
-sqfs_err sqfs_stat(sqfs *fs, sqfs_inode *inode, struct stat *st) {
+#ifdef _MSC_VER
+#define	S_ISCHR(m)	((m & 0170000) == 0020000)	/* char special */
+#define	S_ISBLK(m)	((m & 0170000) == 0060000)	/* block special */
+#endif
+
+sqfs_err sqfs_stat(sqfs *fs, sqfs_inode *inode, struct fuse_stat *st) {
 	sqfs_err err = SQFS_OK;
 	uid_t id;
 	
 	memset(st, 0, sizeof(*st));
 	st->st_mode = inode->base.mode;
 	st->st_nlink = inode->nlink;
-	st->st_mtime = st->st_ctime = st->st_atime = inode->base.mtime;
+	st->st_mtim.tv_sec = st->st_ctim.tv_sec = st->st_atim.tv_sec = inode->base.mtime;
 	
 	if (S_ISREG(st->st_mode)) {
 		/* FIXME: do symlinks, dirs, etc have a size? */
@@ -51,9 +56,9 @@ sqfs_err sqfs_stat(sqfs *fs, sqfs_inode *inode, struct stat *st) {
 	} else if (S_ISLNK(st->st_mode)) {
 		st->st_size = inode->xtra.symlink_size;
 	}
-	
+
 	st->st_blksize = fs->sb.block_size; /* seriously? */
-	
+
 	err = sqfs_id_get(fs, inode->base.uid, &id);
 	if (err)
 		return err;

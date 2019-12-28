@@ -35,6 +35,14 @@ sqfs_err sqfs_cache_init(sqfs_cache *cache, size_t size, size_t count,
 	cache->dispose = dispose;
 	cache->next = 0;
 	
+#ifdef CACHE_THREAD
+	if (thrd_success != mtx_init(&cache->mtx, mtx_plain))
+	{
+		fprintf(stderr, "Error: mtx_init failed!!!\n");
+		return SQFS_ERR;
+	}
+#endif
+
 	cache->idxs = calloc(count, sizeof(sqfs_cache_idx));
 	cache->buf = calloc(count, size);
 	if (cache->idxs && cache->buf)
@@ -62,6 +70,13 @@ void sqfs_cache_destroy(sqfs_cache *cache) {
 
 void *sqfs_cache_get(sqfs_cache *cache, sqfs_cache_idx idx) {
 	size_t i;
+#ifdef CACHE_THREAD
+	if ( thrd_success != mtx_lock(&cache->mtx) )
+	{
+		fprintf(stderr, "Error: mtx_lock failed!!!\n");
+		return NULL;
+	}
+#endif	
 	for (i = 0; i < cache->count; ++i) {
 		if (cache->idxs[i] == idx)
 			return sqfs_cache_entry(cache, i);
@@ -70,14 +85,27 @@ void *sqfs_cache_get(sqfs_cache *cache, sqfs_cache_idx idx) {
 }
 
 void *sqfs_cache_add(sqfs_cache *cache, sqfs_cache_idx idx) {
+#ifdef CACHE_THREAD
+	if (thrd_success == mtx_lock(&cache->mtx))
+	{
+
+#endif	
 	size_t i = (cache->next++);
 	cache->next %= cache->count;
-	
+
 	if (cache->idxs[i] != SQFS_CACHE_IDX_INVALID)
 		cache->dispose(sqfs_cache_entry(cache, i));
-	
+
 	cache->idxs[i] = idx;
 	return sqfs_cache_entry(cache, i);
+#ifdef CACHE_THREAD
+	}
+	else
+	{
+		fprintf(stderr, "Error: mtx_lock failed!!!\n");
+		return NULL;
+	}
+#endif	
 }
 
 /* sqfs_cache_add can be called but the caller can fail to fill it (IO
@@ -86,6 +114,12 @@ void *sqfs_cache_add(sqfs_cache *cache, sqfs_cache_idx idx) {
  * since it is never fully initialized.
  */
 void sqfs_cache_invalidate(sqfs_cache *cache, sqfs_cache_idx idx) {
+#ifdef CACHE_THREAD
+	if (thrd_success != mtx_lock(&cache->mtx))
+	{
+		return;
+	}
+#endif
 	size_t i;
 	for (i = 0; i < cache->count; ++i) {
 		if (cache->idxs[i] == idx) {

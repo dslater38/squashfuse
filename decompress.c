@@ -29,7 +29,9 @@
 #include <string.h>
 
 #if _WIN32
+#ifndef HAVE_ZLIB_H
 	#include "win_decompress.c.inc"
+#endif
 #endif
 
 
@@ -38,8 +40,8 @@
 
 static sqfs_err sqfs_decompressor_zlib(void *in, size_t insz,
 		void *out, size_t *outsz) {
-	uLongf zout = *outsz;
-	int zerr = uncompress((Bytef*)out, &zout, in, insz);
+	uLongf zout = (uLong)(*outsz);
+	int zerr = uncompress((Bytef*)out, &zout, in, (uLong)insz);
 	if (zerr != Z_OK)
 		return SQFS_ERR;
 	*outsz = zout;
@@ -88,7 +90,7 @@ static sqfs_err sqfs_decompressor_lzo(void *in, size_t insz,
 #include <lz4.h>
 static sqfs_err sqfs_decompressor_lz4(void *in, size_t insz,
 		void *out, size_t *outsz) {
-	int lz4out = LZ4_decompress_safe (in, out, insz, *outsz);
+	int lz4out = LZ4_decompress_safe (in, out, (int)insz, (int)(*outsz));
 	if (lz4out < 0)
 		return SQFS_ERR;
 	*outsz = lz4out;
