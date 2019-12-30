@@ -187,7 +187,7 @@ static int sqfs_hl_op_read(const char *path, char *buf, size_t size,
 	sqfs_hl_lookup(&fs, NULL, NULL);
 	sqfs_inode *inode = (sqfs_inode*)(intptr_t)fi->fh;
 
-	fuse_off_t osize = size;
+	sqfs_off_t osize = size;
 	if (sqfs_read_range(fs, inode, off, &osize, buf))
 		return -EIO;
 	return (int)osize;

@@ -4,10 +4,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#ifdef _MSC_VER
+#include <direct.h>
+#include <io.h>
+#include <malloc.h>
+#else
 #include <unistd.h>
+#endif
+
 #include <sys/stat.h>
 #include "squashfs_fs.h"
 
+#include "nonstd.h"
+
+#ifdef _MSC_VER
+
+#endif
 
 #define PROGNAME "squashfuse_extract"
 
@@ -34,14 +47,14 @@ bool startsWith(const char *pre, const char *str)
 }
 
 /* Fill in a stat structure. Does not set st_ino */
-sqfs_err sqfs_stat(sqfs *fs, sqfs_inode *inode, struct stat *st) {
+sqfs_err sqfs_stat(sqfs *fs, sqfs_inode *inode, struct fuse_stat *st) {
 	sqfs_err err = SQFS_OK;
 	uid_t id;
 	
 	memset(st, 0, sizeof(*st));
 	st->st_mode = inode->base.mode;
 	st->st_nlink = inode->nlink;
-	st->st_mtime = st->st_ctime = st->st_atime = inode->base.mtime;
+	st->st_mtim.tv_sec = st->st_ctim.tv_sec = st->st_atim.tv_sec = inode->base.mtime;
 	
 	if (S_ISREG(st->st_mode)) {
 		/* FIXME: do symlinks, dirs, etc have a size? */
@@ -68,15 +81,17 @@ sqfs_err sqfs_stat(sqfs *fs, sqfs_inode *inode, struct stat *st) {
 	return SQFS_OK;
 }
 
+#define BYTES_AT_A_TIME (64 * 1024)
+
 int main(int argc, char *argv[]) {
     sqfs_err err = SQFS_OK;
     sqfs_traverse trv;
     sqfs fs;
     char *image;
     char *path_to_extract;
-    char *prefix;
+    const char *prefix;
     char prefixed_path_to_extract[1024];
-    struct stat st;
+    struct fuse_stat st;
     
     prefix = "squashfs-root/";
     
@@ -101,12 +116,12 @@ int main(int argc, char *argv[]) {
         if (!trv.dir_end) {
             if ((startsWith(path_to_extract, trv.path) != 0) || (strcmp("-a", path_to_extract) == 0)){
                 fprintf(stderr, "trv.path: %s\n", trv.path);
-                fprintf(stderr, "sqfs_inode_id: %lu\n", trv.entry.inode);
+                fprintf(stderr, "sqfs_inode_id: %llu\n", trv.entry.inode);
                 sqfs_inode inode;
                 if (sqfs_inode_get(&fs, &inode, trv.entry.inode))
                     die("sqfs_inode_get error");
                 fprintf(stderr, "inode.base.inode_type: %i\n", inode.base.inode_type);
-                fprintf(stderr, "inode.xtra.reg.file_size: %lu\n", inode.xtra.reg.file_size);
+                fprintf(stderr, "inode.xtra.reg.file_size: %llu\n", inode.xtra.reg.file_size);
                 strcpy(prefixed_path_to_extract, "");
                 strcat(strcat(prefixed_path_to_extract, prefix), trv.path);
                 if (inode.base.inode_type == SQUASHFS_DIR_TYPE){
@@ -136,15 +151,15 @@ int main(int argc, char *argv[]) {
                     printf("\n");
         
                     // Read the file in chunks
-                    off_t bytes_already_read = 0;
-                    sqfs_off_t bytes_at_a_time = 64*1024;
+					sqfs_off_t bytes_already_read = 0;
+                    sqfs_off_t bytes_at_a_time = BYTES_AT_A_TIME;
                     FILE * f;
                     f = fopen (prefixed_path_to_extract, "w+");
                     if (f == NULL)
                         die("fopen error");
                     while (bytes_already_read < inode.xtra.reg.file_size)
                     {
-                        char buf[bytes_at_a_time];
+                        char buf[BYTES_AT_A_TIME];
                         if (sqfs_read_range(&fs, &inode, (sqfs_off_t) bytes_already_read, &bytes_at_a_time, buf))
                             die("sqfs_read_range error");
                         // fwrite(buf, 1, bytes_at_a_time, stdout);
@@ -155,15 +170,24 @@ int main(int argc, char *argv[]) {
                     chmod (prefixed_path_to_extract, st.st_mode);
                 } else if (inode.base.inode_type == SQUASHFS_SYMLINK_TYPE){
                     size_t size = strlen(trv.path)+1;
-                    char buf[size];
-                    int ret = sqfs_readlink(&fs, &inode, buf, &size);
-                    if (ret != 0)
-                        die("sqfs_readlink error");
-                    fprintf(stderr, "Symlink: %s to %s \n", prefixed_path_to_extract, buf);
-                    unlink(prefixed_path_to_extract);
-                    ret = symlink(buf, prefixed_path_to_extract);
-                    if (ret != 0)
-                        die("symlink error");
+                    /* char buf[size]; */
+					char *buf = malloc(size);
+					if (buf)
+					{
+						int ret = sqfs_readlink(&fs, &inode, buf, &size);
+						if (ret != 0)
+							die("sqfs_readlink error");
+						fprintf(stderr, "Symlink: %s to %s \n", prefixed_path_to_extract, buf);
+						unlink(prefixed_path_to_extract);
+						ret = symlink(buf, prefixed_path_to_extract);
+						if (ret != 0)
+							die("symlink error");
+						free(buf);
+					}
+					else
+					{
+						die("memory allocation failure");
+					}
                 } else {
                     fprintf(stderr, "TODO: Implement inode.base.inode_type %i\n", inode.base.inode_type);
                 }

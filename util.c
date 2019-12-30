@@ -38,7 +38,7 @@
 
 		// FIXME: Better error handling
 		if (print)
-			fprintf(stderr, "CreateFile error: %d\n", GetLastError());
+			fprintf(stderr, "CreateFile error: %d\n", (int)GetLastError());
 		return SQFS_ERR;
 	}
 

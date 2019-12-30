@@ -28,14 +28,69 @@
 #include <Windows.h>
 #include <sys/stat.h>
 #include <stdint.h>
+#include <direct.h>
 
-#define S_IFIFO 0010000
-#define S_IFBLK 0060000
-#define S_IFLNK 0120000
+#define mkdir(a,b) win_mkdir(a,b)
+
+__inline int win_mkdir(const char *dir, int mode)
+{
+	return _mkdir(dir);
+}
+
+/* TODO: make a version of this that works correctly with directories*/
+__inline  int symlink(const char *path1, const char *path2)
+{
+	BOOLEAN success = CreateSymbolicLinkA(path2, path1, 0);
+	return (success != 0 ? 0 : -1);
+}
+
+#undef S_IFMT
+#undef S_IFREG
+#undef S_IFDIR
+#undef S_IFCHR
+
+
+#define S_IFMT  00170000
 #define S_IFSOCK 0140000
-#define S_ISDIR(_m) (((_m) & _S_IFMT) == _S_IFDIR)
-#define S_ISREG(_m) (((_m) & _S_IFMT) == _S_IFREG)
-#define S_ISLNK(_m) (((_m) & _S_IFMT) == S_IFLNK)
+#define S_IFLNK	 0120000
+#define S_IFREG  0100000
+#define S_IFBLK  0060000
+#define S_IFDIR  0040000
+#define S_IFCHR  0020000
+#define S_IFIFO  0010000
+#define S_ISUID  0004000
+#define S_ISGID  0002000
+#define S_ISVTX  0001000
+
+#define S_ISLNK(m)	(((m) & S_IFMT) == S_IFLNK)
+#define S_ISREG(m)	(((m) & S_IFMT) == S_IFREG)
+#define S_ISDIR(m)	(((m) & S_IFMT) == S_IFDIR)
+#define S_ISCHR(m)	(((m) & S_IFMT) == S_IFCHR)
+#define S_ISBLK(m)	(((m) & S_IFMT) == S_IFBLK)
+#define S_ISFIFO(m)	(((m) & S_IFMT) == S_IFIFO)
+#define S_ISSOCK(m)	(((m) & S_IFMT) == S_IFSOCK)
+
+#define S_IRWXU 00700
+#define S_IRUSR 00400
+#define S_IWUSR 00200
+#define S_IXUSR 00100
+
+#define S_IRWXG 00070
+#define S_IRGRP 00040
+#define S_IWGRP 00020
+#define S_IXGRP 00010
+
+#define S_IRWXO 00007
+#define S_IROTH 00004
+#define S_IWOTH 00002
+#define S_IXOTH 00001
+
+/* access function */
+#define	F_OK		0	/* test for existence of file */
+#define	X_OK		0x01	/* test for execute or search permission */
+#define	W_OK		0x02	/* test for write permission */
+#define	R_OK		0x04	/* test for read permission */
+
 typedef unsigned short sqfs_mode_t;
 typedef uint32_t sqfs_id_t; /* Internal uids/gids are 32-bits */
 

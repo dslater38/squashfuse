@@ -90,8 +90,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141_clang_c2</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>llvm</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -111,8 +110,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141_clang_c2</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>llvm</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -152,10 +150,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(ProjectDir);$(ProjectDir)\..;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(ProjectDir);$(ProjectDir)\..;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -168,15 +170,21 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir);$(ProjectDir)\..;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir);$(ProjectDir)\..;$(IncludePath)</IncludePath>
     <CustomBuildBeforeTargets>BuildGenerateSources</CustomBuildBeforeTargets>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir);$(ProjectDir)\..;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -190,6 +198,18 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir);$(ProjectDir)\..;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Label="LLVM" Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">
+    <ClangClAdditionalOptions>-Xclang -std=c11</ClangClAdditionalOptions>
+    <UseLldLink>false</UseLldLink>
+    <UseLlvmLib>false</UseLlvmLib>
+  </PropertyGroup>
+  <PropertyGroup Label="LLVM" Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">
+    <UseLldLink>false</UseLldLink>
+    <UseLlvmLib>false</UseLlvmLib>
+    <ClangClAdditionalOptions>-Xclang -std=c11</ClangClAdditionalOptions>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -197,8 +217,9 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WINVER=0x0501;_WIN32_WINNT=0x501;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\build;$(ProjectDIr)..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -206,7 +227,7 @@
       <AdditionalDependencies>zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>d:\usr\local\zlib\lib</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
-      <Version>0.1.103</Version>
+      <Version>0.1103</Version>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
@@ -215,9 +236,10 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WINVER=0x0501;_WIN32_WINNT=0x501;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\build;$(ProjectDIr)..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -225,7 +247,7 @@
       <AdditionalDependencies>zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>d:\usr\local\zlib\lib</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
-      <Version>0.1.103</Version>
+      <Version>0.1103</Version>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -234,16 +256,17 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WINVER=0x0501;_WIN32_WINNT=0x501;WIN32;LZMA_API_STATIC=1;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;LZMA_API_STATIC=1;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\build;$(ProjectDIr)..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>zlibstatic.lib;winfsp-x64.lib;liblzma.a;libzstd_static.lib;liblz4_static.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>d:\usr\local\zlib\lib;d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_Debug;D:\Dev\xz-5.2.4\bin_x86-64;D:\Dev\lz4\visual\VS2017\bin\x64_Debug;D:\usr\local\lzo\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>squashfuse.lib;zlibstat.lib;winfsp-x64.lib;liblzma.lib;libzstd_static.lib;liblz4.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);D:\Dev\zlib-1.2.8\contrib\vstudio\vc14\x64\$(Configuration);d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_$(Configuration);D:\Dev\xz-5.2.4\windows\vs2017\$(Configuration)\x64\liblzma;D:\Dev\lz4\visual\VS2017\bin\x64_$(Configuration);d:\Dev\lzo-2.10\build\$(Configuration)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
-      <Version>0.1.103</Version>
+      <Version>0.1103</Version>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">
@@ -252,17 +275,19 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WINVER=0x0501;_WIN32_WINNT=0x501;WIN32;LZMA_API_STATIC=1;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;LZMA_API_STATIC=1;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\build;$(ProjectDIr)..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>zlibstatic.lib;winfsp-x64.lib;liblzma.a;libzstd_static.lib;liblz4_static.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>d:\usr\local\zlib\lib;d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_Debug;D:\Dev\xz-5.2.4\bin_x86-64;D:\Dev\lz4\visual\VS2017\bin\x64_Debug;D:\usr\local\lzo\lib</AdditionalLibraryDirectories>
-      <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
-      <Version>0.1.103</Version>
+      <AdditionalDependencies>squashfuseLib.lib;zlibstat.lib;winfsp-x64.lib;liblzma.a;libzstd_static.lib;liblz4_static.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);D:\Dev\zlib-1.2.8\contrib\vstudio\vc14\x64\StaticDebug;d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_Debug-Static;D:\Dev\xz-5.2.4\bin_x86-64;D:\Dev\lz4\visual\VS2017\bin\x64_Debug-Static;d:\Dev\lzo-2.10\buildS\Debug</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <Version>0.1103</Version>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -273,18 +298,20 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WINVER=0x0501;_WIN32_WINNT=0x501;WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\build;$(ProjectDIr)..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>d:\usr\local\zlib\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
-      <Version>0.1.103</Version>
+      <Version>0.1103</Version>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">
@@ -295,19 +322,21 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WINVER=0x0501;_WIN32_WINNT=0x501;WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\build;$(ProjectDIr)..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>d:\usr\local\zlib\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
-      <Version>0.1.103</Version>
+      <Version>0.1103</Version>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <PreBuildEvent />
     <PreBuildEvent />
@@ -329,20 +358,23 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WINVER=0x0501;_WIN32_WINNT=0x501;WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\build;$(ProjectDIr)..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <CLanguageStandard>c11</CLanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>d:\usr\local\zlib\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
-      <Version>0.1.103</Version>
+      <Version>0.1103</Version>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -353,20 +385,22 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WINVER=0x0501;_WIN32_WINNT=0x501;WIN32;LZMA_API_STATIC=1;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;LZMA_API_STATIC=1;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\build;$(ProjectDIr)..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>d:\usr\local\zlib\lib;d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_Release;D:\Dev\xz-5.2.4\bin_x86-64;D:\Dev\lz4\visual\VS2017\bin\x64_Release;D:\usr\local\lzo\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstatic.lib;winfsp-x64.lib;liblzma.a;libzstd_static.lib;liblz4_static.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);D:\Dev\zlib-1.2.8\contrib\vstudio\vc14\x64\$(Configuration);d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_$(Configuration);D:\Dev\xz-5.2.4\windows\vs2017\$(Configuration)\x64\liblzma_dll;D:\Dev\lz4\visual\VS2017\bin\x64_$(Configuration);d:\Dev\lzo-2.10\build\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>squashfuse.lib;zlibwapi.lib;winfsp-x64.lib;liblzma.lib;libzstd.lib;liblz4.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
-      <Version>0.1</Version>
+      <Version>0.1103</Version>
       <SetChecksum>true</SetChecksum>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">
@@ -377,22 +411,24 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WINVER=0x0501;_WIN32_WINNT=0x501;WIN32;LZMA_API_STATIC=1;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;LZMA_API_STATIC=1;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\build;$(ProjectDIr)..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>D:\Dev\zlib-1.2.8\contrib\vstudio\vc14\x64\StaticRelease;d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_Release-Static;D:\Dev\xz-5.2.4\windows\vs2017\ReleaseMT\x64\liblzma;D:\Dev\lz4\visual\VS2017\bin\x64_Release-Static;D:\usr\local\lzoS\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstat.lib;winfsp-x64.lib;liblzma.lib;libzstd_static.lib;liblz4_static.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);D:\Dev\zlib-1.2.8\contrib\vstudio\vc14\x64\StaticRelease;d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_Release-Static;D:\Dev\xz-5.2.4\windows\vs2017\ReleaseMT\x64\liblzma;D:\Dev\lz4\visual\VS2017\bin\x64_Release-Static;D:\usr\local\lzoS\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>squashfuseLib.lib;zlibstat.lib;winfsp-x64.lib;liblzma.lib;libzstd_static.lib;liblz4_static.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
       <Version>0.1103</Version>
       <SetChecksum>true</SetChecksum>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <PreBuildEvent />
     <PreBuildEvent />
@@ -414,42 +450,29 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WINVER=0x0501;_WIN32_WINNT=0x501;WIN32;LZMA_API_STATIC=1;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;LZMA_API_STATIC=1;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\build;$(ProjectDIr)..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <CLanguageStandard>c11</CLanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>D:\Dev\zlib-1.2.8\contrib\vstudio\vc14\x64\StaticRelease;d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_Release-Static;D:\Dev\xz-5.2.4\windows\vs2017\ReleaseMT\x64\liblzma;D:\Dev\lz4\visual\VS2017\bin\x64_Release-Static;D:\usr\local\lzoS\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstat.lib;winfsp-x64.lib;liblzma.lib;libzstd_static.lib;liblz4_static.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <AdditionalLibraryDirectories>$(OutDir);D:\Dev\zlib-1.2.8\contrib\vstudio\vc14\x64\StaticRelease;d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_Release-Static;D:\Dev\xz-5.2.4\windows\vs2017\ReleaseMT\x64\liblzma;D:\Dev\lz4\visual\VS2017\bin\x64_Release-Static;D:\usr\local\lzoS\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>squashfuseLib.lib;zlibstat.lib;winfsp-x64.lib;liblzma.lib;libzstd_static.lib;liblz4_static.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
       <Version>0.1103</Version>
-      <SetChecksum>true</SetChecksum>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <GenerateMapFile>true</GenerateMapFile>
+      <TargetMachine>MachineX64</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\cache.c" />
-    <ClCompile Include="..\decompress.c" />
-    <ClCompile Include="..\dir.c" />
-    <ClCompile Include="..\file.c" />
-    <ClCompile Include="..\fs.c" />
-    <ClCompile Include="..\hash.c" />
     <ClCompile Include="..\ls.c" />
-    <ClCompile Include="..\nonstd-pread.c" />
-    <ClCompile Include="..\nonstd-stat.c" />
-    <ClCompile Include="..\stack.c" />
-    <ClCompile Include="..\swap.c" />
-    <ClCompile Include="..\table.c" />
-    <ClCompile Include="..\traverse.c" />
-    <ClCompile Include="..\util.c" />
-    <ClCompile Include="..\xattr.c" />
-    <ClCompile Include="tinfl.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\cache.h" />
@@ -473,7 +496,6 @@
     <ClInclude Include="win32.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\swap.c.inc" />
     <None Include="..\swap.h.inc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

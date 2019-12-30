@@ -1,4 +1,9 @@
-x64/*
-Win32/*
+**/x64
+**/Win32
+**/Debug-Static
+**/Release-Static
+**/ReleaseClang-Static
+**/Debug
+**/Release
 swap.c.inc
 swap.h.inc

@@ -32,10 +32,6 @@
 
 #include "nonstd.h"
 
-#ifdef _MSC_VER
-#define	S_ISCHR(m)	((m & 0170000) == 0020000)	/* char special */
-#define	S_ISBLK(m)	((m & 0170000) == 0060000)	/* block special */
-#endif
 
 sqfs_err sqfs_stat(sqfs *fs, sqfs_inode *inode, struct fuse_stat *st) {
 	sqfs_err err = SQFS_OK;
