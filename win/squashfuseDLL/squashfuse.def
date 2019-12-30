@@ -71,4 +71,5 @@ EXPORTS
 	sqfs_enoattr
 	sqfs_pread
 	sqfs_makedev
+	sqfs_print_compression_info
 

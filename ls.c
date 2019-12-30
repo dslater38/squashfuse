@@ -37,7 +37,8 @@
 
 static void usage() {
 	fprintf(stderr, "%s (c) 2013 Dave Vasilevsky\n\n", PROGNAME);
-	fprintf(stderr, "Usage: %s ARCHIVE\n", PROGNAME);
+	fprintf(stderr, "Usage: %s ARCHIVE\n\n", PROGNAME);
+	sqfs_print_compression_info();
 	exit(ERR_USAGE);
 }
 

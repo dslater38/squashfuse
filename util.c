@@ -123,3 +123,18 @@ sqfs_err sqfs_open_image(sqfs *fs, const char *image, size_t offset) {
 	return err;
 }
 
+void sqfs_print_compression_info()
+{
+	fprintf(stderr, "\tSupported Compressions\n");
+	fprintf(stderr, "\t----------------------\n");
+	sqfs_compression_type sup[SQFS_COMP_MAX];
+	sqfs_compression_supported(sup);
+	for (int i = 0; i < SQFS_COMP_MAX; ++i)
+	{
+		if (sup[i] != SQFS_COMP_UNKNOWN)
+		{
+			fprintf(stderr, "\t%-5s:\t%s\n", sqfs_compression_name(sup[i]), sqfs_compression_version(sup[i]));
+		}
+	}
+	fprintf(stderr, "\t----------------------\n");
+}

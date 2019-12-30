@@ -30,7 +30,8 @@
 
 static void usage() {
     fprintf(stderr, "Usage: %s ARCHIVE PATH_TO_EXTRACT\n", PROGNAME);
-    fprintf(stderr, "       %s ARCHIVE -a\n", PROGNAME);
+    fprintf(stderr, "       %s ARCHIVE -a\n\n", PROGNAME);
+	sqfs_print_compression_info();
     exit(ERR_USAGE);
 }
 
@@ -163,7 +164,7 @@ int main(int argc, char *argv[]) {
                         if (sqfs_read_range(&fs, &inode, (sqfs_off_t) bytes_already_read, &bytes_at_a_time, buf))
                             die("sqfs_read_range error");
                         // fwrite(buf, 1, bytes_at_a_time, stdout);
-                        fwrite(buf, 1, bytes_at_a_time, f);                 
+                        fwrite(buf, 1, (size_t)bytes_at_a_time, f);                 
                         bytes_already_read = bytes_already_read + bytes_at_a_time;
                     }
                     fclose(f);

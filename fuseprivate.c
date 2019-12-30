@@ -104,6 +104,7 @@ void sqfs_usage(char *progname, bool fuse_usage) {
 		fuse_opt_add_arg(&args, "-ho");
 		fprintf(stderr, "\n");
 		fuse_parse_cmdline(&args, NULL, NULL, NULL);
+		sqfs_print_compression_info();
 	}
 	exit(-2);
 }

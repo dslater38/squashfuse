@@ -101,9 +101,6 @@ static sqfs_err sqfs_decompressor_lz4(void *in, size_t insz,
 
 
 #ifdef HAVE_ZSTD_H
-#define STRING2(x) #x
-#define STRING(x) STRING2(x)
-
 
 #include <zstd.h>
 
@@ -167,4 +164,36 @@ void sqfs_compression_supported(sqfs_compression_type *types) {
 #ifdef CAN_DECOMPRESS_ZSTD
 	types[i++] = ZSTD_COMPRESSION;
 #endif
+}
+
+#ifndef ZLIB_VERSION
+#define ZLIB_VERSION ""
+#endif
+
+#ifndef LZMA_VERSION_STRING
+#define LZMA_VERSION_STRING ""
+#endif
+
+#ifndef LZO_VERSION_STRING
+#define LZO_VERSION_STRING ""
+#endif
+
+#ifndef LZ4_VERSION_STRING
+#define LZ4_VERSION_STRING ""
+#endif
+
+#ifndef ZSTD_VERSION_STRING
+#define ZSTD_VERSION_STRING ""
+#endif
+
+
+static char *const sqfs_compression_versions[SQFS_COMP_MAX] = {
+	NULL, ZLIB_VERSION, LZMA_VERSION_STRING, LZO_VERSION_STRING, LZMA_VERSION_STRING, LZ4_VERSION_STRING, ZSTD_VERSION_STRING,
+};
+
+
+char *sqfs_compression_version(sqfs_compression_type type) {
+	if (type < 0 || type >= SQFS_COMP_MAX)
+		return NULL;
+	return sqfs_compression_versions[type];
 }
