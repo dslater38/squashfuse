@@ -121,33 +121,99 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibdll.props" />
+    <Import Project="..\zstddll.props" />
+    <Import Project="..\lz4dll.props" />
+    <Import Project="..\lzmadll.props" />
+    <Import Project="..\lzodll.props" />
+    <Import Project="..\WinFsp.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibstat.props" />
+    <Import Project="..\zstdstat.props" />
+    <Import Project="..\lz4stat.props" />
+    <Import Project="..\lzmastat.props" />
+    <Import Project="..\lzostat.props" />
+    <Import Project="..\WinFsp.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibdll.props" />
+    <Import Project="..\zstddll.props" />
+    <Import Project="..\lz4dll.props" />
+    <Import Project="..\lzmadll.props" />
+    <Import Project="..\lzodll.props" />
+    <Import Project="..\WinFsp.props" />
+    <Import Project="..\zlibRelease.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibstat.props" />
+    <Import Project="..\zstdstat.props" />
+    <Import Project="..\lz4stat.props" />
+    <Import Project="..\lzmastat.props" />
+    <Import Project="..\lzostat.props" />
+    <Import Project="..\WinFsp.props" />
+    <Import Project="..\zlibRelease.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibstat.props" />
+    <Import Project="..\zstdstat.props" />
+    <Import Project="..\lz4stat.props" />
+    <Import Project="..\lzmastat.props" />
+    <Import Project="..\lzostat.props" />
+    <Import Project="..\WinFsp.props" />
+    <Import Project="..\zlibRelease.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibdll.props" />
+    <Import Project="..\zstddll.props" />
+    <Import Project="..\lz4dll.props" />
+    <Import Project="..\lzmadll.props" />
+    <Import Project="..\lzodll.props" />
+    <Import Project="..\WinFsp.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibstat.props" />
+    <Import Project="..\zstdstat.props" />
+    <Import Project="..\lz4stat.props" />
+    <Import Project="..\lzmastat.props" />
+    <Import Project="..\lzostat.props" />
+    <Import Project="..\WinFsp.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibdll.props" />
+    <Import Project="..\zstddll.props" />
+    <Import Project="..\lz4dll.props" />
+    <Import Project="..\lzmadll.props" />
+    <Import Project="..\lzodll.props" />
+    <Import Project="..\WinFsp.props" />
+    <Import Project="..\zlibRelease.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibstat.props" />
+    <Import Project="..\zstdstat.props" />
+    <Import Project="..\lz4stat.props" />
+    <Import Project="..\lzmastat.props" />
+    <Import Project="..\lzostat.props" />
+    <Import Project="..\WinFsp.props" />
+    <Import Project="..\zlibRelease.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibstat.props" />
+    <Import Project="..\zstdstat.props" />
+    <Import Project="..\lz4stat.props" />
+    <Import Project="..\lzmastat.props" />
+    <Import Project="..\lzostat.props" />
+    <Import Project="..\WinFsp.props" />
+    <Import Project="..\zlibRelease.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -219,17 +285,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;_LIB;LZMA_API_STATIC=1;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;_LIB;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDIr)..\..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Dev\zlib-1.2.8\contrib\vstudio\vc14\x64\$(Configuration);d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_$(Configuration);D:\Dev\xz-5.2.4\windows\vs2017\$(Configuration)\x64\liblzma_dll;D:\Dev\lz4\visual\VS2017\bin\x64_$(Configuration);d:\Dev\lzo-2.10\build\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibwapi.lib;winfsp-x64.lib;liblzma.lib;libzstd.lib;liblz4.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <Version>0.1103</Version>
       <SetChecksum>true</SetChecksum>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
@@ -242,9 +308,9 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;_LIB;LZMA_API_STATIC=1;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;_LIB;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDIr)..\..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -253,8 +319,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Dev\zlib-1.2.8\contrib\vstudio\vc14\x64\StaticRelease;d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_Release-Static;D:\Dev\xz-5.2.4\windows\vs2017\ReleaseMT\x64\liblzma;D:\Dev\lz4\visual\VS2017\bin\x64_Release-Static;D:\usr\local\lzoS\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstat.lib;winfsp-x64.lib;liblzma.lib;libzstd_static.lib;liblz4_static.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <Version>0.1103</Version>
@@ -270,9 +336,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;CACHE_THREAD=1;_LIB;LZMA_API_STATIC=1;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;CACHE_THREAD=1;_LIB;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDIr)..\..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <CLanguageStandard>c11</CLanguageStandard>
     </ClCompile>
@@ -281,8 +347,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Dev\zlib-1.2.8\contrib\vstudio\vc14\x64\StaticRelease;d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_Release-Static;D:\Dev\xz-5.2.4\windows\vs2017\ReleaseMT\x64\liblzma;D:\Dev\lz4\visual\VS2017\bin\x64_Release-Static;D:\usr\local\lzoS\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstat.lib;winfsp-x64.lib;liblzma.lib;libzstd_static.lib;liblz4_static.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <Version>0.1103</Version>
@@ -299,12 +365,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDIr)..\..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>winfsp-x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <Version>0.1103</Version>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
     </Link>
@@ -316,13 +382,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDIr)..\..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>winfsp-x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <Version>0.1103</Version>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
     </Link>
@@ -332,15 +398,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;_LIB;LZMA_API_STATIC=1;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;_LIB;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDIr)..\..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Dev\zlib-1.2.8\contrib\vstudio\vc14\x64\$(Configuration);d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_$(Configuration);D:\Dev\xz-5.2.4\windows\vs2017\$(Configuration)\x64\liblzma;D:\Dev\lz4\visual\VS2017\bin\x64_$(Configuration);d:\Dev\lzo-2.10\build\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstat.lib;winfsp-x64.lib;liblzma.lib;libzstd_static.lib;liblz4.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <Version>0.1103</Version>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
     </Link>
@@ -350,16 +416,16 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;_LIB;LZMA_API_STATIC=1;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;_LIB;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDIr)..\..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Dev\zlib-1.2.8\contrib\vstudio\vc14\x64\StaticDebug;d:\Dev\WinFsp\lib;d:\Dev\zstd\build\VS2017\bin\x64_Debug-Static;D:\Dev\xz-5.2.4\bin_x86-64;D:\Dev\lz4\visual\VS2017\bin\x64_Debug-Static;d:\Dev\lzo-2.10\buildS\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstat.lib;winfsp-x64.lib;liblzma.a;libzstd_static.lib;liblz4_static.lib;lzo2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <Version>0.1103</Version>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
     </Link>
@@ -373,14 +439,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDIr)..\..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>winfsp-x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <Version>0.1103</Version>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
       <GenerateMapFile>true</GenerateMapFile>
@@ -395,7 +461,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDIr)..\..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -403,8 +469,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>winfsp-x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
       <Version>0.1103</Version>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
       <GenerateMapFile>true</GenerateMapFile>
@@ -419,7 +486,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_CRT_NONSTDC_NO_WARNINGS=1;_CRT_SECURE_NO_WARNINGS=1;CACHE_THREAD=1;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDIr)..\..\win;d:\usr\local\zlib\include;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;D:\usr\local\lzo\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <CLanguageStandard>c11</CLanguageStandard>
     </ClCompile>
@@ -428,7 +495,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>winfsp-x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
       <Version>0.1103</Version>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>

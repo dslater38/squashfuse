@@ -121,33 +121,99 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibdll.props" />
+    <Import Project="..\zstddll.props" />
+    <Import Project="..\lz4dll.props" />
+    <Import Project="..\lzmadll.props" />
+    <Import Project="..\lzodll.props" />
+    <Import Project="..\WinFsp.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibstat.props" />
+    <Import Project="..\zstdstat.props" />
+    <Import Project="..\lz4stat.props" />
+    <Import Project="..\lzmastat.props" />
+    <Import Project="..\lzostat.props" />
+    <Import Project="..\WinFsp.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibdll.props" />
+    <Import Project="..\zstddll.props" />
+    <Import Project="..\lz4dll.props" />
+    <Import Project="..\lzmadll.props" />
+    <Import Project="..\lzodll.props" />
+    <Import Project="..\WinFsp.props" />
+    <Import Project="..\zlibRelease.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibstat.props" />
+    <Import Project="..\lz4stat.props" />
+    <Import Project="..\lzmastat.props" />
+    <Import Project="..\lzostat.props" />
+    <Import Project="..\WinFsp.props" />
+    <Import Project="..\zstdstat.props" />
+    <Import Project="..\zlibRelease.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibstat.props" />
+    <Import Project="..\zstdstat.props" />
+    <Import Project="..\lz4stat.props" />
+    <Import Project="..\lzmastat.props" />
+    <Import Project="..\lzostat.props" />
+    <Import Project="..\WinFsp.props" />
+    <Import Project="..\zlibRelease.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibdll.props" />
+    <Import Project="..\zstddll.props" />
+    <Import Project="..\lz4dll.props" />
+    <Import Project="..\lzmadll.props" />
+    <Import Project="..\lzodll.props" />
+    <Import Project="..\WinFsp.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibstat.props" />
+    <Import Project="..\zstdstat.props" />
+    <Import Project="..\lz4stat.props" />
+    <Import Project="..\lzmastat.props" />
+    <Import Project="..\lzostat.props" />
+    <Import Project="..\WinFsp.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibdll.props" />
+    <Import Project="..\zstddll.props" />
+    <Import Project="..\lz4dll.props" />
+    <Import Project="..\lzmadll.props" />
+    <Import Project="..\lzodll.props" />
+    <Import Project="..\WinFsp.props" />
+    <Import Project="..\zlibRelease.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibstat.props" />
+    <Import Project="..\zstdstat.props" />
+    <Import Project="..\lz4stat.props" />
+    <Import Project="..\lzmastat.props" />
+    <Import Project="..\lzostat.props" />
+    <Import Project="..\WinFsp.props" />
+    <Import Project="..\zlibRelease.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\zlibstat.props" />
+    <Import Project="..\zstdstat.props" />
+    <Import Project="..\lz4stat.props" />
+    <Import Project="..\lzmastat.props" />
+    <Import Project="..\lzostat.props" />
+    <Import Project="..\WinFsp.props" />
+    <Import Project="..\zlibRelease.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -207,24 +273,32 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;LZMA_API_STATIC=1;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;d:\Dev\zlib-1.2.8;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;d:\Dev\lzo-2.10\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <CustomBuildStep>
+      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;LZMA_API_STATIC=1;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;d:\Dev\zlib-1.2.8;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;d:\Dev\lzo-2.10\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -232,30 +306,46 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <CustomBuildStep>
+      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;LZMA_API_STATIC=1;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;d:\Dev\zlib-1.2.8;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;d:\Dev\lzo-2.10\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <CustomBuildStep>
+      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;LZMA_API_STATIC=1;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;d:\Dev\zlib-1.2.8;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;d:\Dev\lzo-2.10\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -263,6 +353,14 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <CustomBuildStep>
+      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -271,9 +369,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;LZMA_API_STATIC=1;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;d:\Dev\zlib-1.2.8;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;d:\Dev\lzo-2.10\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -282,6 +380,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <CustomBuildStep>
+      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">
     <ClCompile>
@@ -290,9 +396,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;LZMA_API_STATIC=1;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;d:\Dev\zlib-1.2.8;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;d:\Dev\lzo-2.10\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -302,6 +408,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <CustomBuildStep>
+      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">
     <ClCompile>
@@ -310,9 +424,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;LZMA_API_STATIC=1;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;d:\Dev\zlib-1.2.8;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;d:\Dev\lzo-2.10\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -325,6 +439,14 @@
     <Lib>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
     </Lib>
+    <CustomBuildStep>
+      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -333,9 +455,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;LZMA_API_STATIC=1;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;d:\Dev\zlib-1.2.8;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;d:\Dev\lzo-2.10\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -344,6 +466,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <CustomBuildStep>
+      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">
     <ClCompile>
@@ -352,9 +482,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;LZMA_API_STATIC=1;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;d:\Dev\zlib-1.2.8;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;d:\Dev\lzo-2.10\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -364,6 +494,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <CustomBuildStep>
+      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">
     <ClCompile>
@@ -372,9 +510,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;LZMA_API_STATIC=1;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;d:\Dev\zlib-1.2.8;d:\Dev\WinFsp\inc\fuse;D:\Dev\zstd\lib;D:\Dev\xz-5.2.4\include;D:\Dev\lz4\lib;d:\Dev\lzo-2.10\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -387,6 +525,14 @@
     <Lib>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
     </Lib>
+    <CustomBuildStep>
+      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\cache.c" />
@@ -429,6 +575,61 @@
     <ClInclude Include="..\..\traverse.h" />
     <ClInclude Include="..\..\util.h" />
     <ClInclude Include="..\..\xattr.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\gen_swap.sh">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">false</ExcludedFromBuild>
+      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">ClInclude</OutputItemType>
+      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">ClInclude</OutputItemType>
+      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ClInclude</OutputItemType>
+      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ClInclude</OutputItemType>
+      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">ClInclude</OutputItemType>
+      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">ClInclude</OutputItemType>
+      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">ClInclude</OutputItemType>
+      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ClInclude</OutputItemType>
+      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ClInclude</OutputItemType>
+      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">ClInclude</OutputItemType>
+    </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -132,4 +132,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\gen_swap.sh" />
+  </ItemGroup>
 </Project>
