@@ -21,10 +21,10 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
   <Product Id="*" 
-           Name="SQUASHFS-Win" 
+           Name="$(var.MyProductName)" 
            Language="1033" 
            Version="0.1.103.0"
-           Manufacturer="SQUASHFS-Win" 
+           Manufacturer="$(var.MyProductName)" 
            UpgradeCode="$(var.UpgradeCode)">
     
 		<Package Description="$(var.MyProductName) ($(var.MyArch)) - $(var.MyDescription)"
@@ -32,15 +32,16 @@
              Compressed="yes" 
              InstallScope="perMachine" />
 
+    <!--DisallowUpgradeErrorMessage="An older version of $(var.MyProductName) is already installed. You must uninstall it before you can install this version." -->
+    
 	<MajorUpgrade 
-      Disallow="yes" 
+      Disallow="no" 
       AllowDowngrades="no" 
-      AllowSameVersionUpgrades="no" 
-      DisallowUpgradeErrorMessage="An older version of $(var.MyProductName) is already installed. You must uninstall it before you can install this version." 
+      AllowSameVersionUpgrades="yes" 
       DowngradeErrorMessage="A newer version of $(var.MyProductName) is already installed." />
-    <Media Id="1" Cabinet="squashfs_win.cab" EmbedCab="yes" />
-		<!--<MediaTemplate />-->
-
+    
+    <Media Id="1" Cabinet="$(var.MyProductName).cab" EmbedCab="yes" />
+    
     <Property Id="OTHERINSTALLED">
       <ProductSearch UpgradeCode="$(var.OtherUpgradeCode)" Minimum="0.0.0.0" />
     </Property>
@@ -60,10 +61,6 @@
           Type="raw" />
     </Property>
 
-   <!-- <Feature Id="ProductFeature" Title="squashfs_win" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature> -->
-    
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="$(var.ProgramFilesFolder)">
         <Directory Id="INSTALLDIR" Name="$(var.MyProductName)">
@@ -72,39 +69,6 @@
       </Directory>
     </Directory>
 
-
-    <!--<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="$(var.ProgramFilesFolder)">
-				<Directory Id="INSTALLFOLDER" Name="$(var.MyProductName)" />
-			</Directory>
-		</Directory>
-	</Fragment>
-
-	<Fragment>-->
-    <!--
-      <Component Id="cmp0963F528151C82D2DE03776E64EA0574" Guid="{521B5A1B-9C71-4e6e-826F-2308333B18BA}">
-        <File Id="fil3FCEB83EBFD756176B7F1B68C03B7841" KeyPath="yes" Source="SourceDir\win-squashfs.exe" />
-        <File Id="fil3FCEB83EBFD756176B7F1B68C03B7842" KeyPath="no" Source="SourceDir\squashfuse.exe" />
-        <File Id="fil3FCEB83EBFD756176B7F1B68C03B7843" KeyPath="no" Source="SourceDir\squashfuse_extract.exe" />
-        <File Id="fil3FCEB83EBFD756176B7F1B68C03B7844" KeyPath="no" Source="SourceDir\squashfuse_ls.exe" />
-        <File Id="fil3FCEB83EBFD756176B7F1B68C03B7845" KeyPath="no" Source="SourceDir\liblz4.dll" />
-        <File Id="fil3FCEB83EBFD756176B7F1B68C03B7846" KeyPath="no" Source="SourceDir\liblzma.dll" />
-        <File Id="fil3FCEB83EBFD756176B7F1B68C03B7847" KeyPath="no" Source="SourceDir\libzstd.dll" />
-        <File Id="fil3FCEB83EBFD756176B7F1B68C03B7848" KeyPath="no" Source="SourceDir\lzo2.dll" />
-        <File Id="fil3FCEB83EBFD756176B7F1B68C03B7849" KeyPath="no" Source="SourceDir\squashfuse.dll" />
-        <File Id="fil3FCEB83EBFD756176B7F1B68C03B7850" KeyPath="no" Source="SourceDir\zlibwapi.dll" />
-      </Component>-->
-
-      <!--<Component Id='MainExecutable' Guid="A5313B90-1A4E-4c65-B87B-031B661F4855">
-        <File Id='winSquashfsEXE' Name='win-squashfs.exe' DiskId='1' Source='win-squashfs.exe' KeyPath='yes' />
-      </Component>-->
-      
-		<!-- <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER"> -->
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			<!-- <Component Id="ProductComponent"> -->
-				<!-- TODO: Insert files, registry keys, and other resources here. -->
-			<!-- </Component> -->
     <DirectoryRef Id="INSTALLDIR">
       <Component Id="C.INSTALLDIR" Guid="{C953BBC7-D7FF-43cf-9FBD-EBEF214677FB}">
         <RegistryValue
@@ -138,82 +102,14 @@
                 Type="integer"
                 Name="JobControl"
                 Value="1" />
-            <!--<RegistryValue
-                Type="integer"
-                Name="Credentials"
-                Value="1" />-->
           </RegistryKey>
         </RegistryKey>
       </Component>
-      <Component Id="C.squashfs.r.reg" Guid="{9FE9F882-B468-4cc4-A26A-E8F98967840D}">
-        <RegistryKey
-            Root="HKLM"
-            Key="[P.LauncherRegistryKey]">
-          <RegistryKey
-              Key="squashfs.r">
-            <RegistryValue
-                Type="string"
-                Name="Executable"
-                Value="[INSTALLDIR]bin\squashfuse-win.exe"
-                KeyPath="yes" />
-            <RegistryValue
-                Type="string"
-                Name="CommandLine"
-                Value="%1 %2" />
-            <RegistryValue
-                Type="string"
-                Name="Security"
-                Value="D:P(A;;RPWPLC;;;WD)" />
-            <RegistryValue
-                Type="integer"
-                Name="JobControl"
-                Value="1" />
-            <!--<RegistryValue
-                Type="integer"
-                Name="Credentials"
-                Value="1" />-->
-          </RegistryKey>
-        </RegistryKey>
-      </Component>
-      <Component Id="C.squashfs.k.reg" Guid="{76500771-E423-412a-A4E4-5208F2D455EC}">
-        <RegistryKey
-            Root="HKLM"
-            Key="[P.LauncherRegistryKey]">
-          <RegistryKey
-              Key="squashfs.k">
-            <RegistryValue
-                Type="string"
-                Name="Executable"
-                Value="[INSTALLDIR]bin\squashfuse-win.exe"
-                KeyPath="yes" />
-            <RegistryValue
-                Type="string"
-                Name="CommandLine"
-                Value="%1 %2" />
-            <RegistryValue
-                Type="string"
-                Name="Security"
-                Value="D:P(A;;RPWPLC;;;WD)" />
-            <RegistryValue
-                Type="integer"
-                Name="JobControl"
-                Value="1" />
-            <!--<RegistryValue
-                Type="integer"
-                Name="Credentials"
-                Value="0" />-->
-          </RegistryKey>
-        </RegistryKey>
-      </Component>
-
-    <!-- </ComponentGroup> -->
     </DirectoryRef>
 
     <DirectoryRef Id="TARGETDIR">
       <Directory Id="dir99DE416F55C8960850D5A4FCA3758AD4" Name="Release" />
     </DirectoryRef>
-
-
  
     <Feature
         Id="F.Main"
@@ -251,7 +147,5 @@
           Value="WelcomeDlg"
           Order="10">NOT Installed</Publish>
     </UI>    
-    
-	<!-- </Fragment> -->
   </Product>
 </Wix>
