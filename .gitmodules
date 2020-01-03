@@ -1,6 +1,6 @@
 [submodule "win\\3rdparty\\lz4"]
 	path = win\\3rdparty\\lz4
-	url = ../lz4.git
+	url = git@github.com:dslater38/lz4.git
 [submodule "win\\3rdparty\\zstd"]
 	path = win\\3rdparty\\zstd
-	url = ../zstd.git
+	url = git@github.com:dslater38/zstd.git
