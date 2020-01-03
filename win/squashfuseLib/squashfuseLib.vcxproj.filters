@@ -131,6 +131,9 @@
     <ClInclude Include="..\..\xattr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\win32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\..\gen_swap.sh" />

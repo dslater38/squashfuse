@@ -49,6 +49,7 @@ typedef struct {
 	int mountpoint;
 	size_t offset;
 	unsigned int idle_timeout_secs;
+	int have_unc_path;
 } sqfs_opts;
 int sqfs_opt_proc(void *data, const char *arg, int key,
 	struct fuse_args *outargs);

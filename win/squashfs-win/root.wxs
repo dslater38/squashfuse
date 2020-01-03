@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="BINDIR">
+            <Component Id="cmp67444F573F0D32A83E3331E4C11E58FE" Guid="{E7C7EB09-D970-4C07-B4FB-EEE3D1605A11}">
+                <File Id="fil98D46F0563C68732427AEF1198B90AE5" KeyPath="yes" Source="$(var.SourceDir)\squashfuse-win.exe" />
+            </Component>
+            <Component Id="cmp4216918D363B64678D6CDDDB5C08EFBE" Guid="{C5C34588-D568-493A-8543-8215A52094CD}">
+                <File Id="filB96C698375E8BE30E82840351FB5FAEA" KeyPath="yes" Source="$(var.SourceDir)\squashfuse.exe" />
+            </Component>
+            <Component Id="cmpCE29AD071259CC8148AA026F76BBA5B9" Guid="{AC7070B2-3AFB-49FA-8994-E2E6595BAB52}">
+                <File Id="filE6CDFC3B1C6AEED16B5E17C108C5F996" KeyPath="yes" Source="$(var.SourceDir)\squashfuse_extract.exe" />
+            </Component>
+            <Component Id="cmpC2134E08FBDDA08174ADDB4962B2E39F" Guid="{BE2A40E3-D79F-41B8-A2EA-31EACC120D55}">
+                <File Id="filCBD33B61756493EC57468EBB76D696B0" KeyPath="yes" Source="$(var.SourceDir)\squashfuse_ls.exe" />
+            </Component>
+            <Component Id="cmpE26AA2C501843D4E8D9096B7D7183F82" Guid="{FD30232B-916E-421A-B03F-D1C6CAF36AA6}">
+                <File Id="fil7E5EE08A33765D834F1408AE913801D2" KeyPath="yes" Source="$(var.SourceDir)\squashfuse.dll" />
+            </Component>
+
+          <Component Id="cmp95A928DFBC8D610AF9E0F42C19B6D541" Guid="{440E455A-4F02-4447-A600-28B1A3B493DB}">
+            <File Id="fil6E75592C0C8A219992729406A2D283B6" KeyPath="yes" Source="$(var.LibDir)\..\..\..\..\mount.cmd" />
+          </Component>
+
+          <Component Id="cmp95A928DFBC8D610AF9E0F42C19B6D542" Guid="{440E455A-4F02-4447-A600-28B1A3B493DC}">
+            <File Id="fil6E75592C0C8A219992729406A2D283B7" KeyPath="yes" Source="$(var.LibDir)\..\..\..\..\findWinFsp.cmd" />
+          </Component>
+
+          <Component Id="cmp95A928DFBC8D610AF9E0F42C19B6D543" Guid="{440E455A-4F02-4447-A600-28B1A3B493DD}">
+            <File Id="fil6E75592C0C8A219992729406A2D283B8" KeyPath="yes" Source="$(var.LibDir)\..\..\..\..\umount.cmd" />
+          </Component>
+
+
+          <?if $(var.Static) = 0?>
+            <Component Id="cmp69B974F6038C2B274A17ACC297129772" Guid="{ACD52A40-0A3B-46D9-9635-0D0BFA41D50D}">
+                <File Id="fil54FD6CA12E9E1652E5925CE0BFBE0F3C" KeyPath="yes" Source="$(var.LibDir)\liblz4.dll" />
+            </Component>
+            <Component Id="cmpD136DE53286C94839C00DB8DD32F85E1" Guid="{3DFB2751-636E-438C-89E2-753D4046FF34}">
+                <File Id="fil2279AFC4811D4FDD92FBC324B02C4766" KeyPath="yes" Source="$(var.LibDir)\liblzma.dll" />
+            </Component>
+            <Component Id="cmpDA200FCDD06B498BE6D61C6CB5E6AA96" Guid="{08755CF0-6EA0-47F3-9E99-3128A684C38A}">
+                <File Id="fil1BE8A041C2EC7BA616A1D4B58CA1A783" KeyPath="yes" Source="$(var.LibDir)\libzstd.dll" />
+            </Component>
+            <Component Id="cmp9CA4B965EC2F4C230B903F8DB21E089E" Guid="{0435FD11-D081-49F9-8C00-85FDBA9EDA7C}">
+                <File Id="fil36EDC59284A9242493656E788946E4F5" KeyPath="yes" Source="$(var.LibDir)\lzo2.dll" />
+            </Component>
+            <Component Id="cmp95A928DFBC8D610AF9E0F42C19B6D540" Guid="{440E455A-4F02-4447-A600-28B1A3B493DA}">
+                <File Id="fil6E75592C0C8A219992729406A2D283B5" KeyPath="yes" Source="$(var.LibDir)\zlibwapi.dll" />
+            </Component>
+          
+          
+          <?endif?>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+      
+        <ComponentGroup Id="C.Main">
+          <ComponentRef Id="cmp67444F573F0D32A83E3331E4C11E58FE" />
+          <ComponentRef Id="cmpE26AA2C501843D4E8D9096B7D7183F82" />
+          <ComponentRef Id="cmp4216918D363B64678D6CDDDB5C08EFBE" />
+          <ComponentRef Id="cmpCE29AD071259CC8148AA026F76BBA5B9" />
+          <ComponentRef Id="cmpC2134E08FBDDA08174ADDB4962B2E39F" />
+          <ComponentRef Id="cmp95A928DFBC8D610AF9E0F42C19B6D541" />
+          <ComponentRef Id="cmp95A928DFBC8D610AF9E0F42C19B6D542" />
+          <ComponentRef Id="cmp95A928DFBC8D610AF9E0F42C19B6D543" />
+        </ComponentGroup>
+      <?if $(var.Static) = 0?>
+      <ComponentGroup Id="C.Libs">
+          <ComponentRef Id="cmp69B974F6038C2B274A17ACC297129772" />
+          <ComponentRef Id="cmpD136DE53286C94839C00DB8DD32F85E1" />
+          <ComponentRef Id="cmpDA200FCDD06B498BE6D61C6CB5E6AA96" />
+          <ComponentRef Id="cmp9CA4B965EC2F4C230B903F8DB21E089E" />
+          <ComponentRef Id="cmp95A928DFBC8D610AF9E0F42C19B6D540" />
+      </ComponentGroup>
+      <?endif?>
+    </Fragment>
+</Wix>

@@ -269,6 +269,34 @@ static sqfs_hl *sqfs_hl_open(const char *path, size_t offset) {
 	return NULL;
 }
 
+static
+void log_command_line(int argc, char *argv[])
+{
+	FILE *fp = fopen("/squashfuse_command.log", "w+");
+	if (fp)
+	{
+		fprintf(fp, "------------------------------------------------\n");
+		for (int i = 0; i < argc; ++i)
+		{
+			fprintf(fp, argv[i]);
+			fprintf(fp, "\n");
+		}
+		fprintf(fp, "------------------------------------------------\n");
+		fclose(fp);
+	}
+}
+
+static
+void log_image(const char *image)
+{
+	FILE *fp = fopen("/squashfuse_image.log", "w+");
+	if (fp)
+	{
+		fprintf(fp, "------------------------------------------------\n");
+		fprintf(fp, "IMAGE: %s\n", image);
+	}
+}
+
 int main(int argc, char *argv[]) {
 	struct fuse_args args;
 	sqfs_opts opts;
@@ -281,6 +309,9 @@ int main(int argc, char *argv[]) {
 	};
 
 	struct fuse_operations sqfs_hl_ops;
+
+	log_command_line(argc, argv);
+
 	memset(&sqfs_hl_ops, 0, sizeof(sqfs_hl_ops));
 	sqfs_hl_ops.init			= sqfs_hl_op_init;
 	sqfs_hl_ops.destroy		= sqfs_hl_op_destroy;
@@ -304,11 +335,14 @@ int main(int argc, char *argv[]) {
 	opts.image = NULL;
 	opts.mountpoint = 0;
 	opts.offset = 0;
+	opts.have_unc_path = 0;
 	if (fuse_opt_parse(&args, &opts, fuse_opts, sqfs_opt_proc) == -1)
 		sqfs_usage(argv[0], true);
 	if (!opts.image)
 		sqfs_usage(argv[0], true);
-	
+
+	log_image(opts.image);
+
 	hl = sqfs_hl_open(opts.image, opts.offset);
 	if (!hl)
 		return -1;

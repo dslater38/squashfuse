@@ -300,6 +300,7 @@
       <SetChecksum>true</SetChecksum>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
       <GenerateMapFile>true</GenerateMapFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName)Dll.pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">
@@ -327,6 +328,7 @@
       <SetChecksum>true</SetChecksum>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
       <GenerateMapFile>true</GenerateMapFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName)Dll.pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">
@@ -356,6 +358,7 @@
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
       <GenerateMapFile>true</GenerateMapFile>
       <TargetMachine>MachineX64</TargetMachine>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName)Dll.pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -373,6 +376,7 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <Version>0.1103</Version>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName)Dll.pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
@@ -391,6 +395,7 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <Version>0.1103</Version>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName)Dll.pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -409,6 +414,7 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <Version>0.1103</Version>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName)Dll.pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">
@@ -428,6 +434,7 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <Version>0.1103</Version>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName)Dll.pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -450,6 +457,7 @@
       <Version>0.1103</Version>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
       <GenerateMapFile>true</GenerateMapFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName)Dll.pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">
@@ -475,6 +483,7 @@
       <Version>0.1103</Version>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
       <GenerateMapFile>true</GenerateMapFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName)Dll.pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">
@@ -501,6 +510,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <ModuleDefinitionFile>$(ProjectDir)squashfuse.def</ModuleDefinitionFile>
       <GenerateMapFile>true</GenerateMapFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName)Dll.pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
