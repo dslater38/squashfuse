@@ -13,8 +13,9 @@ set PLATFORM=%2
 set BUILD_CONFIG=%CONFIGURATION%
 set PLATFORM_TARGET=%PLATFORM%
 
-rem MSBuild xz_win.sln /t:Clean /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
-devenv xz_win.sln /Clean "!BUILD_CONFIG!|!PLATFORM!" 
+MSBuild xz_win.sln /m /t:Clean /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
+rem devenv xz_win.sln /Clean "!BUILD_CONFIG!|!PLATFORM!" 
+
 
 if errorlevel 1 goto :END
 

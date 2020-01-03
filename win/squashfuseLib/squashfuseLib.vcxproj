@@ -159,6 +159,7 @@
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\externalDeps.props" />
     <Import Project="..\zlibstat.props" />
     <Import Project="..\zstdstat.props" />
     <Import Project="..\lz4stat.props" />

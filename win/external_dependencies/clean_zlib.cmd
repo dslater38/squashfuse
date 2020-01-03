@@ -30,11 +30,12 @@ cd "!ROOTDIR!..\3rdparty\zlib\contrib\vstudio\vc15"
 if errorlevel 1 goto :END
 
 rem MSBuild zlibstat.vcxproj /t:Clean /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
-devenv zlibvc.sln /Clean "!BUILD_CONFIG!|!PLATFORM!" /project zlibstat 
-if errorlevel 1 goto :END
+MSBuild zlibvc.sln /m /t:zlibstat:Clean;zlibvc:Clean /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
+rem devenv zlibvc.sln /Clean "!BUILD_CONFIG!|!PLATFORM!" /project zlibstat 
+rem if errorlevel 1 goto :END
 
 rem MSBuild zlibvc.vcxproj /t:Clean /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
-devenv zlibvc.sln /Clean "!BUILD_CONFIG!|!PLATFORM!" /project zlibvc
+rem devenv zlibvc.sln /Clean "!BUILD_CONFIG!|!PLATFORM!" /project zlibvc
 
 goto :END
 

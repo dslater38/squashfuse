@@ -128,6 +128,7 @@
     <Import Project="..\lzodll.props" />
     <Import Project="..\WinFsp.props" />
     <Import Project="..\squashfuseDLL.props" />
+    <Import Project="..\externalDeps.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -138,6 +139,7 @@
     <Import Project="..\lzostat.props" />
     <Import Project="..\WinFsp.props" />
     <Import Project="..\squashfuseDLL.props" />
+    <Import Project="..\externalDeps.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -149,6 +151,7 @@
     <Import Project="..\WinFsp.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\zlibRelease.props" />
+    <Import Project="..\externalDeps.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -160,6 +163,7 @@
     <Import Project="..\WinFsp.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\zlibRelease.props" />
+    <Import Project="..\externalDeps.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -171,6 +175,7 @@
     <Import Project="..\WinFsp.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\zlibRelease.props" />
+    <Import Project="..\externalDeps.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -181,6 +186,7 @@
     <Import Project="..\lzodll.props" />
     <Import Project="..\WinFsp.props" />
     <Import Project="..\squashfuseDLL.props" />
+    <Import Project="..\externalDeps.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -191,6 +197,7 @@
     <Import Project="..\lzostat.props" />
     <Import Project="..\WinFsp.props" />
     <Import Project="..\squashfuseDLL.props" />
+    <Import Project="..\externalDeps.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -202,6 +209,7 @@
     <Import Project="..\WinFsp.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\zlibRelease.props" />
+    <Import Project="..\externalDeps.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -213,6 +221,7 @@
     <Import Project="..\WinFsp.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\zlibRelease.props" />
+    <Import Project="..\externalDeps.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -224,6 +233,7 @@
     <Import Project="..\WinFsp.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\zlibRelease.props" />
+    <Import Project="..\externalDeps.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

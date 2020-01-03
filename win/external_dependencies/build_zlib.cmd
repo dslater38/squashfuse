@@ -22,13 +22,14 @@ if "%CONFIGURATION%"=="ReleaseMT" (
 )
 
 rem MSBuild zlibstat.vcxproj /t:Build /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
-devenv zlibvc.sln /Build "!BUILD_CONFIG!|!PLATFORM!" /project zlibstat 
+rem devenv zlibvc.sln /Build "!BUILD_CONFIG!|!PLATFORM!" /project zlibstat 
+MSBuild zlibvc.sln /m /t:zlibstat;zlibvc /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
 
 if errorlevel 1 exit /B 2
 
 rem MSBuild zlibvc.vcxproj /t:Build /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
-devenv zlibvc.sln /Build "!BUILD_CONFIG!|!PLATFORM!" /project zlibvc
-if errorlevel 1 exit /B 3
+rem devenv zlibvc.sln /Build "!BUILD_CONFIG!|!PLATFORM!" /project zlibvc
+rem if errorlevel 1 exit /B 3
 
 copy "!ROOTDIR!..\3rdparty\zlib\zlib.h" "!ROOTDIR!..\3rdparty\include" > nul
 if errorlevel 1 exit /B 4
