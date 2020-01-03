@@ -13,6 +13,12 @@ set PLATFORM=%2
 set BUILD_CONFIG=%CONFIGURATION%
 set PLATFORM_TARGET=%PLATFORM%
 
+if not exist "!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!\liblzma.lib" goto :BUILD
+if not exist "!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!\liblzma_dll.lib" goto :BUILD
+if not exist "!ROOTDIR!..\3rdparty\bin\!PLATFORM!\!CONFIGURATION!\liblzma.dll" goto :BUILD
+goto :END
+
+:BUILD
 MSBuild xz_win.sln /m /t:Build /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
 rem devenv xz_win.sln /Build "!BUILD_CONFIG!|!PLATFORM!" 
 if errorlevel 1 exit /B 2

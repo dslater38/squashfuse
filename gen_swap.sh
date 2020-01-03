@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 # Copyright (c) 2012 Dave Vasilevsky <dave@vasilevsky.ca>
 # All rights reserved.
 #

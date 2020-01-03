@@ -22,6 +22,8 @@ if "%CONFIGURATION%"=="ReleaseMT" (
 	set BUILD_CONFIG=Release-Static
 )
 
+if exist "!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!\liblz4.lib" goto :END
+
 rem MSBuild zlibstat.vcxproj /t:Build /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
 rem MSBuild /target:Build /property:Configuration=!BUILD_CONFIG! /property:Platform=!PLATFORM! liblz4
 MSBuild lz4.sln /m /t:liblz4;liblz4-dll /property:Configuration=!BUILD_CONFIG! /property:Platform=!PLATFORM!

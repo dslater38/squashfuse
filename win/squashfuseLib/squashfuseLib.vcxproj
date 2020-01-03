@@ -237,7 +237,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CustomBuildStep>
-      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
@@ -259,7 +259,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CustomBuildStep>
-      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
@@ -285,7 +285,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CustomBuildStep>
-      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
@@ -312,7 +312,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CustomBuildStep>
-      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
@@ -342,7 +342,7 @@
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
     </Lib>
     <CustomBuildStep>
-      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
@@ -368,7 +368,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CustomBuildStep>
-      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
@@ -395,7 +395,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CustomBuildStep>
-      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
@@ -425,7 +425,7 @@
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
     </Lib>
     <CustomBuildStep>
-      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
@@ -487,7 +487,7 @@
 </Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">rem cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
@@ -503,14 +503,14 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <OutputItemType Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">ClInclude</OutputItemType>
       <OutputItemType Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">ClInclude</OutputItemType>
       <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ClInclude</OutputItemType>

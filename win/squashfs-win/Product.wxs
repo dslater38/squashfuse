@@ -40,7 +40,7 @@
       AllowSameVersionUpgrades="yes" 
       DowngradeErrorMessage="A newer version of $(var.MyProductName) is already installed." />
     
-    <Media Id="1" Cabinet="$(var.MyProductName).cab" EmbedCab="yes" />
+    <Media Id="1" Cabinet="SQUASHFS_Win.cab" EmbedCab="yes" />
     
     <Property Id="OTHERINSTALLED">
       <ProductSearch UpgradeCode="$(var.OtherUpgradeCode)" Minimum="0.0.0.0" />
@@ -123,8 +123,6 @@
         Absent="disallow">
       <ComponentRef Id="C.INSTALLDIR" />
       <ComponentRef Id="C.squashfs.reg" />
-      <ComponentRef Id="C.squashfs.r.reg" />
-      <ComponentRef Id="C.squashfs.k.reg" />
       <ComponentGroupRef Id="C.Main" />
       <?if $(var.Static) = 0?>
       <ComponentGroupRef Id="C.Libs" />

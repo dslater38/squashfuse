@@ -5,7 +5,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Dev\WinFsp\inc\fuse;D:\Dev\WinFsp\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\WinFsp\inc\fuse;C:\Program Files %28x86%29\WinFsp\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Program Files %28x86%29\WinFsp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

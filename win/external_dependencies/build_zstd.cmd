@@ -22,6 +22,13 @@ if "%CONFIGURATION%"=="ReleaseMT" (
 	set BUILD_CONFIG=Release-Static
 )
 
+if not exist "!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!\libzstd.lib" goto :BUILD
+if not exist "!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!\libzstd_static.lib" goto :BUILD
+if not exist "!ROOTDIR!..\3rdparty\bin\!PLATFORM!\!CONFIGURATION!\libzstd.dll" goto :BUILD
+
+goto :END
+
+:BUILD
 rem MSBuild zlibvc.sln /m /t:zlibstat:Clean;zlibvc:Clean /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
 MSBuild zstd.sln /m /t:libzstd;libzstd-dll /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
 rem devenv zstd.sln /Build "!BUILD_CONFIG!|!PLATFORM!" /project libzstd 

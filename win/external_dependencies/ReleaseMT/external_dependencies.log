@@ -1,0 +1,85 @@
+﻿  
+  Microsoft (R) Program Maintenance Utility Version 14.16.27034.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+  Copyright (C) Microsoft Corporation. All rights reserved.
+  
+  Build started 1/3/2020 4:47:32 PM.
+       1>Project "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\xz_win.sln" on node 1 (Build target(s)).
+       1>ValidateSolutionConfiguration:
+           Building solution configuration "ReleaseMT|Win32".
+       1>Project "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\xz_win.sln" (1) is building "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\liblzma_dll.vcxproj" (3) on node 2 (default targets).
+       3>InitializeBuildStatus:
+           Creating "ReleaseMT\Win32\liblzma_dll\liblzma_dll.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+       1>Project "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\xz_win.sln" (1) is building "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\liblzma.vcxproj" (2) on node 1 (default targets).
+       2>InitializeBuildStatus:
+           Creating "ReleaseMT\Win32\liblzma\liblzma.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+       3>ClCompile:
+           All outputs are up-to-date.
+         ResourceCompile:
+           All outputs are up-to-date.
+         Link:
+           All outputs are up-to-date.
+           liblzma_dll.vcxproj -> E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\ReleaseMT\Win32\liblzma_dll\liblzma.dll
+         FinalizeBuildStatus:
+           Deleting file "ReleaseMT\Win32\liblzma_dll\liblzma_dll.tlog\unsuccessfulbuild".
+           Touching "ReleaseMT\Win32\liblzma_dll\liblzma_dll.tlog\liblzma_dll.lastbuildstate".
+       3>Done Building Project "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\liblzma_dll.vcxproj" (default targets).
+       2>ClCompile:
+           All outputs are up-to-date.
+         Lib:
+           All outputs are up-to-date.
+           liblzma.vcxproj -> E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\ReleaseMT\Win32\liblzma\liblzma.lib
+         FinalizeBuildStatus:
+           Deleting file "ReleaseMT\Win32\liblzma\liblzma.tlog\unsuccessfulbuild".
+           Touching "ReleaseMT\Win32\liblzma\liblzma.tlog\liblzma.lastbuildstate".
+       2>Done Building Project "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\liblzma.vcxproj" (default targets).
+       1>Done Building Project "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\xz_win.sln" (Build target(s)).
+  
+  Build succeeded.
+      0 Warning(s)
+      0 Error(s)
+  
+  Time Elapsed 00:00:00.54
+  Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
+  Copyright (C) Microsoft Corporation. All rights reserved.
+  
+  Build started 1/3/2020 4:47:33 PM.
+       1>Project "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\lz4.sln" on node 1 (liblz4;liblz4-dll target(s)).
+       1>ValidateSolutionConfiguration:
+           Building solution configuration "Release-Static|Win32".
+       1>Project "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\lz4.sln" (1) is building "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\liblz4\liblz4.vcxproj" (2) on node 1 (default targets).
+       2>InitializeBuildStatus:
+           Creating "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\obj\liblz4_Win32_Release-Static\liblz4.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+         ClCompile:
+           All outputs are up-to-date.
+         Lib:
+           All outputs are up-to-date.
+           liblz4.vcxproj -> E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\Win32_Release-Static\liblz4_static.lib
+         FinalizeBuildStatus:
+           Deleting file "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\obj\liblz4_Win32_Release-Static\liblz4.tlog\unsuccessfulbuild".
+           Touching "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\obj\liblz4_Win32_Release-Static\liblz4.tlog\liblz4.lastbuildstate".
+       2>Done Building Project "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\liblz4\liblz4.vcxproj" (default targets).
+       1>Project "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\lz4.sln" (1) is building "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\liblz4-dll\liblz4-dll.vcxproj" (3) on node 1 (default targets).
+       3>InitializeBuildStatus:
+           Creating "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\obj\liblz4-dll_Win32_Release-Static\liblz4-dll.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+         ClCompile:
+           All outputs are up-to-date.
+         ResourceCompile:
+           All outputs are up-to-date.
+         Link:
+           All outputs are up-to-date.
+           liblz4-dll.vcxproj -> E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\Win32_Release-Static\liblz4.dll
+         FinalizeBuildStatus:
+           Deleting file "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\obj\liblz4-dll_Win32_Release-Static\liblz4-dll.tlog\unsuccessfulbuild".
+           Touching "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\obj\liblz4-dll_Win32_Release-Static\liblz4-dll.tlog\liblz4-dll.lastbuildstate".
+       3>Done Building Project "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\liblz4-dll\liblz4-dll.vcxproj" (default targets).
+       1>Done Building Project "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\lz4.sln" (liblz4;liblz4-dll target(s)).
+  
+  Build succeeded.
+      0 Warning(s)
+      0 Error(s)
+  
+  Time Elapsed 00:00:00.52
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.MakeFile.Targets(44,5): warning MSB5021: Terminating the task executable "cmd" and its child processes because the build was canceled.

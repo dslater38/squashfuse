@@ -34,6 +34,8 @@ set "CMAKE_C_FLAGS_RELWITHDEBINFO=/MD /Zi /O2 /Ob1 /DNDEBUG"
 
 set "BUILDDIR=!ROOTDIR!..\3rdparty\lzo\build\!PLATFORM!"
 
+if exist "!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!\lzo2.lib" goto :END
+
 call :DOMKDIR "!ROOTDIR!..\3rdparty\lzo\build"
 if errorlevel 1 exit /B 1
 
@@ -48,8 +50,8 @@ set "INSTALL_LIB_DIR=!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!"
 set "INSTALL_BIN_DIR=!ROOTDIR!..\3rdparty\bin\!PLATFORM!\!CONFIGURATION!"
 set "INSTALL_INC_DIR=!ROOTDIR!..\3rdparty\include"
 
-if not exist lzo.sln (
 cmake -G "!TOOL_SET!" ^
+-DENABLE_SHARED="ON" ^
 -DCMAKE_INSTALL_PREFIX="!CMAKE_INSTALL_PREFIX!" ^
 -DCMAKE_INSTALL_LIBDIR="!INSTALL_LIB_DIR!" ^
 -DCMAKE_INSTALL_BINDIR="!INSTALL_BIN_DIR!" ^
@@ -62,7 +64,6 @@ cmake -G "!TOOL_SET!" ^
 
 if errorlevel 1  exit /B 4
 
-)
 
 cmake --build . --config !BUILD_CONFIG! --target INSTALL -- /maxcpucount:4
 if errorlevel 1  exit /B 4

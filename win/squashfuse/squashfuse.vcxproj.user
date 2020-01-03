@@ -4,15 +4,11 @@
     <LocalDebuggerCommandArguments>--VolumePrefix=\squashfs\share\d\Dev\squashfuse-dist\build\newlib.sqf -U \squashfs\share\d\Dev\squashfuse-dist\build\newlib.sqf Y:</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">
-    <LocalDebuggerCommandArguments>-U \squashfs\share\d:\Dev\squashfuse-dist\build\newlib.sqf Y:</LocalDebuggerCommandArguments>
-    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LocalDebuggerCommandArguments>d:\Dev\squashfuse\build\newlib.sqf \newlib</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">
     <LocalDebuggerCommandArguments>d:\Dev\squashfuse\build\newlib.sqf \newlib</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
