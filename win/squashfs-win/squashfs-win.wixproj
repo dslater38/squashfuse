@@ -41,25 +41,25 @@
     <DefineConstants>MyArch=x64;SourceDir=$(ProjectDir)..\$(Platform)\$(Configuration);Static=0;LibDir=$(ProjectDir)..\3rdparty\bin\$(Platform)\$(Configuration)</DefineConstants>
     <LinkerAdditionalOptions>-ext WixUIExtension</LinkerAdditionalOptions>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release-Static|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseMT|x86' ">
     <WixVariables />
     <DefineConstants>MyArch=x86;SourceDir=$(ProjectDir)..\Win32\$(Configuration);Static=1;LibDir=$(ProjectDir)..\3rdparty\bin\$(Platform)\$(Configuration)</DefineConstants>
     <LinkerAdditionalOptions>-ext WixUIExtension</LinkerAdditionalOptions>
     <OutputPath>$(SolutionDir)installer\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release-Static|x64' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseMT|x64' ">
     <WixVariables />
     <DefineConstants>MyArch=x64;SourceDir=$(ProjectDir)..\$(Platform)\$(Configuration);Static=1;LibDir=$(ProjectDir)..\3rdparty\bin\$(Platform)\$(Configuration)</DefineConstants>
     <LinkerAdditionalOptions>-ext WixUIExtension</LinkerAdditionalOptions>
     <OutputPath>$(SolutionDir)installer\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release-Static|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseMT|AnyCPU' ">
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release-Static|Any CPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseMT|AnyCPU' ">
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>

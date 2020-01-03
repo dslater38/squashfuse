@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug-Static|Win32">
-      <Configuration>Debug-Static</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug-Static|x64">
-      <Configuration>Debug-Static</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-Static|Win32">
-      <Configuration>Release-Static</Configuration>
+    <ProjectConfiguration Include="ReleaseMT|Win32">
+      <Configuration>ReleaseMT</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-Static|x64">
-      <Configuration>Release-Static</Configuration>
+    <ProjectConfiguration Include="ReleaseMT|x64">
+      <Configuration>ReleaseMT</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="ReleaseClang-Static|Win32">
@@ -56,12 +48,6 @@
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -69,7 +55,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
@@ -88,12 +74,6 @@
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -101,7 +81,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
@@ -128,15 +108,6 @@
     <Import Project="..\lzodll.props" />
     <Import Project="..\WinFsp.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\zlibstat.props" />
-    <Import Project="..\zstdstat.props" />
-    <Import Project="..\lz4stat.props" />
-    <Import Project="..\lzmastat.props" />
-    <Import Project="..\lzostat.props" />
-    <Import Project="..\WinFsp.props" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\zlibdll.props" />
@@ -147,7 +118,7 @@
     <Import Project="..\WinFsp.props" />
     <Import Project="..\zlibRelease.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\zlibstat.props" />
     <Import Project="..\lz4stat.props" />
@@ -176,15 +147,6 @@
     <Import Project="..\lzodll.props" />
     <Import Project="..\WinFsp.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\zlibstat.props" />
-    <Import Project="..\zstdstat.props" />
-    <Import Project="..\lz4stat.props" />
-    <Import Project="..\lzmastat.props" />
-    <Import Project="..\lzostat.props" />
-    <Import Project="..\WinFsp.props" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\zlibdll.props" />
@@ -195,7 +157,7 @@
     <Import Project="..\WinFsp.props" />
     <Import Project="..\zlibRelease.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\zlibstat.props" />
     <Import Project="..\zstdstat.props" />
@@ -219,15 +181,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
@@ -237,7 +191,7 @@
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
@@ -250,7 +204,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">
@@ -290,29 +244,6 @@
       <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-    <CustomBuildStep>
-      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
-</Command>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
-    </CustomBuildStep>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -320,29 +251,6 @@
       <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-    <CustomBuildStep>
-      <Command>cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
-</Command>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
-    </CustomBuildStep>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WINVER=0x0600;_WIN32_WINNT=0x0600;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\..\build;$(ProjectDir)..\..\win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -384,7 +292,7 @@
       <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
@@ -467,7 +375,7 @@
       <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
@@ -570,7 +478,7 @@
   <ItemGroup>
     <CustomBuild Include="..\..\gen_swap.sh">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
@@ -578,9 +486,7 @@
 </Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
-</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
+      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
@@ -588,38 +494,30 @@
 </Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
 </Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">cd $(ProjectDir)..\ &amp; d:\Cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">false</ExcludedFromBuild>
-      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">ClInclude</OutputItemType>
+      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">ClInclude</OutputItemType>
       <OutputItemType Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">ClInclude</OutputItemType>
       <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ClInclude</OutputItemType>
       <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ClInclude</OutputItemType>
-      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">ClInclude</OutputItemType>
-      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'">ClInclude</OutputItemType>
+      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">ClInclude</OutputItemType>
       <OutputItemType Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">ClInclude</OutputItemType>
       <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ClInclude</OutputItemType>
       <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ClInclude</OutputItemType>
-      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'">ClInclude</OutputItemType>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
