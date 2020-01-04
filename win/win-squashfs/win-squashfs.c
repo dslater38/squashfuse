@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
+#include <ctype.h>
 
 static char *sqfs_parse_unc_path(const char *arg);
 static char *squashfuse_path();
@@ -32,7 +33,6 @@ int main(int argc, char **argv)
 		strcpy_s(ProgName, sizeof(ProgName), FNAME);
 		strcat_s(ProgName, sizeof(ProgName), EXT);
 		const char *squashfs_args[256] = {
-//			PROGNAME, buffer, "-f", "-U", unc_path, drive, (void *)0
 			ProgName, buffer, "-f", archivePath, drive, (void *)0
 		};
 
@@ -83,9 +83,30 @@ char *sqfs_parse_unc_path(const char *arg)
 	/* This only applies when we're building against the WinFsp version of FUSE */
 
 	const char *unc_path = arg;
-	/* skip over the server and share names */
-	const char *unc_prefix = unc_path;
-	if (*unc_prefix == '\\') {
+	/* skip over the server names */
+	/* const char *unc_prefix = unc_path; */
+	if (*unc_path == '\\') {
+		unc_path = strchr(++unc_path, '\\');
+		char *ptr = NULL;
+		if (isalpha(*(unc_path + 1)) && *(unc_path + 2) == '\\') {
+			/* We'll interpret a single letter share name as a drive letter */
+			size_t sLen = strlen(unc_path) + 1;
+			ptr = malloc(sLen);
+			*ptr = *(++unc_path);
+			*(ptr + 1) = ':';
+			strcpy_s(ptr + 2, sLen - 2, ++unc_path);
+		}
+		else {
+			/* We'll interpret the everything after the \\squashfuse as a UNC path to the file */
+			++unc_path;
+			size_t sLen = strlen(unc_path) + 3;
+			ptr = malloc(sLen);
+			*ptr = '\\';
+			*(ptr + 1) = '\\';
+			strcpy_s(ptr + 2, sLen - 2, unc_path);
+		}
+		return ptr;
+#if 0
 		int i = 0;
 		for (i = 0; i < 2 && (*unc_path == '\\'); ++i) {
 			unc_path = strchr(++unc_path, '\\');
@@ -101,6 +122,7 @@ char *sqfs_parse_unc_path(const char *arg)
 			strcpy_s(ptr + 2, sLen - 2, ++unc_path);
 			return ptr; //  ++unc_path;
 		}
+#endif // 0
 	}
 	return NULL;
 }
