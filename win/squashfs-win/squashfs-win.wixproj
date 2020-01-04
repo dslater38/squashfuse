@@ -12,7 +12,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>$(SolutionDir)installer\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Debug;MyArch=x86;SourceDir=$(ProjectDir)..\Win32\$(Configuration);Static=0;LibDir=$(ProjectDir)..\3rdparty\bin\$(Platform)\$(Configuration)</DefineConstants>
+    <DefineConstants>Debug;MyArch=x86;SourceDir=$(ProjectDir)..\Win32\$(Configuration);Static=0;LibDir=$(ProjectDir)..\3rdparty\bin\Win32\$(Configuration)</DefineConstants>
     <WixVariables>
     </WixVariables>
     <LinkerAdditionalOptions>-ext WixUIExtension</LinkerAdditionalOptions>
@@ -22,7 +22,7 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <WixVariables>
     </WixVariables>
-    <DefineConstants>MyArch=x86;SourceDir=$(ProjectDir)..\Win32\$(Configuration);Static=0;LibDir=$(ProjectDir)..\3rdparty\bin\$(Platform)\$(Configuration)</DefineConstants>
+    <DefineConstants>MyArch=x86;SourceDir=$(ProjectDir)..\Win32\$(Configuration);Static=0;LibDir=$(ProjectDir)..\3rdparty\bin\Win32\$(Configuration)</DefineConstants>
     <LinkerAdditionalOptions>-ext WixUIExtension</LinkerAdditionalOptions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
@@ -43,7 +43,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseMT|x86' ">
     <WixVariables />
-    <DefineConstants>MyArch=x86;SourceDir=$(ProjectDir)..\Win32\$(Configuration);Static=1;LibDir=$(ProjectDir)..\3rdparty\bin\$(Platform)\$(Configuration)</DefineConstants>
+    <DefineConstants>MyArch=x86;SourceDir=$(ProjectDir)..\Win32\$(Configuration);Static=1;LibDir=$(ProjectDir)..\3rdparty\bin\Win32\$(Configuration)</DefineConstants>
     <LinkerAdditionalOptions>-ext WixUIExtension</LinkerAdditionalOptions>
     <OutputPath>$(SolutionDir)installer\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
@@ -64,7 +64,7 @@
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug-Static|x86' ">
-    <DefineConstants>Debug;MyArch=x86;SourceDir=$(ProjectDir)..\Win32\$(Configuration);Static=1;LibDir=$(ProjectDir)..\3rdparty\bin\$(Platform)\$(Configuration)</DefineConstants>
+    <DefineConstants>Debug;MyArch=x86;SourceDir=$(ProjectDir)..\Win32\$(Configuration);Static=1;LibDir=$(ProjectDir)..\3rdparty\bin\Win32\$(Configuration)</DefineConstants>
     <WixVariables />
     <LinkerAdditionalOptions>-ext WixUIExtension</LinkerAdditionalOptions>
     <OutputPath>$(SolutionDir)installer\$(Platform)\$(Configuration)\</OutputPath>
