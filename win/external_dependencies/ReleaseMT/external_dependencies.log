@@ -2,84 +2,139 @@
   Microsoft (R) Program Maintenance Utility Version 14.16.27034.0
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
+  -- Selecting Windows SDK version 10.0.18362.0 to target Windows 10.0.19536.
+  -- CMAKE_CONFIGURATION_TYPES = Debug;Release;MinSizeRel;RelWithDebInfo
+  -- CMAKE_BUILD_TYPE = Release
+  -- Configuring done
+  -- Generating done
+  -- Build files have been written to: D:/Dev/squashfuse/win/3rdparty/lzo/build/Win32
   Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
   Copyright (C) Microsoft Corporation. All rights reserved.
   
-  Build started 1/3/2020 4:47:32 PM.
-       1>Project "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\xz_win.sln" on node 1 (Build target(s)).
-       1>ValidateSolutionConfiguration:
-           Building solution configuration "ReleaseMT|Win32".
-       1>Project "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\xz_win.sln" (1) is building "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\liblzma_dll.vcxproj" (3) on node 2 (default targets).
-       3>InitializeBuildStatus:
-           Creating "ReleaseMT\Win32\liblzma_dll\liblzma_dll.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
-       1>Project "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\xz_win.sln" (1) is building "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\liblzma.vcxproj" (2) on node 1 (default targets).
-       2>InitializeBuildStatus:
-           Creating "ReleaseMT\Win32\liblzma\liblzma.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
-       3>ClCompile:
-           All outputs are up-to-date.
-         ResourceCompile:
-           All outputs are up-to-date.
-         Link:
-           All outputs are up-to-date.
-           liblzma_dll.vcxproj -> E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\ReleaseMT\Win32\liblzma_dll\liblzma.dll
-         FinalizeBuildStatus:
-           Deleting file "ReleaseMT\Win32\liblzma_dll\liblzma_dll.tlog\unsuccessfulbuild".
-           Touching "ReleaseMT\Win32\liblzma_dll\liblzma_dll.tlog\liblzma_dll.lastbuildstate".
-       3>Done Building Project "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\liblzma_dll.vcxproj" (default targets).
-       2>ClCompile:
-           All outputs are up-to-date.
-         Lib:
-           All outputs are up-to-date.
-           liblzma.vcxproj -> E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\ReleaseMT\Win32\liblzma\liblzma.lib
-         FinalizeBuildStatus:
-           Deleting file "ReleaseMT\Win32\liblzma\liblzma.tlog\unsuccessfulbuild".
-           Touching "ReleaseMT\Win32\liblzma\liblzma.tlog\liblzma.lastbuildstate".
-       2>Done Building Project "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\liblzma.vcxproj" (default targets).
-       1>Done Building Project "E:\Dev\squashfuse\win\3rdparty\lzma\windows\vs2017\xz_win.sln" (Build target(s)).
-  
-  Build succeeded.
-      0 Warning(s)
-      0 Error(s)
-  
-  Time Elapsed 00:00:00.54
-  Microsoft (R) Build Engine version 15.9.21+g9802d43bc3 for .NET Framework
-  Copyright (C) Microsoft Corporation. All rights reserved.
-  
-  Build started 1/3/2020 4:47:33 PM.
-       1>Project "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\lz4.sln" on node 1 (liblz4;liblz4-dll target(s)).
-       1>ValidateSolutionConfiguration:
-           Building solution configuration "Release-Static|Win32".
-       1>Project "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\lz4.sln" (1) is building "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\liblz4\liblz4.vcxproj" (2) on node 1 (default targets).
-       2>InitializeBuildStatus:
-           Creating "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\obj\liblz4_Win32_Release-Static\liblz4.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
-         ClCompile:
-           All outputs are up-to-date.
-         Lib:
-           All outputs are up-to-date.
-           liblz4.vcxproj -> E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\Win32_Release-Static\liblz4_static.lib
-         FinalizeBuildStatus:
-           Deleting file "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\obj\liblz4_Win32_Release-Static\liblz4.tlog\unsuccessfulbuild".
-           Touching "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\obj\liblz4_Win32_Release-Static\liblz4.tlog\liblz4.lastbuildstate".
-       2>Done Building Project "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\liblz4\liblz4.vcxproj" (default targets).
-       1>Project "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\lz4.sln" (1) is building "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\liblz4-dll\liblz4-dll.vcxproj" (3) on node 1 (default targets).
-       3>InitializeBuildStatus:
-           Creating "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\obj\liblz4-dll_Win32_Release-Static\liblz4-dll.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
-         ClCompile:
-           All outputs are up-to-date.
-         ResourceCompile:
-           All outputs are up-to-date.
-         Link:
-           All outputs are up-to-date.
-           liblz4-dll.vcxproj -> E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\Win32_Release-Static\liblz4.dll
-         FinalizeBuildStatus:
-           Deleting file "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\obj\liblz4-dll_Win32_Release-Static\liblz4-dll.tlog\unsuccessfulbuild".
-           Touching "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\bin\obj\liblz4-dll_Win32_Release-Static\liblz4-dll.tlog\liblz4-dll.lastbuildstate".
-       3>Done Building Project "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\liblz4-dll\liblz4-dll.vcxproj" (default targets).
-       1>Done Building Project "E:\Dev\squashfuse\win\3rdparty\lz4\visual\VS2017\lz4.sln" (liblz4;liblz4-dll target(s)).
-  
-  Build succeeded.
-      0 Warning(s)
-      0 Error(s)
-  
-  Time Elapsed 00:00:00.52
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.MakeFile.Targets(44,5): warning MSB5021: Terminating the task executable "cmd" and its child processes because the build was canceled.
+    lzo1.c
+    lzo1_99.c
+    lzo1a.c
+    lzo1a_99.c
+    lzo1b_1.c
+    lzo1b_2.c
+    lzo1b_3.c
+    lzo1b_4.c
+    lzo1b_5.c
+    lzo1b_6.c
+    lzo1b_7.c
+    lzo1b_8.c
+    lzo1b_9.c
+    lzo1b_99.c
+    lzo1b_9x.c
+    lzo1b_cc.c
+    lzo1b_d1.c
+    lzo1b_d2.c
+    lzo1b_rr.c
+    lzo1b_xx.c
+    Generating Code...
+    Compiling...
+    lzo1c_1.c
+    lzo1c_2.c
+    lzo1c_3.c
+    lzo1c_4.c
+    lzo1c_5.c
+    lzo1c_6.c
+    lzo1c_7.c
+    lzo1c_8.c
+    lzo1c_9.c
+    lzo1c_99.c
+    lzo1c_9x.c
+    lzo1c_cc.c
+    lzo1c_d1.c
+    lzo1c_d2.c
+    lzo1c_rr.c
+    lzo1c_xx.c
+    lzo1f_1.c
+    lzo1f_9x.c
+    lzo1f_d1.c
+    lzo1f_d2.c
+    Generating Code...
+    Compiling...
+    lzo1x_1.c
+    lzo1x_1k.c
+    lzo1x_1l.c
+    lzo1x_1o.c
+    lzo1x_9x.c
+    lzo1x_d1.c
+    lzo1x_d2.c
+    lzo1x_d3.c
+    lzo1x_o.c
+    lzo1y_1.c
+    lzo1y_9x.c
+    lzo1y_d1.c
+    lzo1y_d2.c
+    lzo1y_d3.c
+    lzo1y_o.c
+    lzo1z_9x.c
+    lzo1z_d1.c
+    lzo1z_d2.c
+    lzo1z_d3.c
+    lzo2a_9x.c
+    Generating Code...
+    Compiling...
+    lzo2a_d1.c
+    lzo2a_d2.c
+    lzo_crc.c
+    lzo_init.c
+    lzo_ptr.c
+    lzo_str.c
+    lzo_util.c
+    Generating Code...
+    lzo_object_lib.vcxproj -> D:\Dev\squashfuse\win\3rdparty\lzo\build\Win32\lzo_object_lib.dir\Release\lzo_object_lib.lib
+    Auto build dll exports
+    lzo_static_lib.vcxproj -> D:\Dev\squashfuse\win\3rdparty\lzo\build\Win32\Release\lzo2.lib
+    testmini.c
+    minilzo.c
+       Creating library D:/Dev/squashfuse/win/3rdparty/lzo/build/Win32/Release/lzo2_dllimport.lib and object D:/Dev/squashfuse/win/3rdparty/lzo/build/Win32/Release/lzo2_dllimport.exp
+    Generating Code...
+    lzo_shared_lib.vcxproj -> D:\Dev\squashfuse\win\3rdparty\lzo\build\Win32\Release\lzo2.dll
+    precomp.c
+    simple.c
+    testmini.vcxproj -> D:\Dev\squashfuse\win\3rdparty\lzo\build\Win32\Release\testmini.exe
+    lzotest.c
+    dict.c
+    precomp2.c
+    overlap.c
+    lzopack.c
+    simple.vcxproj -> D:\Dev\squashfuse\win\3rdparty\lzo\build\Win32\Release\simple.exe
+    precomp.vcxproj -> D:\Dev\squashfuse\win\3rdparty\lzo\build\Win32\Release\precomp.exe
+    precomp2.vcxproj -> D:\Dev\squashfuse\win\3rdparty\lzo\build\Win32\Release\precomp2.exe
+    dict.vcxproj -> D:\Dev\squashfuse\win\3rdparty\lzo\build\Win32\Release\dict.exe
+    overlap.vcxproj -> D:\Dev\squashfuse\win\3rdparty\lzo\build\Win32\Release\overlap.exe
+    lzotest.vcxproj -> D:\Dev\squashfuse\win\3rdparty\lzo\build\Win32\Release\lzotest.exe
+    lzopack.vcxproj -> D:\Dev\squashfuse\win\3rdparty\lzo\build\Win32\Release\lzopack.exe
+    -- Install configuration: "Release"
+    -- Up-to-date: D:/Dev/squashfuse/win/3rdparty/share/doc/lzo/AUTHORS
+    -- Up-to-date: D:/Dev/squashfuse/win/3rdparty/share/doc/lzo/COPYING
+    -- Up-to-date: D:/Dev/squashfuse/win/3rdparty/share/doc/lzo/NEWS
+    -- Up-to-date: D:/Dev/squashfuse/win/3rdparty/share/doc/lzo/THANKS
+    -- Up-to-date: D:/Dev/squashfuse/win/3rdparty/share/doc/lzo/LZO.FAQ
+    -- Up-to-date: D:/Dev/squashfuse/win/3rdparty/share/doc/lzo/LZO.TXT
+    -- Up-to-date: D:/Dev/squashfuse/win/3rdparty/share/doc/lzo/LZOAPI.TXT
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/include/lzo/lzo1.h
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/include/lzo/lzo1a.h
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/include/lzo/lzo1b.h
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/include/lzo/lzo1c.h
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/include/lzo/lzo1f.h
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/include/lzo/lzo1x.h
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/include/lzo/lzo1y.h
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/include/lzo/lzo1z.h
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/include/lzo/lzo2a.h
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/include/lzo/lzo_asm.h
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/include/lzo/lzoconf.h
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/include/lzo/lzodefs.h
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/include/lzo/lzoutil.h
+    -- Installing: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/lib/Win32/ReleaseMT/lzo2.lib
+    -- Up-to-date: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/lib/Win32/ReleaseMT/lzo2_dllimport.lib
+    -- Installing: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/bin/Win32/ReleaseMT/lzo2.dll
+    -- Installing: D:/Dev/squashfuse/win/3rdparty/libexec/lzo/examples/lzopack.exe
+    -- Installing: D:/Dev/squashfuse/win/3rdparty/libexec/lzo/examples/lzotest.exe
+    -- Installing: D:/Dev/squashfuse/win/3rdparty/libexec/lzo/examples/simple.exe
+    -- Installing: D:/Dev/squashfuse/win/3rdparty/libexec/lzo/examples/testmini.exe
+    -- Installing: D:/Dev/squashfuse/win/external_dependencies/../3rdparty/lib/Win32/ReleaseMT/pkgconfig/lzo2.pc
+  ReleaseMT Win32

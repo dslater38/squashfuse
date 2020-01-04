@@ -4,3 +4,7 @@ lib
 *.VC.db
 *.obj
 *.lst
+libexec
+share
+**/.vs
+zlib/build/

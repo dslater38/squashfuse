@@ -25,12 +25,21 @@ int main(int argc, char **argv)
 		char buffer[256];
 		sprintf_s(buffer, sizeof(buffer), volumePrefix, unc_path);
 		char *PROGNAME = squashfuse_path();
+		char FNAME[_MAX_FNAME];
+		char EXT[_MAX_EXT];
+		_splitpath_s(PROGNAME, NULL, 0, NULL, 0, FNAME, _MAX_FNAME, EXT, _MAX_EXT);
+		char ProgName[_MAX_FNAME + _MAX_EXT + 1];
+		strcpy_s(ProgName, sizeof(ProgName), FNAME);
+		strcat_s(ProgName, sizeof(ProgName), EXT);
 		const char *squashfs_args[256] = {
 //			PROGNAME, buffer, "-f", "-U", unc_path, drive, (void *)0
-			PROGNAME, buffer, "-f", archivePath, drive, (void *)0
+			ProgName, buffer, "-f", archivePath, drive, (void *)0
 		};
 
 		int retVal = (int)_spawnv(_P_WAIT ,PROGNAME, squashfs_args);
+		if (retVal == -1) {
+			fprintf(stderr, "Error: _spawnv failed. errorno %d\n", errno);
+		}
 		free(PROGNAME);
 		free(archivePath);
 		return retVal;
@@ -51,7 +60,7 @@ char *squashfuse_path()
 	LSTATUS status = RegOpenKeyEx(HKEY_LOCAL_MACHINE, WIN_SQUASHFS_KEY, 0, KEY_READ, &hKey);
 	if (ERROR_SUCCESS == status) {
 		DWORD bufSize = _MAX_PATH;
-		char *buffer = (char *)calloc(_MAX_PATH, 1);
+		char *buffer = (char *)calloc(_MAX_PATH, 3);
 		if (buffer) {
 			status = RegQueryValueExA(hKey, "Executable", NULL, NULL, buffer, &bufSize);
 			if (ERROR_SUCCESS == status) {

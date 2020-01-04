@@ -26,6 +26,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "squashfuseDLL", "squashfuseDLL\squashfuseDLL.vcxproj", "{19949FC9-5879-49CF-9FBB-1E833E96A20E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "squashfuse-win", "win-squashfs\win-squashfs.vcxproj", "{F1D5B01E-2897-421B-8257-84751FE9ABB1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{65711DB8-92D1-49C7-BF6B-F77DA46EA1FC} = {65711DB8-92D1-49C7-BF6B-F77DA46EA1FC}
+	EndProjectSection
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "squashfs-win", "squashfs-win\squashfs-win.wixproj", "{2F7D44FE-CE75-479A-8746-4BE0FE4535AA}"
 	ProjectSection(ProjectDependencies) = postProject

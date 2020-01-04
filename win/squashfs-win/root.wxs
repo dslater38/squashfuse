@@ -53,7 +53,6 @@
         </DirectoryRef>
     </Fragment>
     <Fragment>
-      
         <ComponentGroup Id="C.Main">
           <ComponentRef Id="cmp67444F573F0D32A83E3331E4C11E58FE" />
           <ComponentRef Id="cmpE26AA2C501843D4E8D9096B7D7183F82" />
