@@ -8,3 +8,6 @@ libexec
 share
 **/.vs
 zlib/build/
+*.exe
+*.obj
+*.lst
