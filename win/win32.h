@@ -30,19 +30,19 @@
 #include <stdint.h>
 #include <direct.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define mkdir(a,b) win_mkdir(a,b)
 
-__inline int win_mkdir(const char *dir, int mode)
-{
-	return _mkdir(dir);
-}
+	__inline int win_mkdir(const char *dir, int mode)
+	{
+		return _mkdir(dir);
+	}
 
-/* TODO: make a version of this that works correctly with directories*/
-__inline  int symlink(const char *path1, const char *path2)
-{
-	BOOLEAN success = CreateSymbolicLinkA(path2, path1, 0);
-	return (success != 0 ? 0 : -1);
-}
+	/* TODO: make a version of this that works correctly with directories
+	int sqfs_symlink(sqfs *fs, const char *path1, const char *path2);*/
 
 #undef S_IFMT
 #undef S_IFREG
@@ -85,18 +85,26 @@ __inline  int symlink(const char *path1, const char *path2)
 #define S_IWOTH 00002
 #define S_IXOTH 00001
 
-/* access function */
+	/* access function */
 #define	F_OK		0	/* test for existence of file */
 #define	X_OK		0x01	/* test for execute or search permission */
 #define	W_OK		0x02	/* test for write permission */
 #define	R_OK		0x04	/* test for read permission */
 
-typedef unsigned short sqfs_mode_t;
-typedef uint32_t sqfs_id_t; /* Internal uids/gids are 32-bits */
+	typedef unsigned short sqfs_mode_t;
+	typedef uint32_t sqfs_id_t; /* Internal uids/gids are 32-bits */
 
-typedef SSIZE_T ssize_t;
-typedef DWORD64 sqfs_off_t;
-typedef HANDLE sqfs_fd_t;
-typedef unsigned uid_t;
+	typedef SSIZE_T ssize_t;
+	typedef DWORD64 sqfs_off_t;
+	typedef HANDLE sqfs_fd_t;
+	typedef unsigned uid_t;
+
+	unsigned short sqfs_inode_mode_to_stat_mode(uint32_t mode);
+
+
+#ifdef __cplusplus
+}
+#endif
+
 
 #endif

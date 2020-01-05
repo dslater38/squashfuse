@@ -39,8 +39,6 @@ set "BUILDDIR=!ROOTDIR!..\3rdparty\lzo\build\!PLATFORM!"
 
 if not exist "!BUILDDIR!" mkdir "!BUILDDIR!"
 
-rem if exist "!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!\lzo2.lib" goto :END
-
 cd "!BUILDDIR!"
 if errorlevel 1 exit /B 1
 

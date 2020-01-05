@@ -451,6 +451,7 @@
     <ClInclude Include="..\..\traverse.h" />
     <ClInclude Include="..\..\util.h" />
     <ClInclude Include="..\..\xattr.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\squashfuseLib\squashfuseLib.vcxproj">
@@ -459,6 +460,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="squashfuse.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="squashfuseDLL.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

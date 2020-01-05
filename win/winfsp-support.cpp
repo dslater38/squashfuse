@@ -33,6 +33,7 @@ struct IUnknown;
 
 extern "C"
 {
+#include "../squashfuse.h"
 	/* delay-load winfsp dynamic link library. */
 	/* return 0 on success. */
 	int sqfs_load_winfsp()
@@ -44,6 +45,62 @@ extern "C"
 
 	}
 	int glb__WinFspLoaded = sqfs_load_winfsp();
+
+	static void die(const char *msg) {
+		fprintf(stderr, "%s\n", msg);
+		exit(1);
+	}
+
+	char *make_full_path(const char *path1, const char *path2) {
+		if (*path1 == '/') {
+			return strdup(path1);
+		}
+		else {
+			const char *ptr = path2;
+			if (*ptr != '/') {
+				ptr = strchr(ptr, '/');	/* skip over the extraction root dir */
+				char dir[_MAX_DIR];
+				char buffer[_MAX_PATH];
+				if (0 == _splitpath_s(ptr, NULL, 0, dir, _MAX_DIR, NULL, 0, NULL, 0)) {
+
+					size_t len = strlen(dir) + strlen(path1) + 1;
+					char *buf = (char *)malloc(len);
+					strcpy_s(buf, len, dir);
+					strcat_s(buf, len, path1);
+					return buf;
+
+				}
+			}
+		}
+		die("_splitpath_s");
+		return NULL;
+	}
+
+	/* TODO: make a version of this that works correctly with directories*/
+	int sqfs_symlink(sqfs *fs, const char *path1, const char *path2)
+	{
+		sqfs_inode inode = { 0 };
+		DWORD flags = 0;
+		char *fullPath = make_full_path(path1, path2);
+		bool found = false;
+		sqfs_err err = sqfs_inode_get(fs, &inode, sqfs_inode_root(fs));
+		if (err == err ) {
+			err = sqfs_lookup_path(fs, &inode, fullPath, &found);
+			free(fullPath);
+			if (SQFS_OK == err && true == found) {
+				if (S_ISDIR(inode.base.mode)) {
+					flags |= SYMBOLIC_LINK_FLAG_DIRECTORY;
+				}
+			}
+		}
+		BOOLEAN success = CreateSymbolicLinkA(path2, path1, flags);
+		if (!success) {
+
+		}
+		return (success != 0 ? 0 : -1);
+	}
+
+
 #if 0
 	struct Args {
 		int argc;

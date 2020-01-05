@@ -8,6 +8,11 @@ set PLATFORM=%2
 set BUILD_CONFIG=%CONFIGURATION%
 set PLATFORM_TARGET=%PLATFORM%
 
+if "!CONFIGURATION!"=="ReleaseMT" (
+	set BUILD_CONFIG=Release
+)
+
+
 if "%PLATFORM%"=="x64" (
 set "TOOL_SET=Visual Studio 15 2017 Win64" 
 ) else (
@@ -37,7 +42,7 @@ cd "!BUILDDIR!"
 if errorlevel 1 exit /B 1
 
 if exist lzo.sln (
-	cmake --build . --target clean --config %CONFIGURATION%
+	cmake --build . --target clean --config !BUILD_CONFIG!
 	if errorlevel 1 exit /B 2
 )
 

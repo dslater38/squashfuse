@@ -78,6 +78,9 @@
     <ClInclude Include="..\stack.h">
       <Filter>Common headers</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Common headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\swap.h.inc">
@@ -91,5 +94,15 @@
     <ClCompile Include="..\winfsp-support.cpp">
       <Filter>Windows sources</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="squashfuse_ls.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\squashfuse.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -138,3 +138,11 @@ void sqfs_print_compression_info()
 	}
 	fprintf(stderr, "\t----------------------\n");
 }
+
+#ifndef WIN32
+int sqfs_symlink(sqfs *fs, const char *path1, const char *path2)
+{
+	((void)fs);
+	return symlink(path1, path2);
+}
+#endif

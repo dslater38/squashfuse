@@ -11,23 +11,26 @@
   <?define OtherUpgradeCode="$(var.UpgradeCode32)"?>
   <?define ProgramFilesFolder="ProgramFiles64Folder"?>
   <?define LauncherRegistryKey="Software\WOW6432Node\WinFsp\Services"?>
+  <?define ProductName="$(var.MyProductName) ($(var.MyArch))"?>
 <?else?>
   <?define UpgradeCode="$(var.UpgradeCode32)"?>
   <?define OtherUpgradeCode="$(var.UpgradeCode64)"?>
   <?define ProgramFilesFolder="ProgramFilesFolder"?>
   <?define LauncherRegistryKey="Software\WinFsp\Services"?>
+<?define ProductName="$(var.MyProductName)"?>
 <?endif?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
   <Product Id="*" 
-           Name="$(var.MyProductName)" 
+           Name="$(var.ProductName)" 
            Language="1033" 
            Version="0.1.103.0"
            Manufacturer="$(var.MyProductName)" 
            UpgradeCode="$(var.UpgradeCode)">
-    
-		<Package Description="$(var.MyProductName) ($(var.MyArch)) - $(var.MyDescription)"
+
+
+    <Package Description="$(var.MyProductName) ($(var.MyArch)) - $(var.MyDescription)"
              InstallerVersion="200" 
              Compressed="yes" 
              InstallScope="perMachine" />
@@ -35,10 +38,11 @@
     <!--DisallowUpgradeErrorMessage="An older version of $(var.MyProductName) is already installed. You must uninstall it before you can install this version." -->
     
 	<MajorUpgrade 
-      Disallow="no" 
+      Disallow="yes" 
       AllowDowngrades="no" 
       AllowSameVersionUpgrades="yes" 
-      DowngradeErrorMessage="A newer version of $(var.MyProductName) is already installed." />
+       DisallowUpgradeErrorMessage="An older version of $(var.ProductName) is already installed. You must uninstall it before you can install this version."
+      DowngradeErrorMessage="A newer version of $(var.ProductName) is already installed." />
     
     <Media Id="1" Cabinet="SQUASHFS_Win.cab" EmbedCab="yes" />
     
@@ -144,6 +148,11 @@
           Event="NewDialog"
           Value="WelcomeDlg"
           Order="10">NOT Installed</Publish>
-    </UI>    
+    </UI>
+
+    <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
+    <Icon Id="icon.ico" SourceFile="..\squashfuse.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+
   </Product>
 </Wix>

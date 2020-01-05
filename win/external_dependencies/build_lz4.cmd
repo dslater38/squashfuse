@@ -22,20 +22,8 @@ if "%CONFIGURATION%"=="ReleaseMT" (
 	set BUILD_CONFIG=Release-Static
 )
 
-rem if not exist "!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!\liblz4.lib" goto :BUILD
-
-
-rem MSBuild zlibstat.vcxproj /t:Build /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
-rem MSBuild /target:Build /property:Configuration=!BUILD_CONFIG! /property:Platform=!PLATFORM! liblz4
 MSBuild lz4.sln /m /t:liblz4;liblz4-dll /property:Configuration=!BUILD_CONFIG! /property:Platform=!PLATFORM!
-rem MSBuild /target:Build /property:Configuration=!BUILD_CONFIG! /property:Platform=!PLATFORM! /property:TargetName=liblz4 lz4.sln
-rem devenv lz4.sln /Build "!BUILD_CONFIG!|!PLATFORM!" /project lz4 
 if errorlevel 1 exit /B 2
-
-rem MSBuild zlibvc.vcxproj /t:Build /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
-rem MSBuild /target:Build /property:Configuration=!BUILD_CONFIG! /property:Platform=!PLATFORM! /property:TargetName=liblz4-dll lz4.sln
-rem devenv lz4.sln /Build "!BUILD_CONFIG!|!PLATFORM!" /project liblz4-dll
-rem if errorlevel 1 exit /B 3
 
 
 copy "!ROOTDIR!..\3rdparty\lz4\lib\lz4.h" "!ROOTDIR!..\3rdparty\include" > nul

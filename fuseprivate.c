@@ -95,18 +95,9 @@ int sqfs_listxattr(sqfs *fs, sqfs_inode *inode, char *buf, size_t *size) {
 }
 
 void sqfs_usage(char *progname, bool fuse_usage) {
-	const char *prog = progname ? progname : PACKAGE_NAME;
 	fprintf(stderr, "%s (c) 2012 Dave Vasilevsky\n\n", PACKAGE_STRING);
-	fprintf(stderr, "Usage: %s [options] ARCHIVE MOUNTPOINT\n", prog);
-
-#ifdef FUSE_WINFSP_FUSE_H_INCLUDED
-	/* This only applies when we're building against the WinFsp version of FUSE */
-	fprintf(stderr, "\n%s options:\n", prog);
-	fprintf(stderr, "-U\t indicates ARCHIVE is a unc path name of the form \\[WINFSP_SERVICE]\\ARCHIVE_PATH\n");
-	fprintf(stderr, "\t v%s\n", "where [WINFSP_SERVICE] is the name of the WinFsp service key that enables the WinFsp Network provider.");
-	fprintf(stderr, "\t For info on the WinFsp network provider, see:\n\t%s\n", "https://github.com/billziss-gh/winfsp/blob/master/doc/WinFsp-Service-Architecture.asciidoc#winfsp-network-provider");
-#endif
-
+	fprintf(stderr, "Usage: %s [options] ARCHIVE MOUNTPOINT\n",
+		progname ? progname : PACKAGE_NAME);
 	if (fuse_usage) {
 		struct fuse_args args = FUSE_ARGS_INIT(0, NULL);
 		fuse_opt_add_arg(&args, ""); /* progname */
@@ -118,62 +109,6 @@ void sqfs_usage(char *progname, bool fuse_usage) {
 	exit(-2);
 }
 
-#ifdef FUSE_WINFSP_FUSE_H_INCLUDED
-/* This only applies when we're building against the WinFsp version of FUSE */
-static
-int sqfs_opt_add_volume_prefix_arg(const char *prefixStart, const char *prefixEnd, struct fuse_args *outargs) {
-	const int slen = strlen(prefixStart);/* (int)(prefixEnd - prefixStart); */
-	const char *prefix_format = "--VolumePrefix=%.*s";
-	if (slen > 0)
-	{
-		char *buf = calloc(strlen(prefix_format) + slen + 5, 1);
-		if (buf) {
-			sprintf(buf, prefix_format, slen, prefixStart);
-			fuse_opt_add_arg(outargs, buf);
-			// fuse_opt_add_arg(outargs, "-ofstypename=squashfs");
-			free(buf);
-			return 1;
-		}
-	}
-
-	return 0;
-}
-#endif
-
-static
-int sqfs_parse_unc_path(sqfs_opts *opts, const char *arg, struct fuse_args *outargs)
-{
-	int success = 0;
-#ifdef FUSE_WINFSP_FUSE_H_INCLUDED
-	/* This only applies when we're building against the WinFsp version of FUSE */
-	if (opts->have_unc_path == 1) {
-		const char *unc_path = arg;
-		/* skip over the server and share names */
-		const char *unc_prefix = unc_path;
-		if (*unc_prefix == '\\') {
-			int i = 0;
-			for (i = 0; i < 2 && (*unc_path == '\\'); ++i) {
-				unc_path = strchr(++unc_path, '\\');
-			}
-
-			if (i == 2 && unc_path != NULL) {
-				/* Add the WinFsp VolumePrefix argument so we show up as a network drive */
-				/* sqfs_opt_add_volume_prefix_arg(unc_prefix, unc_path, outargs); */
-				/* Set the image path to the unc_path with the \server\share\ prefix stripped off.*/
-				char *ptr = malloc(strlen(unc_path) + 1);
-				*ptr = *(++unc_path);
-				*(ptr+1) = ':';
-				strcpy(ptr + 2, ++unc_path);
-				opts->image = ptr; //  ++unc_path;
-				success = 1;
-
-			}
-		}
-	}
-#endif 
-	return success;
-}
-
 int sqfs_opt_proc(void *data, const char *arg, int key,
 		struct fuse_args *outargs) {
 	sqfs_opts *opts = (sqfs_opts*)data;
@@ -183,17 +118,13 @@ int sqfs_opt_proc(void *data, const char *arg, int key,
 		} else if (opts->image) {
 			opts->mountpoint = 1;
 			return 1;
-		} else if (sqfs_parse_unc_path(opts, arg, outargs) == 0) {
+		} else {
 			opts->image = arg;
+			return 0;
 		}
-		return 0;
 	} else if (key == FUSE_OPT_KEY_OPT) {
-		if (strncmp(arg, "-h", 2) == 0 || strncmp(arg, "--h", 3) == 0) {
+		if (strncmp(arg, "-h", 2) == 0 || strncmp(arg, "--h", 3) == 0)
 			sqfs_usage(opts->progname, true);
 		}
-		else if (strncmp(arg, "-U", 2) == 0 || strncmp(arg, "--U", 3) == 0) {
-			opts->have_unc_path = 1;
-		}
-	}
 	return 1; /* Keep */
 }

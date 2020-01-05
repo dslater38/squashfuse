@@ -2,6 +2,7 @@
 **/Win32
 **/Debug-Static
 **/Release-Static
+**/ReleaseMT
 **/ReleaseClang-Static
 **/Debug
 **/Release

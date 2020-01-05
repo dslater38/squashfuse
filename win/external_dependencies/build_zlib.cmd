@@ -21,22 +21,9 @@ if "%CONFIGURATION%"=="ReleaseMT" (
 	set BUILD_CONFIG=Release-Static
 )
 
-if not exist "!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!\zlibstat.lib" goto :BUILD
-if not exist "!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!\zlibwapi.lib" goto :BUILD
-if not exist "!ROOTDIR!..\3rdparty\bin\!PLATFORM!\!CONFIGURATION!\zlibwapi.dll" goto :BUILD
-
-goto :END
-
-:BUILD
-rem MSBuild zlibstat.vcxproj /t:Build /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
-rem devenv zlibvc.sln /Build "!BUILD_CONFIG!|!PLATFORM!" /project zlibstat 
 MSBuild zlibvc.sln /m /t:zlibstat;zlibvc /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
 
 if errorlevel 1 exit /B 2
-
-rem MSBuild zlibvc.vcxproj /t:Build /P:Configuration=!BUILD_CONFIG! /p:Platform=!PLATFORM!
-rem devenv zlibvc.sln /Build "!BUILD_CONFIG!|!PLATFORM!" /project zlibvc
-rem if errorlevel 1 exit /B 3
 
 copy "!ROOTDIR!..\3rdparty\zlib\zlib.h" "!ROOTDIR!..\3rdparty\include"
 if errorlevel 1 exit /B 4
@@ -49,9 +36,6 @@ set "ZLIBDLLOUT=!PLATFORM_TARGET!\ZlibDll!BUILD_CONFIG!"
 
 copy "!ROOTDIR!..\3rdparty\zlib\contrib\vstudio\vc15\!ZLIBSTATOUT!\zlibstat.lib" "!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!"
 if errorlevel 1 exit /B 6
-
-rem copy "!ROOTDIR!..\3rdparty\zlib\contrib\vstudio\vc15\!ZLIBSTATOUT!\zlibstat.pdb" "!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!"
-rem if errorlevel 1 exit /B 7
 
 copy "!ROOTDIR!..\3rdparty\zlib\contrib\vstudio\vc15\!ZLIBDLLOUT!\zlibwapi.lib" "!ROOTDIR!..\3rdparty\lib\!PLATFORM!\!CONFIGURATION!"
 if errorlevel 1 exit /B 7

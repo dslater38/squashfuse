@@ -63,28 +63,6 @@
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug-Static|x86' ">
-    <DefineConstants>Debug;MyArch=x86;SourceDir=$(ProjectDir)..\Win32\$(Configuration);Static=1;LibDir=$(ProjectDir)..\3rdparty\bin\Win32\$(Configuration)</DefineConstants>
-    <WixVariables />
-    <LinkerAdditionalOptions>-ext WixUIExtension</LinkerAdditionalOptions>
-    <OutputPath>$(SolutionDir)installer\$(Platform)\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug-Static|x64' ">
-    <DefineConstants>Debug;MyArch=x64;SourceDir=$(ProjectDir)..\$(Platform)\$(Configuration);Static=1;LibDir=$(ProjectDir)..\3rdparty\bin\$(Platform)\$(Configuration)</DefineConstants>
-    <WixVariables />
-    <LinkerAdditionalOptions>-ext WixUIExtension</LinkerAdditionalOptions>
-    <OutputPath>$(SolutionDir)installer\$(Platform)\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug-Static|AnyCPU' ">
-    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug-Static|Any CPU' ">
-    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
-  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Product.wxs" />
     <Compile Include="root.wxs" />

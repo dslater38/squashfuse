@@ -484,6 +484,7 @@
     <ClInclude Include="..\util.h" />
     <ClInclude Include="..\xattr.h" />
     <ClInclude Include="config.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="win32.h" />
   </ItemGroup>
   <ItemGroup>
@@ -492,6 +493,12 @@
   <ItemGroup>
     <ClCompile Include="..\..\ls.c" />
     <ClCompile Include="..\winfsp-support.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="squashfuse_ls.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\squashfuse.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

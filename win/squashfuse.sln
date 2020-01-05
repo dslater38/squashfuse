@@ -19,9 +19,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "squashfuse_extract", "squas
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "squashfuseLib", "squashfuseLib\squashfuseLib.vcxproj", "{73F9D88C-0768-4663-A217-DD4DD9B5F3D1}"
-	ProjectSection(ProjectDependencies) = postProject
-		{4A94847F-8858-405C-AD8A-85D7824FBE50} = {4A94847F-8858-405C-AD8A-85D7824FBE50}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "squashfuseDLL", "squashfuseDLL\squashfuseDLL.vcxproj", "{19949FC9-5879-49CF-9FBB-1E833E96A20E}"
 EndProject
@@ -149,7 +146,8 @@ Global
 		{F1D5B01E-2897-421B-8257-84751FE9ABB1}.ReleaseMT|x64.Build.0 = ReleaseMT|x64
 		{2F7D44FE-CE75-479A-8746-4BE0FE4535AA}.Debug|Win32.ActiveCfg = Debug|x86
 		{2F7D44FE-CE75-479A-8746-4BE0FE4535AA}.Debug|Win32.Build.0 = Debug|x86
-		{2F7D44FE-CE75-479A-8746-4BE0FE4535AA}.Debug|x64.ActiveCfg = Debug|x86
+		{2F7D44FE-CE75-479A-8746-4BE0FE4535AA}.Debug|x64.ActiveCfg = Debug|x64
+		{2F7D44FE-CE75-479A-8746-4BE0FE4535AA}.Debug|x64.Build.0 = Debug|x64
 		{2F7D44FE-CE75-479A-8746-4BE0FE4535AA}.Release|Win32.ActiveCfg = Release|x86
 		{2F7D44FE-CE75-479A-8746-4BE0FE4535AA}.Release|Win32.Build.0 = Release|x86
 		{2F7D44FE-CE75-479A-8746-4BE0FE4535AA}.Release|x64.ActiveCfg = Release|x64

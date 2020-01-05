@@ -243,14 +243,8 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <CustomBuildStep>
-      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
-</Command>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
-    </CustomBuildStep>
+    <CustomBuildStep />
+    <CustomBuildStep />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -265,14 +259,8 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <CustomBuildStep>
-      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
-</Command>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
-    </CustomBuildStep>
+    <CustomBuildStep />
+    <CustomBuildStep />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -291,14 +279,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <CustomBuildStep>
-      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
-</Command>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
-    </CustomBuildStep>
+    <CustomBuildStep />
+    <CustomBuildStep />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">
     <ClCompile>
@@ -318,14 +300,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <CustomBuildStep>
-      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
-</Command>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
-    </CustomBuildStep>
+    <CustomBuildStep />
+    <CustomBuildStep />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|Win32'">
     <ClCompile>
@@ -348,14 +324,8 @@
     <Lib>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
     </Lib>
-    <CustomBuildStep>
-      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
-</Command>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
-    </CustomBuildStep>
+    <CustomBuildStep />
+    <CustomBuildStep />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -374,14 +344,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <CustomBuildStep>
-      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
-</Command>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
-    </CustomBuildStep>
+    <CustomBuildStep />
+    <CustomBuildStep />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">
     <ClCompile>
@@ -401,14 +365,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <CustomBuildStep>
-      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
-</Command>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
-    </CustomBuildStep>
+    <CustomBuildStep />
+    <CustomBuildStep />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'">
     <ClCompile>
@@ -431,14 +389,8 @@
     <Lib>
       <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
     </Lib>
-    <CustomBuildStep>
-      <Command>echo cd $(ProjectDir)..\ &amp; echo C:\dev\cygwin64\bin\bash.exe -c "SED=/usr/bin/sed ../gen_swap.sh ../squashfs_fs.h"
-</Command>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Outputs>$(ProjectDir)..\swap.h.inc;$(ProjectDir)..\swap.c.inc;%(Outputs)</Outputs>
-      <Inputs>$(ProjectDir)..\..\gen_swap.sh;$(ProjectDir)..\..\squashfs_fs.h;%(Inputs)</Inputs>
-    </CustomBuildStep>
+    <CustomBuildStep />
+    <CustomBuildStep />
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\cache.c" />
