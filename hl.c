@@ -71,11 +71,11 @@ static void sqfs_hl_op_destroy(void *user_data) {
 	free(hl);
 }
 
-static void *sqfs_hl_op_init(struct fuse_conn_info *conn) {
+static void *sqfs_hl_op_init(struct fuse_conn_info *conn, struct fuse3_config *conf) {
 	return fuse_get_context()->private_data;
 }
 
-static int sqfs_hl_op_getattr(const char *path, struct fuse_stat *st) {
+static int sqfs_hl_op_getattr(const char *path, struct fuse_stat *st, struct fuse3_file_info *fi) {
 	sqfs *fs;
 	sqfs_inode inode;
 	if (sqfs_hl_lookup(&fs, &inode, path))
@@ -117,7 +117,7 @@ static int sqfs_hl_op_releasedir(const char *path,
 }
 
 static int sqfs_hl_op_readdir(const char *path, void *buf,
-		fuse_fill_dir_t filler, fuse_off_t offset, struct fuse_file_info *fi) {
+		fuse_fill_dir_t filler, fuse_off_t offset, struct fuse_file_info *fi, enum fuse3_readdir_flags flags) {
 	sqfs_err err;
 	sqfs *fs;
 	sqfs_inode *inode;
@@ -137,7 +137,7 @@ static int sqfs_hl_op_readdir(const char *path, void *buf,
 	while (sqfs_dir_next(fs, &dir, &entry, &err)) {
 		sqfs_off_t doff = sqfs_dentry_next_offset(&entry);
 		st.st_mode = sqfs_dentry_mode(&entry);
-		if (filler(buf, sqfs_dentry_name(&entry), &st, doff))
+		if (filler(buf, sqfs_dentry_name(&entry), &st, doff, FUSE_FILL_DIR_PLUS))
 			return 0;
 	}
 	if (err)

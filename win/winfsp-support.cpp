@@ -17,14 +17,83 @@
 // forward declare IUnknown or we get a compile error out of <combaseapi.h>
 struct IUnknown;
 
+#define WIN32_NO_STATUS
 #include <windows.h>
-#include <winfsp/winfsp.h>
+#undef WIN32_NO_STATUS
+#include <winternl.h>
+#pragma warning(push)
+#pragma warning(disable:4005)           /* macro redefinition */
+#include <ntstatus.h>
+#pragma warning(pop)
+/* #include <winfsp/winfsp.h> */
 #include <signal.h>
 #include <process.h>
 
 extern "C"
 {
 #include "../squashfuse.h"
+
+	static inline
+		NTSTATUS FspLoad(PVOID *PModule)
+	{
+#if defined(_WIN64)
+#define FSP_DLLNAME                     "fuse3-x64.dll"
+#else
+#define FSP_DLLNAME                     "fuse3-x86.dll"
+#endif
+#define FSP_DLLPATH                     "opt\\libfuse\\bin\\" FSP_DLLNAME
+
+		WINADVAPI
+			LSTATUS
+			APIENTRY
+			RegGetValueW(
+				HKEY hkey,
+				LPCWSTR lpSubKey,
+				LPCWSTR lpValue,
+				DWORD dwFlags,
+				LPDWORD pdwType,
+				PVOID pvData,
+				LPDWORD pcbData);
+
+		WCHAR PathBuf[MAX_PATH];
+		DWORD Size;
+		HKEY RegKey;
+		LONG Result;
+		HMODULE Module;
+
+		if (0 != PModule)
+			*PModule = 0;
+
+		Module = LoadLibraryW(L"" FSP_DLLNAME);
+		if (0 == Module)
+		{
+			Result = RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"Software\\WinFuse",
+				0, KEY_READ , &RegKey);
+			if (ERROR_SUCCESS == Result)
+			{
+				Size = sizeof PathBuf - sizeof L"" FSP_DLLPATH + sizeof(WCHAR);
+				Result = RegGetValueW(RegKey, 0, L"InstallDir",
+					RRF_RT_REG_SZ, 0, PathBuf, &Size);
+				RegCloseKey(RegKey);
+			}
+			if (ERROR_SUCCESS != Result)
+				return STATUS_OBJECT_NAME_NOT_FOUND;
+
+			RtlCopyMemory(PathBuf + (Size / sizeof(WCHAR) - 1), L"" FSP_DLLPATH, sizeof L"" FSP_DLLPATH);
+			Module = LoadLibraryW(PathBuf);
+			if (0 == Module)
+				return STATUS_DLL_NOT_FOUND;
+		}
+
+		if (0 != PModule)
+			*PModule = Module;
+
+		return STATUS_SUCCESS;
+
+#undef FSP_DLLNAME
+#undef FSP_DLLPATH
+	}
+
 	/* delay-load winfsp dynamic link library. */
 	/* return 0 on success. */
 	int sqfs_load_winfsp()
