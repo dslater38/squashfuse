@@ -36,12 +36,12 @@
 sqfs_err sqfs_stat(sqfs *fs, sqfs_inode *inode, struct fuse_stat *st) {
 	sqfs_err err = SQFS_OK;
 	uid_t id;
-	
+
 	memset(st, 0, sizeof(*st));
 	st->st_mode = inode->base.mode;
 	st->st_nlink = inode->nlink;
 	st->st_mtim.tv_sec = st->st_ctim.tv_sec = st->st_atim.tv_sec = inode->base.mtime;
-	
+
 	if (S_ISREG(st->st_mode)) {
 		/* FIXME: do symlinks, dirs, etc have a size? */
 		st->st_size = inode->xtra.reg.file_size;
@@ -63,24 +63,24 @@ sqfs_err sqfs_stat(sqfs *fs, sqfs_inode *inode, struct fuse_stat *st) {
 	st->st_gid = id;
 	if (err)
 		return err;
-	
+
 	return SQFS_OK;
 }
 
 int sqfs_listxattr(sqfs *fs, sqfs_inode *inode, char *buf, size_t *size) {
 	sqfs_xattr x;
 	size_t count = 0;
-	
+
 	if (sqfs_xattr_open(fs, inode, &x))
 		return -EIO;
-	
+
 	while (x.remain) {
 		size_t n;
 		if (sqfs_xattr_read(&x))
 			 return EIO;
 		n = sqfs_xattr_name_size(&x);
 		count += n + 1;
-		
+
 		if (buf) {
 			if (count > *size)
 				return ERANGE;
@@ -103,7 +103,8 @@ void sqfs_usage(char *progname, bool fuse_usage) {
 		fuse_opt_add_arg(&args, ""); /* progname */
 		fuse_opt_add_arg(&args, "-ho");
 		fprintf(stderr, "\n");
-		fuse_parse_cmdline(&args, NULL, NULL, NULL);
+		/* fuse_parse_cmdline(&args, NULL, NULL, NULL); */
+		fuse_parse_cmdline(&args, NULL);
 		sqfs_print_compression_info();
 	}
 	exit(-2);

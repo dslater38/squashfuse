@@ -5,12 +5,13 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Program Files\WinFuse\opt\libfuse\include;C:\Program Files\WinFuse\opt\libfuse\include\fuse3;C:\Program Files %28x86%29\WinFsp\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\WinFsp\inc\fuse3;C:\Program Files %28x86%29\WinFsp\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN_FSP=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Program Files\WinFuse\opt\libfuse\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>fuse3-$(PlatformTarget).lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <DelayLoadDLLs>fuse3-$(PlatformTarget).dll</DelayLoadDLLs>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\WinFsp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winfsp-$(PlatformTarget).lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>winfsp-$(PlatformTarget).dll</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />

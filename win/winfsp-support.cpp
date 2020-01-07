@@ -113,7 +113,7 @@ extern "C"
 
 	char *make_full_path(const char *path1, const char *path2) {
 		if (*path1 == '/') {
-			return strdup(path1);
+			return _strdup(path1);
 		}
 		else {
 			const char *ptr = path2;

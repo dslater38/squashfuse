@@ -48,7 +48,7 @@ struct sqfs_hl {
 static sqfs_err sqfs_hl_lookup(sqfs **fs, sqfs_inode *inode,
 		const char *path) {
 	bool found;
-	
+
 	sqfs_hl *hl = fuse_get_context()->private_data;
 	*fs = &hl->fs;
 	if (inode)
@@ -71,40 +71,40 @@ static void sqfs_hl_op_destroy(void *user_data) {
 	free(hl);
 }
 
-static void *sqfs_hl_op_init(struct fuse_conn_info *conn, struct fuse3_config *conf) {
+static void *sqfs_hl_op_init(struct fuse_conn_info *conn, struct fuse_config *conf) {
 	return fuse_get_context()->private_data;
 }
 
-static int sqfs_hl_op_getattr(const char *path, struct fuse_stat *st, struct fuse3_file_info *fi) {
+static int sqfs_hl_op_getattr(const char *path, struct fuse_stat *st, struct fuse_file_info *fi) {
 	sqfs *fs;
 	sqfs_inode inode;
 	if (sqfs_hl_lookup(&fs, &inode, path))
 		return -ENOENT;
-	
+
 	if (sqfs_stat(fs, &inode, st))
 		return -ENOENT;
-	
+
 	return 0;
 }
 
 static int sqfs_hl_op_opendir(const char *path, struct fuse_file_info *fi) {
 	sqfs *fs;
 	sqfs_inode *inode;
-	
+
 	inode = malloc(sizeof(*inode));
 	if (!inode)
 		return -ENOMEM;
-	
+
 	if (sqfs_hl_lookup(&fs, inode, path)) {
 		free(inode);
 		return -ENOENT;
 	}
-		
+
 	if (!S_ISDIR(inode->base.mode)) {
 		free(inode);
 		return -ENOTDIR;
 	}
-	
+
 	fi->fh = (intptr_t)inode;
 	return 0;
 }
@@ -125,13 +125,13 @@ static int sqfs_hl_op_readdir(const char *path, void *buf,
 	sqfs_name namebuf;
 	sqfs_dir_entry entry;
 	struct fuse_stat st;
-	
+
 	sqfs_hl_lookup(&fs, NULL, NULL);
 	inode = (sqfs_inode*)(intptr_t)fi->fh;
-		
+
 	if (sqfs_dir_open(fs, inode, &dir, offset))
 		return -EINVAL;
-	
+
 	memset(&st, 0, sizeof(st));
 	sqfs_dentry_init(&entry, namebuf);
 	while (sqfs_dir_next(fs, &dir, &entry, &err)) {
@@ -148,24 +148,24 @@ static int sqfs_hl_op_readdir(const char *path, void *buf,
 static int sqfs_hl_op_open(const char *path, struct fuse_file_info *fi) {
 	sqfs *fs;
 	sqfs_inode *inode;
-	
+
 	if (fi->flags & (O_WRONLY | O_RDWR))
 		return -EROFS;
-	
+
 	inode = malloc(sizeof(*inode));
 	if (!inode)
 		return -ENOMEM;
-	
+
 	if (sqfs_hl_lookup(&fs, inode, path)) {
 		free(inode);
 		return -ENOENT;
 	}
-	
+
 	if (!S_ISREG(inode->base.mode)) {
 		free(inode);
 		return -EISDIR;
 	}
-	
+
 	fi->fh = (intptr_t)inode;
 	fi->keep_cache = 1;
 	return 0;
@@ -198,12 +198,12 @@ static int sqfs_hl_op_readlink(const char *path, char *buf, size_t size) {
 	sqfs_inode inode;
 	if (sqfs_hl_lookup(&fs, &inode, path))
 		return -ENOENT;
-	
+
 	if (!S_ISLNK(inode.base.mode)) {
 		return -EINVAL;
 	} else if (sqfs_readlink(fs, &inode, buf, &size)) {
 		return -EIO;
-	}	
+	}
 	return 0;
 }
 
@@ -211,7 +211,7 @@ static int sqfs_hl_op_listxattr(const char *path, char *buf, size_t size) {
 	sqfs *fs;
 	sqfs_inode inode;
 	int ferr;
-	
+
 	if (sqfs_hl_lookup(&fs, &inode, path))
 		return -ENOENT;
 
@@ -238,7 +238,7 @@ static int sqfs_hl_op_getxattr(const char *path, const char *name,
 
 	if (sqfs_hl_lookup(&fs, &inode, path))
 		return -ENOENT;
-	
+
 	if ((sqfs_xattr_lookup(fs, &inode, name, value, &real)))
 		return -EIO;
 	if (real == 0)
@@ -250,7 +250,7 @@ static int sqfs_hl_op_getxattr(const char *path, const char *name,
 
 static sqfs_hl *sqfs_hl_open(const char *path, size_t offset) {
 	sqfs_hl *hl;
-	
+
 	hl = malloc(sizeof(*hl));
 	if (!hl) {
 		perror("Can't allocate memory");
@@ -263,7 +263,7 @@ static sqfs_hl *sqfs_hl_open(const char *path, size_t offset) {
 				return hl;
 			sqfs_destroy(&hl->fs);
 		}
-		
+
 		free(hl);
 	}
 	return NULL;
@@ -302,7 +302,7 @@ int main(int argc, char *argv[]) {
 	sqfs_opts opts;
 	sqfs_hl *hl;
 	int ret;
-	
+
 	struct fuse_opt fuse_opts[] = {
 		{"offset=%zu", offsetof(sqfs_opts, offset), 0},
 		FUSE_OPT_END
@@ -326,11 +326,11 @@ int main(int argc, char *argv[]) {
 	sqfs_hl_ops.readlink	= sqfs_hl_op_readlink;
 	sqfs_hl_ops.listxattr	= sqfs_hl_op_listxattr;
 	sqfs_hl_ops.getxattr	= sqfs_hl_op_getxattr;
-  
+
 	args.argc = argc;
 	args.argv = argv;
 	args.allocated = 0;
-	
+
 	opts.progname = argv[0];
 	opts.image = NULL;
 	opts.mountpoint = 0;
@@ -346,7 +346,7 @@ int main(int argc, char *argv[]) {
 	hl = sqfs_hl_open(opts.image, opts.offset);
 	if (!hl)
 		return -1;
-	
+
 #ifndef CACHE_THREAD
 	fuse_opt_add_arg(&args, "-s"); /* single threaded */
 #endif

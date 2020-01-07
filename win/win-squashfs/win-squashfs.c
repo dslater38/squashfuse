@@ -82,7 +82,7 @@ char *squashfuse_path()
 			if (ERROR_SUCCESS == status) {
 				char drive[_MAX_DRIVE];
 				char path[_MAX_PATH];
-					
+
 				_splitpath_s(buffer, drive, _MAX_DRIVE, path, _MAX_PATH, NULL, 0, NULL, 0);
 				_makepath_s(buffer, _MAX_PATH, drive, path, "squashfuse", ".exe");
 				return buffer;

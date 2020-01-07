@@ -28,6 +28,9 @@
 #include "squashfuse.h"
 
 #include <fuse.h>
+#ifdef WIN_FUSE
+#include <fuse_lowlevel.h>
+#endif
 
 // #include <sys/stat.h>
 

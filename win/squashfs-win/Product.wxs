@@ -132,10 +132,20 @@
       <ComponentGroupRef Id="C.Libs" />
       <?endif?>
     </Feature>
-
-    <UI Id="FeatureTree">
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    <UIRef Id="WixUI_InstallDir" />
+    <!-- skip the license agreement dialog; higher Order takes priority (weird) -->
+    <!--  <UI Id="FeatureTree">
+      <UIRef Id="WixUI_InstallDir" />-->
+      
+<!--      
+      
       <UIRef Id="WixUI_FeatureTree" />
-      <!-- skip the license agreement dialog; higher Order takes priority (weird) -->
+      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="LicenseAgreementDlg" />
+      <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="CustomizeDlg" />
+      <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" /> -->
+      
+<!--      
       <Publish
           Dialog="WelcomeDlg"
           Control="Next"
@@ -148,11 +158,37 @@
           Event="NewDialog"
           Value="WelcomeDlg"
           Order="10">NOT Installed</Publish>
-    </UI>
+-->          
+    <!-- </UI> -->
+    <!--<UI Id="FeatureTree">
+      <UIRef Id="WixUI_Mondo" />
+      <Publish
+          Dialog="WelcomeDlg"
+          Control="Next"
+          Event="NewDialog"
+          Value="CustomizeDlg"
+          Order="10">NOT Installed</Publish>
+      
+      <Publish
+          Dialog="LicenseAgreementDlg"
+          Control="Next"
+          Event="NewDialog"
+          Value="WelcomeDlg"
+          Order="10">NOT Installed</Publish>
 
+      <Publish
+          Dialog="CustomizeDlg"
+          Control="Back"
+          Event="NewDialog"
+          Value="WelcomeDlg"
+          Order="10">NOT Installed</Publish>
+    </UI>-->
+    
     <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+    
     <Icon Id="icon.ico" SourceFile="..\squashfuse.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
-
+    
   </Product>
 </Wix>

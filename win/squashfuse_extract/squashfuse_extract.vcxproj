@@ -106,7 +106,7 @@
     <Import Project="..\lz4dll.props" />
     <Import Project="..\lzmadll.props" />
     <Import Project="..\lzodll.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x86Fuse.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\externalDeps.props" />
   </ImportGroup>
@@ -117,7 +117,7 @@
     <Import Project="..\lz4dll.props" />
     <Import Project="..\lzmadll.props" />
     <Import Project="..\lzodll.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x86Fuse.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\zlibRelease.props" />
     <Import Project="..\externalDeps.props" />
@@ -129,7 +129,7 @@
     <Import Project="..\lz4stat.props" />
     <Import Project="..\lzmastat.props" />
     <Import Project="..\lzostat.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x86Fuse.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\zlibRelease.props" />
     <Import Project="..\externalDeps.props" />
@@ -141,7 +141,7 @@
     <Import Project="..\lz4stat.props" />
     <Import Project="..\lzmastat.props" />
     <Import Project="..\lzostat.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x86Fuse.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\zlibRelease.props" />
     <Import Project="..\externalDeps.props" />
@@ -153,7 +153,7 @@
     <Import Project="..\lz4dll.props" />
     <Import Project="..\lzmadll.props" />
     <Import Project="..\lzodll.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x64Fuse.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\externalDeps.props" />
   </ImportGroup>
@@ -164,7 +164,7 @@
     <Import Project="..\lz4dll.props" />
     <Import Project="..\lzmadll.props" />
     <Import Project="..\lzodll.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x64Fuse.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\zlibRelease.props" />
     <Import Project="..\externalDeps.props" />
@@ -176,7 +176,7 @@
     <Import Project="..\lz4stat.props" />
     <Import Project="..\lzmastat.props" />
     <Import Project="..\lzostat.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x64Fuse.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\zlibRelease.props" />
     <Import Project="..\externalDeps.props" />
@@ -188,7 +188,7 @@
     <Import Project="..\lz4stat.props" />
     <Import Project="..\lzmastat.props" />
     <Import Project="..\lzostat.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x64Fuse.props" />
     <Import Project="..\squashfuseDLL.props" />
     <Import Project="..\zlibRelease.props" />
     <Import Project="..\externalDeps.props" />
