@@ -25,7 +25,7 @@ static char *sqfs_parse_unc_path(const char *arg);
 static char *squashfuse_path();
 
 // const char *PROGNAME = "d:\\Dev\\squashfuse\\win\\x64\\Debug\\squashfuse.exe";
-const char *volumePrefix = "--VolumePrefix=%s";
+const char *VOLUMEPREFIX = "--VolumePrefix=%s";
 
 #define SQUASHFS_ARGS                      \
     "-orellinks",                       \
@@ -36,11 +36,11 @@ const char *volumePrefix = "--VolumePrefix=%s";
 int main(int argc, char **argv)
 {
 	if (argc == 3) {
+		char buffer[256];
 		const char *unc_path = argv[1];
 		const char *drive = argv[2];
-		char *archivePath = sqfs_parse_unc_path(unc_path);
-		char buffer[256];
-		sprintf_s(buffer, sizeof(buffer), volumePrefix, unc_path);
+		char *volumePrefix = NULL;
+
 		char *PROGNAME = squashfuse_path();
 		char FNAME[_MAX_FNAME];
 		char EXT[_MAX_EXT];
@@ -48,9 +48,27 @@ int main(int argc, char **argv)
 		char ProgName[_MAX_FNAME + _MAX_EXT + 1];
 		strcpy_s(ProgName, sizeof(ProgName), FNAME);
 		strcat_s(ProgName, sizeof(ProgName), EXT);
+
+		char *archivePath = sqfs_parse_unc_path(unc_path);
+		if(NULL != archivePath) {
+			sprintf_s(buffer, sizeof(buffer), VOLUMEPREFIX, unc_path);
+			volumePrefix = buffer;
+		} else {
+			archivePath = _strdup(unc_path);
+		}
+
 		const char *squashfs_args[256] = {
-			ProgName, buffer, "-f", archivePath, drive, (void *)0
+			ProgName
 		};
+
+		size_t i = 0;
+		if(NULL != volumePrefix) {
+			squashfs_args[++i] = buffer;
+			squashfs_args[++i] = "-f";
+		}
+		squashfs_args[++i] = archivePath;
+		squashfs_args[++i] = drive;
+		squashfs_args[++i] = NULL;
 
 		int retVal = (int)_spawnv(_P_WAIT ,PROGNAME, squashfs_args);
 		if (retVal == -1) {
@@ -82,7 +100,7 @@ char *squashfuse_path()
 			if (ERROR_SUCCESS == status) {
 				char drive[_MAX_DRIVE];
 				char path[_MAX_PATH];
-					
+
 				_splitpath_s(buffer, drive, _MAX_DRIVE, path, _MAX_PATH, NULL, 0, NULL, 0);
 				_makepath_s(buffer, _MAX_PATH, drive, path, "squashfuse", ".exe");
 				return buffer;
