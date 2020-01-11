@@ -69,6 +69,15 @@
     <ClCompile Include="..\..\xattr.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\getopt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\getsubopt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\win_supp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\cache.h">
@@ -132,6 +141,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\win32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\getopt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\strchrnul.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

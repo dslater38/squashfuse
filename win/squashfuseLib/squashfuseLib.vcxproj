@@ -410,7 +410,10 @@
     <ClCompile Include="..\..\traverse.c" />
     <ClCompile Include="..\..\util.c" />
     <ClCompile Include="..\..\xattr.c" />
+    <ClCompile Include="..\getopt.c" />
+    <ClCompile Include="..\getsubopt.c" />
     <ClCompile Include="..\WinMutex.c" />
+    <ClCompile Include="..\win_supp.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\cache.h" />
@@ -433,6 +436,8 @@
     <ClInclude Include="..\..\traverse.h" />
     <ClInclude Include="..\..\util.h" />
     <ClInclude Include="..\..\xattr.h" />
+    <ClInclude Include="..\getopt.h" />
+    <ClInclude Include="..\strchrnul.h" />
     <ClInclude Include="..\win32.h" />
   </ItemGroup>
   <ItemGroup>

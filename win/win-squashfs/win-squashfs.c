@@ -20,9 +20,20 @@
 #include <string.h>
 #include <malloc.h>
 #include <ctype.h>
+#include "../getopt.h"
 
 static char *sqfs_parse_unc_path(const char *arg);
 static char *squashfuse_path();
+
+static char *OPTIONS = "V:u:g:";
+static struct option long_options[] = {
+	{"VolumePrefix",required_argument,0,'V'},
+	{"uid",required_argument,0,'u'},
+	{"gid",required_argument,0,'g'},
+
+};
+
+
 
 // const char *PROGNAME = "d:\\Dev\\squashfuse\\win\\x64\\Debug\\squashfuse.exe";
 const char *VOLUMEPREFIX = "--VolumePrefix=%s";
@@ -35,6 +46,17 @@ const char *VOLUMEPREFIX = "--VolumePrefix=%s";
 
 int main(int argc, char **argv)
 {
+
+	char *PROGNAME = squashfuse_path();
+	char FNAME[_MAX_FNAME];
+	char EXT[_MAX_EXT];
+	_splitpath_s(PROGNAME, NULL, 0, NULL, 0, FNAME, _MAX_FNAME, EXT, _MAX_EXT);
+	char ProgName[_MAX_FNAME + _MAX_EXT + 1];
+	strcpy_s(ProgName, sizeof(ProgName), FNAME);
+	strcat_s(ProgName, sizeof(ProgName), EXT);
+	
+
+
 	if (argc == 3) {
 		char buffer[256];
 		const char *unc_path = argv[1];
