@@ -33,12 +33,31 @@ const char *VOLUMEPREFIX = "--VolumePrefix=%s";
     "-oUserKnownHostsFile=/dev/null",   \
     "-oStrictHostKeyChecking=no"
 
+static void log_cmdline(int argc, char **argv)
+{
+	FILE *fp = fopen("c:\\Users\\dslat\\win-squashfs.log", "w+");
+	if (fp)
+	{
+		for (int i = 0; i < argc; ++i)
+		{
+			fprintf(fp,"%s ", argv[i]);
+		}
+		fprintf(fp,"\n");
+		fflush(fp);
+		fclose(fp);
+	}
+}
+
+const char *GETOPTSTR = "U:u:g:";
+
 int main(int argc, char **argv)
 {
-	if (argc == 3) {
+	log_cmdline(argc, argv);
+	if (argc == 4) {
 		char buffer[256];
 		const char *unc_path = argv[1];
 		const char *drive = argv[2];
+		const char *UserName = argv[3];
 		char *volumePrefix = NULL;
 
 		char *PROGNAME = squashfuse_path();
@@ -68,6 +87,7 @@ int main(int argc, char **argv)
 		}
 		squashfs_args[++i] = archivePath;
 		squashfs_args[++i] = drive;
+		squashfs_args[++i] = UserName;
 		squashfs_args[++i] = NULL;
 
 		int retVal = (int)_spawnv(_P_WAIT ,PROGNAME, squashfs_args);

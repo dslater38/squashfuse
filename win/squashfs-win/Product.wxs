@@ -40,7 +40,7 @@
 	<MajorUpgrade 
       Disallow="yes" 
       AllowDowngrades="no" 
-      AllowSameVersionUpgrades="yes" 
+      AllowSameVersionUpgrades="no" 
        DisallowUpgradeErrorMessage="An older version of $(var.ProductName) is already installed. You must uninstall it before you can install this version."
       DowngradeErrorMessage="A newer version of $(var.ProductName) is already installed." />
     
@@ -97,7 +97,7 @@
             <RegistryValue
                 Type="string"
                 Name="CommandLine"
-                Value="%1 %2" />
+                Value="%1 %2 --UserName=%U" />
             <RegistryValue
                 Type="string"
                 Name="Security"

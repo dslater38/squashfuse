@@ -18,10 +18,6 @@
 
 #include "nonstd.h"
 
-#ifdef _MSC_VER
-
-#endif
-
 #define PROGNAME "squashfuse_extract"
 
 #define ERR_MISC	(1)

@@ -77,17 +77,14 @@ static void *sqfs_hl_op_init(struct fuse_conn_info *conn, struct fuse_config *co
 
 static int sqfs_hl_op_getattr(const char *path, struct fuse_stat *st, struct fuse_file_info *fi) {
 	sqfs *fs;
-	sqfs_inode *inode;
+	sqfs_inode inode;
 
-	if(sqfs_hl_lookup(&fs, NULL, NULL))
-		return -ENOENT;
+	((void)fi);
 
-	inode = (sqfs_inode*)(intptr_t)fi->fh;
+	if (sqfs_hl_lookup(&fs, &inode, path))
+		return -ENOENT; 
 
-/*	if (sqfs_hl_lookup(&fs, &inode, path))
-		return -ENOENT; */
-
-	if (sqfs_stat(fs, inode, st))
+	if (sqfs_stat(fs, &inode, st))
 		return -ENOENT;
 
 	return 0;
@@ -143,7 +140,7 @@ static int sqfs_hl_op_readdir(const char *path, void *buf,
 	while (sqfs_dir_next(fs, &dir, &entry, &err)) {
 		sqfs_off_t doff = sqfs_dentry_next_offset(&entry);
 		st.st_mode = sqfs_dentry_mode(&entry);
-		if (filler(buf, sqfs_dentry_name(&entry), &st, doff, FUSE_FILL_DIR_PLUS))
+		if (filler(buf, sqfs_dentry_name(&entry), &st, doff, flags))
 			return 0;
 	}
 	if (err)
@@ -166,12 +163,12 @@ static int sqfs_hl_op_open(const char *path, struct fuse_file_info *fi) {
 		free(inode);
 		return -ENOENT;
 	}
-
+	
 	if (!S_ISREG(inode->base.mode)) {
 		free(inode);
 		return -EISDIR;
 	}
-
+	
 	fi->fh = (intptr_t)inode;
 	fi->keep_cache = 1;
 	return 0;
@@ -204,12 +201,12 @@ static int sqfs_hl_op_readlink(const char *path, char *buf, size_t size) {
 	sqfs_inode inode;
 	if (sqfs_hl_lookup(&fs, &inode, path))
 		return -ENOENT;
-
+	
 	if (!S_ISLNK(inode.base.mode)) {
 		return -EINVAL;
 	} else if (sqfs_readlink(fs, &inode, buf, &size)) {
 		return -EIO;
-	}
+	}	
 	return 0;
 }
 
@@ -217,7 +214,7 @@ static int sqfs_hl_op_listxattr(const char *path, char *buf, size_t size) {
 	sqfs *fs;
 	sqfs_inode inode;
 	int ferr;
-
+	
 	if (sqfs_hl_lookup(&fs, &inode, path))
 		return -ENOENT;
 
@@ -244,7 +241,7 @@ static int sqfs_hl_op_getxattr(const char *path, const char *name,
 
 	if (sqfs_hl_lookup(&fs, &inode, path))
 		return -ENOENT;
-
+	
 	if ((sqfs_xattr_lookup(fs, &inode, name, value, &real)))
 		return -EIO;
 	if (real == 0)
@@ -256,7 +253,7 @@ static int sqfs_hl_op_getxattr(const char *path, const char *name,
 
 static sqfs_hl *sqfs_hl_open(const char *path, size_t offset) {
 	sqfs_hl *hl;
-
+	
 	hl = malloc(sizeof(*hl));
 	if (!hl) {
 		perror("Can't allocate memory");
@@ -269,38 +266,10 @@ static sqfs_hl *sqfs_hl_open(const char *path, size_t offset) {
 				return hl;
 			sqfs_destroy(&hl->fs);
 		}
-
+		
 		free(hl);
 	}
 	return NULL;
-}
-
-static
-void log_command_line(int argc, char *argv[])
-{
-	FILE *fp = fopen("/squashfuse_command.log", "w+");
-	if (fp)
-	{
-		fprintf(fp, "------------------------------------------------\n");
-		for (int i = 0; i < argc; ++i)
-		{
-			fprintf(fp, argv[i]);
-			fprintf(fp, "\n");
-		}
-		fprintf(fp, "------------------------------------------------\n");
-		fclose(fp);
-	}
-}
-
-static
-void log_image(const char *image)
-{
-	FILE *fp = fopen("/squashfuse_image.log", "w+");
-	if (fp)
-	{
-		fprintf(fp, "------------------------------------------------\n");
-		fprintf(fp, "IMAGE: %s\n", image);
-	}
 }
 
 int main(int argc, char *argv[]) {
@@ -308,16 +277,13 @@ int main(int argc, char *argv[]) {
 	sqfs_opts opts;
 	sqfs_hl *hl;
 	int ret;
-
+	
 	struct fuse_opt fuse_opts[] = {
 		{"offset=%zu", offsetof(sqfs_opts, offset), 0},
 		FUSE_OPT_END
 	};
 
 	struct fuse_operations sqfs_hl_ops;
-
-	log_command_line(argc, argv);
-
 	memset(&sqfs_hl_ops, 0, sizeof(sqfs_hl_ops));
 	sqfs_hl_ops.init			= sqfs_hl_op_init;
 	sqfs_hl_ops.destroy		= sqfs_hl_op_destroy;
@@ -347,15 +313,11 @@ int main(int argc, char *argv[]) {
 	if (!opts.image)
 		sqfs_usage(argv[0], true);
 
-	log_image(opts.image);
-
 	hl = sqfs_hl_open(opts.image, opts.offset);
 	if (!hl)
 		return -1;
 
-#ifndef CACHE_THREAD
 	fuse_opt_add_arg(&args, "-s"); /* single threaded */
-#endif
 	ret = fuse_main(args.argc, args.argv, &sqfs_hl_ops, hl);
 	fuse_opt_free_args(&args);
 	return ret;
