@@ -53,11 +53,10 @@ const char *GETOPTSTR = "U:u:g:";
 int main(int argc, char **argv)
 {
 	log_cmdline(argc, argv);
-	if (argc == 4) {
+	if (argc >= 3) {
 		char buffer[256];
 		const char *unc_path = argv[1];
 		const char *drive = argv[2];
-		const char *UserName = argv[3];
 		char *volumePrefix = NULL;
 
 		char *PROGNAME = squashfuse_path();
@@ -85,9 +84,14 @@ int main(int argc, char **argv)
 			squashfs_args[++i] = buffer;
 			squashfs_args[++i] = "-f";
 		}
+
+		for (int j = 3; j < argc; ++j) {
+			squashfs_args[++i] = argv[j];
+		}
+
 		squashfs_args[++i] = archivePath;
 		squashfs_args[++i] = drive;
-		squashfs_args[++i] = UserName;
+
 		squashfs_args[++i] = NULL;
 
 		int retVal = (int)_spawnv(_P_WAIT ,PROGNAME, squashfs_args);

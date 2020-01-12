@@ -25,7 +25,7 @@
   <Product Id="*" 
            Name="$(var.ProductName)" 
            Language="1033" 
-           Version="0.1.103.0"
+           Version="$(var.MyVersion)"
            Manufacturer="$(var.MyProductName)" 
            UpgradeCode="$(var.UpgradeCode)">
 
@@ -37,11 +37,11 @@
 
     <!--DisallowUpgradeErrorMessage="An older version of $(var.MyProductName) is already installed. You must uninstall it before you can install this version." -->
     
-	<MajorUpgrade 
-      Disallow="yes" 
+	<MajorUpgrade
+      Schedule="afterInstallInitialize" 
+      Disallow="no" 
       AllowDowngrades="no" 
-      AllowSameVersionUpgrades="no" 
-       DisallowUpgradeErrorMessage="An older version of $(var.ProductName) is already installed. You must uninstall it before you can install this version."
+      AllowSameVersionUpgrades="yes" 
       DowngradeErrorMessage="A newer version of $(var.ProductName) is already installed." />
     
     <Media Id="1" Cabinet="SQUASHFS_Win.cab" EmbedCab="yes" />
@@ -66,13 +66,17 @@
     </Property>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="$(var.MyProductName)"/>
+      </Directory>
+
       <Directory Id="$(var.ProgramFilesFolder)">
         <Directory Id="INSTALLDIR" Name="$(var.MyProductName)">
           <Directory Id="BINDIR" Name="bin"/>
         </Directory>
       </Directory>
     </Directory>
-
+    
     <DirectoryRef Id="INSTALLDIR">
       <Component Id="C.INSTALLDIR" Guid="{C953BBC7-D7FF-43cf-9FBD-EBEF214677FB}">
         <RegistryValue
@@ -97,7 +101,7 @@
             <RegistryValue
                 Type="string"
                 Name="CommandLine"
-                Value="%1 %2 --UserName=%U" />
+                Value="%1 %2 --UserName=%U --GroupName=%U" />
             <RegistryValue
                 Type="string"
                 Name="Security"
@@ -111,10 +115,26 @@
       </Component>
     </DirectoryRef>
 
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="2C9C2AD3-0F61-472E-A176-C00B9BFD127B">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="$(var.MyProductName) Command Line"
+                  Description="$(var.MyProductName) Command Line"
+                  Arguments="/K &#x22;[#squashfs_env]&#x22;"
+                  Icon="icon.ico"
+                  Target="[%ComSpec]" />
+        <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\$(var.MyProductName)\squashfs_env" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+    
     <DirectoryRef Id="TARGETDIR">
       <Directory Id="dir99DE416F55C8960850D5A4FCA3758AD4" Name="Release" />
     </DirectoryRef>
- 
+
+
+
+
     <Feature
         Id="F.Main"
         Level="1"
@@ -128,6 +148,7 @@
       <ComponentRef Id="C.INSTALLDIR" />
       <ComponentRef Id="C.squashfs.reg" />
       <ComponentGroupRef Id="C.Main" />
+      <ComponentRef Id="ApplicationShortcut" />
       <?if $(var.Static) = 0?>
       <ComponentGroupRef Id="C.Libs" />
       <?endif?>

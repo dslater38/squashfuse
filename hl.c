@@ -78,13 +78,21 @@ static void *sqfs_hl_op_init(struct fuse_conn_info *conn, struct fuse_config *co
 static int sqfs_hl_op_getattr(const char *path, struct fuse_stat *st, struct fuse_file_info *fi) {
 	sqfs *fs;
 	sqfs_inode inode;
+	sqfs_inode *pInode = NULL;
 
-	((void)fi);
+	if (NULL != fi) {
+		if (sqfs_hl_lookup(&fs, NULL, NULL))
+			return -ENOENT;
+		pInode = (sqfs_inode*)(intptr_t)fi->fh;
+	}
+	
+	if (NULL == pInode) {
+		if (sqfs_hl_lookup(&fs, &inode, path))
+			return -ENOENT; 
+		pInode = &inode;
+	}
 
-	if (sqfs_hl_lookup(&fs, &inode, path))
-		return -ENOENT; 
-
-	if (sqfs_stat(fs, &inode, st))
+	if (sqfs_stat(fs, pInode, st))
 		return -ENOENT;
 
 	return 0;
@@ -272,12 +280,29 @@ static sqfs_hl *sqfs_hl_open(const char *path, size_t offset) {
 	return NULL;
 }
 
+static void log_cmdline(int argc, char **argv)
+{
+	FILE *fp = fopen("c:\\Users\\dslat\\squashfuse.log", "w+");
+	if (fp)
+	{
+		for (int i = 0; i < argc; ++i)
+		{
+			fprintf(fp, "%s ", argv[i]);
+		}
+		fprintf(fp, "\n");
+		fflush(fp);
+		fclose(fp);
+	}
+}
+
 int main(int argc, char *argv[]) {
 	struct fuse_args args;
 	sqfs_opts opts;
 	sqfs_hl *hl;
 	int ret;
 	
+	log_cmdline(argc, argv);
+
 	struct fuse_opt fuse_opts[] = {
 		{"offset=%zu", offsetof(sqfs_opts, offset), 0},
 		FUSE_OPT_END

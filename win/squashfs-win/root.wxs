@@ -19,15 +19,19 @@
             </Component>
 
           <Component Id="cmp95A928DFBC8D610AF9E0F42C19B6D541" Guid="{440E455A-4F02-4447-A600-28B1A3B493DB}">
-            <File Id="fil6E75592C0C8A219992729406A2D283B6" KeyPath="yes" Source="$(var.LibDir)\..\..\..\..\mount.cmd" />
+            <File Id="fil6E75592C0C8A219992729406A2D283B6" KeyPath="yes" Source="$(var.LibDir)\..\..\..\..\squashfs-win\mount.cmd" />
           </Component>
 
           <Component Id="cmp95A928DFBC8D610AF9E0F42C19B6D542" Guid="{440E455A-4F02-4447-A600-28B1A3B493DC}">
-            <File Id="fil6E75592C0C8A219992729406A2D283B7" KeyPath="yes" Source="$(var.LibDir)\..\..\..\..\findWinFsp.cmd" />
+            <File Id="fil6E75592C0C8A219992729406A2D283B7" KeyPath="yes" Source="$(var.LibDir)\..\..\..\..\squashfs-win\findWinFsp.cmd" />
           </Component>
 
           <Component Id="cmp95A928DFBC8D610AF9E0F42C19B6D543" Guid="{440E455A-4F02-4447-A600-28B1A3B493DD}">
-            <File Id="fil6E75592C0C8A219992729406A2D283B8" KeyPath="yes" Source="$(var.LibDir)\..\..\..\..\umount.cmd" />
+            <File Id="fil6E75592C0C8A219992729406A2D283B8" KeyPath="yes" Source="$(var.LibDir)\..\..\..\..\squashfs-win\umount.cmd" />
+          </Component>
+
+          <Component Id="squashfs_env" Guid="{440E455A-4F02-4447-A600-28B1A3B493DE}">
+            <File Id="squashfs_env" KeyPath="yes" Source="$(var.LibDir)\..\..\..\..\squashfs-win\squashfs_env.cmd" />
           </Component>
 
 
@@ -62,6 +66,7 @@
           <ComponentRef Id="cmp95A928DFBC8D610AF9E0F42C19B6D541" />
           <ComponentRef Id="cmp95A928DFBC8D610AF9E0F42C19B6D542" />
           <ComponentRef Id="cmp95A928DFBC8D610AF9E0F42C19B6D543" />
+          <ComponentRef Id="squashfs_env" />
         </ComponentGroup>
       <?if $(var.Static) = 0?>
       <ComponentGroup Id="C.Libs">

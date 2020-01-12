@@ -51,7 +51,6 @@ extern "C"
 			if (*ptr != '/') {
 				ptr = strchr(ptr, '/');	/* skip over the extraction root dir */
 				char dir[_MAX_DIR];
-				char buffer[_MAX_PATH];
 				if (0 == _splitpath_s(ptr, NULL, 0, dir, _MAX_DIR, NULL, 0, NULL, 0)) {
 
 					size_t len = strlen(dir) + strlen(path1) + 1;
