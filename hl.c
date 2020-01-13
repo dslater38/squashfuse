@@ -38,6 +38,12 @@
 typedef unsigned short mode_t;
 #endif
 
+#include "../mutex.h"
+
+Mutex mtx;
+#define LOCK() lock_mutex(&mtx)
+#define UNLOCK() unlock_mutex(&mtx)
+#define RETURN(a) {UNLOCK(); return (a);}
 
 typedef struct sqfs_hl sqfs_hl;
 struct sqfs_hl {
@@ -66,13 +72,16 @@ static sqfs_err sqfs_hl_lookup(sqfs **fs, sqfs_inode *inode,
 
 
 static void sqfs_hl_op_destroy(void *user_data) {
+	LOCK();
 	sqfs_hl *hl = (sqfs_hl*)user_data;
 	sqfs_destroy(&hl->fs);
 	free(hl);
+	UNLOCK();
 }
 
 static void *sqfs_hl_op_init(struct fuse_conn_info *conn, struct fuse_config *conf) {
-	return fuse_get_context()->private_data;
+	LOCK();
+	RETURN(fuse_get_context()->private_data);
 }
 
 static int sqfs_hl_op_getattr(const char *path, struct fuse_stat *st, struct fuse_file_info *fi) {
@@ -80,22 +89,28 @@ static int sqfs_hl_op_getattr(const char *path, struct fuse_stat *st, struct fus
 	sqfs_inode inode;
 	sqfs_inode *pInode = NULL;
 
+
 	if (NULL != fi) {
+		LOCK();		
 		if (sqfs_hl_lookup(&fs, NULL, NULL))
-			return -ENOENT;
+			RETURN(-ENOENT);
+		UNLOCK();
 		pInode = (sqfs_inode*)(intptr_t)fi->fh;
 	}
 	
 	if (NULL == pInode) {
+		LOCK();
 		if (sqfs_hl_lookup(&fs, &inode, path))
-			return -ENOENT; 
+			RETURN(-ENOENT);
+		UNLOCK();
 		pInode = &inode;
 	}
 
-	if (sqfs_stat(fs, pInode, st))
-		return -ENOENT;
 
-	return 0;
+	if (sqfs_stat(fs, pInode, st))
+		return(-ENOENT);
+
+	return(0);
 }
 
 static int sqfs_hl_op_opendir(const char *path, struct fuse_file_info *fi) {
@@ -104,27 +119,32 @@ static int sqfs_hl_op_opendir(const char *path, struct fuse_file_info *fi) {
 
 	inode = malloc(sizeof(*inode));
 	if (!inode)
-		return -ENOMEM;
+		return(-ENOMEM);
 
+	LOCK();
 	if (sqfs_hl_lookup(&fs, inode, path)) {
+		UNLOCK();
 		free(inode);
-		return -ENOENT;
+		return(-ENOENT);
 	}
+
+	UNLOCK();
 
 	if (!S_ISDIR(inode->base.mode)) {
 		free(inode);
-		return -ENOTDIR;
+		return(-ENOTDIR);
 	}
 
 	fi->fh = (intptr_t)inode;
-	return 0;
+	return(0);
 }
 
 static int sqfs_hl_op_releasedir(const char *path,
 		struct fuse_file_info *fi) {
+	LOCK();
 	free((sqfs_inode*)(intptr_t)fi->fh);
 	fi->fh = 0;
-	return 0;
+	RETURN(0);
 }
 
 static int sqfs_hl_op_readdir(const char *path, void *buf,
@@ -136,12 +156,13 @@ static int sqfs_hl_op_readdir(const char *path, void *buf,
 	sqfs_name namebuf;
 	sqfs_dir_entry entry;
 	struct fuse_stat st;
+	LOCK();
 
 	sqfs_hl_lookup(&fs, NULL, NULL);
 	inode = (sqfs_inode*)(intptr_t)fi->fh;
 
 	if (sqfs_dir_open(fs, inode, &dir, offset))
-		return -EINVAL;
+		RETURN(-EINVAL);
 
 	memset(&st, 0, sizeof(st));
 	sqfs_dentry_init(&entry, namebuf);
@@ -149,37 +170,40 @@ static int sqfs_hl_op_readdir(const char *path, void *buf,
 		sqfs_off_t doff = sqfs_dentry_next_offset(&entry);
 		st.st_mode = sqfs_dentry_mode(&entry);
 		if (filler(buf, sqfs_dentry_name(&entry), &st, doff, flags))
-			return 0;
+			RETURN(0);
 	}
 	if (err)
-		return -EIO;
-	return 0;
+		RETURN(-EIO);
+	RETURN(0);
 }
 
 static int sqfs_hl_op_open(const char *path, struct fuse_file_info *fi) {
 	sqfs *fs;
 	sqfs_inode *inode;
 
+
 	if (fi->flags & (O_WRONLY | O_RDWR))
-		return -EROFS;
+		RETURN(-EROFS);
 
 	inode = malloc(sizeof(*inode));
 	if (!inode)
-		return -ENOMEM;
+		RETURN(-ENOMEM);
 
+	LOCK();
 	if (sqfs_hl_lookup(&fs, inode, path)) {
+		UNLOCK();
 		free(inode);
-		return -ENOENT;
+		return(-ENOENT);
 	}
-	
+	UNLOCK();
 	if (!S_ISREG(inode->base.mode)) {
 		free(inode);
-		return -EISDIR;
+		return(-EISDIR);
 	}
 	
 	fi->fh = (intptr_t)inode;
 	fi->keep_cache = 1;
-	return 0;
+	return(0);
 }
 
 static int sqfs_hl_op_create(const char* unused_path, fuse_mode_t unused_mode,
@@ -187,35 +211,44 @@ static int sqfs_hl_op_create(const char* unused_path, fuse_mode_t unused_mode,
 	return -EROFS;
 }
 static int sqfs_hl_op_release(const char *path, struct fuse_file_info *fi) {
-	free((sqfs_inode*)(intptr_t)fi->fh);
+	LOCK();
+	sqfs_inode*ptr = (sqfs_inode*)(intptr_t)fi->fh;
 	fi->fh = 0;
-	return 0;
+	UNLOCK();
+	free(ptr);
+	return(0);
 }
 
 static int sqfs_hl_op_read(const char *path, char *buf, size_t size,
 	fuse_off_t off, struct fuse_file_info *fi) {
 	sqfs *fs;
+
+	LOCK();
+
 	sqfs_hl_lookup(&fs, NULL, NULL);
 	sqfs_inode *inode = (sqfs_inode*)(intptr_t)fi->fh;
 
 	sqfs_off_t osize = size;
 	if (sqfs_read_range(fs, inode, off, &osize, buf))
-		return -EIO;
-	return (int)osize;
+		RETURN(-EIO);
+	RETURN((int)osize);
 }
 
 static int sqfs_hl_op_readlink(const char *path, char *buf, size_t size) {
 	sqfs *fs;
 	sqfs_inode inode;
+
+	LOCK();
+
 	if (sqfs_hl_lookup(&fs, &inode, path))
-		return -ENOENT;
+		RETURN(-ENOENT);
 	
 	if (!S_ISLNK(inode.base.mode)) {
-		return -EINVAL;
+		RETURN(-EINVAL);
 	} else if (sqfs_readlink(fs, &inode, buf, &size)) {
-		return -EIO;
+		RETURN(-EIO);
 	}	
-	return 0;
+	RETURN(0);
 }
 
 static int sqfs_hl_op_listxattr(const char *path, char *buf, size_t size) {
@@ -223,13 +256,17 @@ static int sqfs_hl_op_listxattr(const char *path, char *buf, size_t size) {
 	sqfs_inode inode;
 	int ferr;
 	
+	LOCK();
+
 	if (sqfs_hl_lookup(&fs, &inode, path))
-		return -ENOENT;
+		RETURN(-ENOENT);
 
 	ferr = sqfs_listxattr(fs, &inode, buf, &size);
+	UNLOCK();
+
 	if (ferr)
-		return -ferr;
-	return (int)size;
+		return(-ferr);
+	return((int)size);
 }
 
 static int sqfs_hl_op_getxattr(const char *path, const char *name,
@@ -242,42 +279,50 @@ static int sqfs_hl_op_getxattr(const char *path, const char *name,
 	sqfs_inode inode;
 	size_t real = size;
 
+	LOCK();
+
 #ifdef FUSE_XATTR_POSITION
 	if (position != 0) /* We don't support resource forks */
-		return -EINVAL;
+		RETURN(-EINVAL);
 #endif
 
 	if (sqfs_hl_lookup(&fs, &inode, path))
-		return -ENOENT;
+		RETURN(-ENOENT);
 	
 	if ((sqfs_xattr_lookup(fs, &inode, name, value, &real)))
-		return -EIO;
+		RETURN(-EIO);
+	UNLOCK();
+
 	if (real == 0)
-		return -sqfs_enoattr();
+		return(-sqfs_enoattr());
+
 	if (size != 0 && size < real)
-		return -ERANGE;
-	return (int)real;
+		return(-ERANGE);
+
+	return((int)real);
 }
 
 static sqfs_hl *sqfs_hl_open(const char *path, size_t offset) {
 	sqfs_hl *hl;
 	
+
 	hl = malloc(sizeof(*hl));
 	if (!hl) {
 		perror("Can't allocate memory");
 	} else {
 		memset(hl, 0, sizeof(*hl));
+		LOCK();
 		if (sqfs_open_image(&hl->fs, path, offset) == SQFS_OK) {
 			if (sqfs_inode_get(&hl->fs, &hl->root, sqfs_inode_root(&hl->fs)))
 				fprintf(stderr, "Can't find the root of this filesystem!\n");
 			else
-				return hl;
+				RETURN(hl);
 			sqfs_destroy(&hl->fs);
 		}
-		
+		UNLOCK();
 		free(hl);
 	}
-	return NULL;
+	return(NULL);
 }
 
 static void log_cmdline(int argc, char **argv)
@@ -300,7 +345,8 @@ int main(int argc, char *argv[]) {
 	sqfs_opts opts;
 	sqfs_hl *hl;
 	int ret;
-	
+
+	init_mutex(&mtx);
 	log_cmdline(argc, argv);
 
 	struct fuse_opt fuse_opts[] = {
@@ -342,8 +388,9 @@ int main(int argc, char *argv[]) {
 	if (!hl)
 		return -1;
 
-	fuse_opt_add_arg(&args, "-s"); /* single threaded */
+	/* fuse_opt_add_arg(&args, "-s"); */ /* single threaded */
 	ret = fuse_main(args.argc, args.argv, &sqfs_hl_ops, hl);
 	fuse_opt_free_args(&args);
+	delete_mutex(&mtx);
 	return ret;
 }

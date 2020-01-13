@@ -34,8 +34,8 @@ typedef struct MutexT
 #define LOCK_FAILURE (-1)
 
 int init_mutex(Mutex *pMtx);
-int lock(Mutex *pMtx);
-int unlock(Mutex *pMtx);
+int lock_mutex(Mutex *pMtx);
+int unlock_mutex(Mutex *pMtx);
 int delete_mutex(Mutex *pMtx);
 
 

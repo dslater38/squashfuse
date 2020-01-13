@@ -72,5 +72,9 @@ EXPORTS
 	sqfs_pread
 	sqfs_makedev
 	sqfs_print_compression_info
+	init_mutex
+	lock_mutex
+	unlock_mutex
+	delete_mutex
 
 

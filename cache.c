@@ -71,7 +71,7 @@ void *sqfs_cache_get(sqfs_cache *cache, sqfs_cache_idx idx) {
 	size_t i;
 	void *retVal = NULL;
 #ifdef CACHE_THREAD
-	if (LOCK_SUCCESS != lock(&cache->mtx) )
+	if (LOCK_SUCCESS != lock_mutex(&cache->mtx) )
 	{
 		return NULL;
 	}
@@ -82,7 +82,7 @@ void *sqfs_cache_get(sqfs_cache *cache, sqfs_cache_idx idx) {
 		}
 	}
 #ifdef CACHE_THREAD
-	unlock(&cache->mtx);
+	unlock_mutex(&cache->mtx);
 #endif
 	return retVal;
 }
@@ -90,7 +90,7 @@ void *sqfs_cache_get(sqfs_cache *cache, sqfs_cache_idx idx) {
 void *sqfs_cache_add(sqfs_cache *cache, sqfs_cache_idx idx) {
 	void *retVal = NULL;
 #ifdef CACHE_THREAD
-	if (LOCK_SUCCESS == lock(&cache->mtx))
+	if (LOCK_SUCCESS == lock_mutex(&cache->mtx))
 	{
 
 #endif	
@@ -103,7 +103,7 @@ void *sqfs_cache_add(sqfs_cache *cache, sqfs_cache_idx idx) {
 	cache->idxs[i] = idx;
 	retVal = sqfs_cache_entry(cache, i);
 #ifdef CACHE_THREAD
-	unlock(&cache->mtx);
+	unlock_mutex(&cache->mtx);
 	}
 #endif
 	return retVal;
@@ -116,7 +116,7 @@ void *sqfs_cache_add(sqfs_cache *cache, sqfs_cache_idx idx) {
  */
 void sqfs_cache_invalidate(sqfs_cache *cache, sqfs_cache_idx idx) {
 #ifdef CACHE_THREAD
-	if (LOCK_SUCCESS != lock(&cache->mtx))
+	if (LOCK_SUCCESS != lock_mutex(&cache->mtx))
 	{
 		return;
 	}
@@ -126,7 +126,7 @@ void sqfs_cache_invalidate(sqfs_cache *cache, sqfs_cache_idx idx) {
 		if (cache->idxs[i] == idx) {
 			cache->idxs[i] = SQFS_CACHE_IDX_INVALID;
 #ifdef CACHE_THREAD
-			unlock(&cache->mtx);
+			unlock_mutex(&cache->mtx);
 #endif
 			return;
 		}

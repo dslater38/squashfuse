@@ -26,14 +26,14 @@ int init_mutex(Mutex *pMtx)
 		pMtx->impl = (CRITICAL_SECTION *)malloc(sizeof(CRITICAL_SECTION));
 		if (pMtx->impl != NULL)
 		{
-			InitializeCriticalSectionAndSpinCount((CRITICAL_SECTION *)(pMtx->impl), 1000);
+			InitializeCriticalSectionAndSpinCount((CRITICAL_SECTION *)(pMtx->impl), 10000);
 			success = LOCK_SUCCESS;
 		}
 	}
 	return success;
 }
 
-int lock(Mutex *pMtx)
+int lock_mutex(Mutex *pMtx)
 {
 	if (pMtx)
 	{
@@ -43,7 +43,7 @@ int lock(Mutex *pMtx)
 	return LOCK_FAILURE;
 }
 
-int unlock(Mutex *pMtx)
+int unlock_mutex(Mutex *pMtx)
 {
 	if (pMtx)
 	{
