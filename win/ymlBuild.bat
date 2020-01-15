@@ -6,7 +6,7 @@ msbuild /verbosity:normal /property:Project=squashfs-win /property:Configuration
 if errorlevel 1 exit /b 2
 cd .\win\installer\x64\ReleaseMT
 if errorlevel 1 exit /b 3
-zip squashfs_win.zip squashfs_win.msi
+"c:\Program Files\7-Zip\7z.exe" a squashfs_win.zip squashfs_win.msi
 if errorlevel 1 exit /b 4
 
 exit /b 0
