@@ -1,0 +1,13 @@
+name: CI - Visual Studio 2017
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-2016
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build Compression Libraries...
+      run: .\win\ymlBuild.bat
