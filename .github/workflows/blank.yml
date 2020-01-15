@@ -10,8 +10,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build Compression Libraries...
-      run: |
-        dir "c:\Program Files (x86)\Microsoft Visual Studio\"
-    - name: Build SquashFS installer
-      run: |
-        dir "c:\Program Files (x86)\Microsoft Visual Studio\2017"
+      run: .\win\ymlBuild.bat
