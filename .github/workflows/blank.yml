@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build Compression Libraries...
       run: |
-        "c:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\MSBuild\\15.0\\bin\\msbuild.exe" /verbosity:normal /property:Configuration=ReleaseMT /property:Platform=x86 /t:Build /maxcpucount:2 .\win\external_dependencies\external_dependencies.vcxproj
+        dir "c:\Program Files (x86)\Microsoft Visual Studio\"
     - name: Build SquashFS installer
       run: |
-        "c:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\MSBuild\\15.0\\bin\\msbuild.exe" /verbosity:normal /property:Project=squashfs-win /property:Configuration=ReleaseMT /property:Platform=x86 /t:Build /maxcpucount:2 .\win\squashfuse.sln
+        dir "c:\Program Files (x86)\Microsoft Visual Studio\2017"
