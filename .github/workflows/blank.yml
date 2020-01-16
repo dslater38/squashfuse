@@ -10,11 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build Compression Libraries...
-       run: |
-         dir -S c:\ > .\win\dir.log
-       
-#      run: .\win\ymlBuild.bat
-
+       run: .\win\ymlBuild.bat
+     
     - uses: actions/upload-artifact@v1
       if: success()
       with:
