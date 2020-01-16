@@ -10,11 +10,11 @@ jobs:
     steps:
 #    - uses: actions/checkout@v1
     - name: Build Compression Libraries...
-      run: robocopy c:\ c:\ /L /S /NJH /NJS /NS /LEV:5 > .\win\dir.log
+      run: robocopy c:\ c:\ /L /S /NJH /NJS /NS /LEV:5 > .\dir.log
      
     - uses: actions/upload-artifact@v1
       if: success()
       with:
         name: SQUASHFS-WinInstaller
-        path: .\win\dir.log
+        path: .\dir.log
 #        path: .\win\installer\x64\ReleaseMT\squashfs_win.msi
