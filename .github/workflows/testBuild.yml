@@ -3,6 +3,7 @@ name: CI - Visual Studio 2017
 on:
   push:
     tags-ignore: 'v*'
+    branches: '*master*'
 
 jobs:
   build:
