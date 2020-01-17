@@ -3,7 +3,7 @@ name: CI - Visual Studio 2017
 on:
   push:
     tags:
-    - '!*'
+    - '!v*'
 
 jobs:
   build:
