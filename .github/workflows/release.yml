@@ -8,7 +8,7 @@ name: Create Release
 
 jobs:
   build:
-    name: Upload Release Asset
+    name: Create Release
     runs-on: windows-2016
     steps:
       - name: Checkout code
