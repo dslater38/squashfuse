@@ -34,7 +34,6 @@
             <File Id="squashfs_env" KeyPath="yes" Source="$(var.LibDir)\..\..\..\..\squashfs-win\squashfs_env.cmd" />
           </Component>
 
-
           <?if $(var.Static) = 0?>
             <Component Id="cmp69B974F6038C2B274A17ACC297129772" Guid="{ACD52A40-0A3B-46D9-9635-0D0BFA41D50D}">
                 <File Id="fil54FD6CA12E9E1652E5925CE0BFBE0F3C" KeyPath="yes" Source="$(var.LibDir)\liblz4.dll" />
@@ -55,6 +54,19 @@
           
           <?endif?>
         </DirectoryRef>
+      <DirectoryRef Id="DOCDIR">
+        <Component Id="help_doc" Guid="{440E455A-4F02-4447-A600-28B1A3B493DF}">
+          <File Id="help_doc" KeyPath="yes" Source="$(var.SourceDir)\help.html" />
+        </Component>
+        <Component Id="help_css" Guid="{440E455A-4F02-4447-A600-28B1A3B493E1}">
+          <File Id="help_css" KeyPath="yes" Source="$(var.SourceDir)\github.css" />
+        </Component>
+      </DirectoryRef>
+      <DirectoryRef Id="DOCIMG">
+        <Component Id="map_drive" Guid="{440E455A-4F02-4447-A600-28B1A3B493E0}">
+          <File Id="map_drive" KeyPath="yes" Source="$(var.SourceDir)\images\MapNetworkDrive.jpg" />
+        </Component>
+      </DirectoryRef>
     </Fragment>
     <Fragment>
         <ComponentGroup Id="C.Main">
@@ -67,6 +79,9 @@
           <ComponentRef Id="cmp95A928DFBC8D610AF9E0F42C19B6D542" />
           <ComponentRef Id="cmp95A928DFBC8D610AF9E0F42C19B6D543" />
           <ComponentRef Id="squashfs_env" />
+          <ComponentRef Id="help_doc" />
+          <ComponentRef Id="map_drive" />
+          <ComponentRef Id="help_css" />
         </ComponentGroup>
       <?if $(var.Static) = 0?>
       <ComponentGroup Id="C.Libs">
