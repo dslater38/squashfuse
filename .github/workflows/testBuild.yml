@@ -3,7 +3,7 @@ name: CI - Visual Studio 2017
 on:
   push:
     branches: '*'
-    tags-ignore: '*'
+    tags: !'*'
 
 jobs:
   build:
@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Build Compression Libraries...
+    - name: Build SQUASHFS-Win...
       shell: cmd
       run: .\.github\workflows\ymlBuild.bat
      
