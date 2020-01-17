@@ -1,4 +1,4 @@
-name: CI - Visual Studio 2017
+name: Integration test build.
 
 on:
   push:
@@ -16,6 +16,11 @@ jobs:
       shell: cmd
       run: .\.github\workflows\ymlBuild.bat
      
+    - name: Tag Success
+      if: success()
+      shell: cmd
+      run: git tag success-${{github.sha}} ${{github.sha}}
+    - name: Upload Artifacts 
     - uses: actions/upload-artifact@v1
       if: success()
       with:
