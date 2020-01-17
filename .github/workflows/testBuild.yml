@@ -17,13 +17,13 @@ jobs:
       run: .\.github\workflows\ymlBuild.bat
      
     - name: Tag Success
-      run: git tag success-${{github.sha}} ${{github.sha}}
+      id: tag_success
       if: success()
-      id: tag_success      
+      run: git tag success-${{github.sha}} ${{github.sha}}      
       shell: cmd      
       
-    - name: Upload Artifacts 
-    - uses: actions/upload-artifact@v1
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v1
       if: success()
       with:
         name: SQUASHFS-WinInstaller
