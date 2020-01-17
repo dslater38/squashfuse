@@ -17,9 +17,11 @@ jobs:
       run: .\.github\workflows\ymlBuild.bat
      
     - name: Tag Success
+      id: tag_success
       if: success()
       shell: cmd
-      run: git tag success-${{github.sha}} ${{github.sha}}
+      run: git tag success-${{github.sha}} ${{github.sha}}      
+      
     - name: Upload Artifacts 
     - uses: actions/upload-artifact@v1
       if: success()
