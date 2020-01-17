@@ -8,14 +8,13 @@ jobs:
     runs-on: windows-2016
 
     steps:
-#    - uses: actions/checkout@v1
+    - uses: actions/checkout@v1
     - name: Build Compression Libraries...
       shell: cmd
-      run: set > .\set.log
+      run: .\win\ymlBuild.bat
      
     - uses: actions/upload-artifact@v1
       if: success()
       with:
         name: SQUASHFS-WinInstaller
-        path: .\set.log
-#        path: .\win\installer\x64\ReleaseMT\squashfs_win.msi
+        path: .\win\installer\x64\ReleaseMT\squashfs_win.msi
