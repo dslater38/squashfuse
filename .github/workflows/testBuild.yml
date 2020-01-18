@@ -1,0 +1,30 @@
+name: Integration test build.
+
+on:
+  push:
+    tags-ignore: 'v*'
+    branches: '*master*'
+
+jobs:
+  build:
+
+    runs-on: windows-2016
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build SQUASHFS-Win...
+      shell: cmd
+      run: .\.github\workflows\ymlBuild.bat
+     
+    - name: Tag Success
+      id: tag_success
+      if: success()
+      run: git tag success-${{github.sha}} ${{github.sha}}      
+      shell: cmd      
+      
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v1
+      if: success()
+      with:
+        name: SQUASHFS-WinInstaller
+        path: .\win\installer\x64\ReleaseMT\squashfs_win.msi

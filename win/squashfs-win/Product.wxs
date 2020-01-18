@@ -73,6 +73,9 @@
       <Directory Id="$(var.ProgramFilesFolder)">
         <Directory Id="INSTALLDIR" Name="$(var.MyProductName)">
           <Directory Id="BINDIR" Name="bin"/>
+          <Directory Id="DOCDIR" Name="doc">
+            <Directory Id="DOCIMG" Name="images"/>
+          </Directory>
         </Directory>
       </Directory>
     </Directory>
@@ -123,8 +126,14 @@
                   Arguments="/K &#x22;[#squashfs_env]&#x22;"
                   Icon="icon.ico"
                   Target="[%ComSpec]" />
+        <Shortcut Id="ApplicationHelpMenuShortcut"
+                  Name="$(var.MyProductName) Help"
+                  Description="$(var.MyProductName) Help"
+                  Target="[#help_doc]" />
+
         <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\$(var.MyProductName)\squashfs_env" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+        <RegistryValue Root="HKCU" Key="Software\$(var.MyProductName)\help_doc" Name="installed" Type="integer" Value="1" KeyPath="no"/>
       </Component>
     </DirectoryRef>
     
@@ -153,10 +162,20 @@
       <ComponentGroupRef Id="C.Libs" />
       <?endif?>
     </Feature>
-
-    <UI Id="FeatureTree">
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    <UIRef Id="WixUI_InstallDir" />
+    <!-- skip the license agreement dialog; higher Order takes priority (weird) -->
+    <!--  <UI Id="FeatureTree">
+      <UIRef Id="WixUI_InstallDir" />-->
+      
+<!--      
+      
       <UIRef Id="WixUI_FeatureTree" />
-      <!-- skip the license agreement dialog; higher Order takes priority (weird) -->
+      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="LicenseAgreementDlg" />
+      <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="CustomizeDlg" />
+      <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" /> -->
+      
+<!--      
       <Publish
           Dialog="WelcomeDlg"
           Control="Next"
@@ -169,11 +188,37 @@
           Event="NewDialog"
           Value="WelcomeDlg"
           Order="10">NOT Installed</Publish>
-    </UI>
+-->          
+    <!-- </UI> -->
+    <!--<UI Id="FeatureTree">
+      <UIRef Id="WixUI_Mondo" />
+      <Publish
+          Dialog="WelcomeDlg"
+          Control="Next"
+          Event="NewDialog"
+          Value="CustomizeDlg"
+          Order="10">NOT Installed</Publish>
+      
+      <Publish
+          Dialog="LicenseAgreementDlg"
+          Control="Next"
+          Event="NewDialog"
+          Value="WelcomeDlg"
+          Order="10">NOT Installed</Publish>
 
+      <Publish
+          Dialog="CustomizeDlg"
+          Control="Back"
+          Event="NewDialog"
+          Value="WelcomeDlg"
+          Order="10">NOT Installed</Publish>
+    </UI>-->
+    
     <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+    
     <Icon Id="icon.ico" SourceFile="..\squashfuse.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
-
+    
   </Product>
 </Wix>

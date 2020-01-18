@@ -87,6 +87,7 @@ static void *sqfs_hl_op_init(struct fuse_conn_info *conn, struct fuse_config *co
 static int sqfs_hl_op_getattr(const char *path, struct fuse_stat *st, struct fuse_file_info *fi) {
 	sqfs *fs;
 	sqfs_inode inode;
+
 	sqfs_inode *pInode = NULL;
 
 
@@ -196,11 +197,12 @@ static int sqfs_hl_op_open(const char *path, struct fuse_file_info *fi) {
 		return(-ENOENT);
 	}
 	UNLOCK();
+
 	if (!S_ISREG(inode->base.mode)) {
 		free(inode);
 		return(-EISDIR);
 	}
-	
+
 	fi->fh = (intptr_t)inode;
 	fi->keep_cache = 1;
 	return(0);
@@ -288,7 +290,7 @@ static int sqfs_hl_op_getxattr(const char *path, const char *name,
 
 	if (sqfs_hl_lookup(&fs, &inode, path))
 		RETURN(-ENOENT);
-	
+
 	if ((sqfs_xattr_lookup(fs, &inode, name, value, &real)))
 		RETURN(-EIO);
 	UNLOCK();
@@ -304,7 +306,6 @@ static int sqfs_hl_op_getxattr(const char *path, const char *name,
 
 static sqfs_hl *sqfs_hl_open(const char *path, size_t offset) {
 	sqfs_hl *hl;
-	
 
 	hl = malloc(sizeof(*hl));
 	if (!hl) {
@@ -320,6 +321,7 @@ static sqfs_hl *sqfs_hl_open(const char *path, size_t offset) {
 			sqfs_destroy(&hl->fs);
 		}
 		UNLOCK();
+
 		free(hl);
 	}
 	return(NULL);

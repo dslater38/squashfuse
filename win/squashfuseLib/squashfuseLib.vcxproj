@@ -106,7 +106,7 @@
     <Import Project="..\lz4dll.props" />
     <Import Project="..\lzmadll.props" />
     <Import Project="..\lzodll.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x86Fuse.props" />
     <Import Project="..\externalDeps.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -116,7 +116,7 @@
     <Import Project="..\lz4dll.props" />
     <Import Project="..\lzmadll.props" />
     <Import Project="..\lzodll.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x86Fuse.props" />
     <Import Project="..\zlibRelease.props" />
     <Import Project="..\externalDeps.props" />
   </ImportGroup>
@@ -126,7 +126,7 @@
     <Import Project="..\lz4stat.props" />
     <Import Project="..\lzmastat.props" />
     <Import Project="..\lzostat.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x86Fuse.props" />
     <Import Project="..\zstdstat.props" />
     <Import Project="..\zlibRelease.props" />
     <Import Project="..\externalDeps.props" />
@@ -138,7 +138,7 @@
     <Import Project="..\lz4stat.props" />
     <Import Project="..\lzmastat.props" />
     <Import Project="..\lzostat.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x86Fuse.props" />
     <Import Project="..\zlibRelease.props" />
     <Import Project="..\externalDeps.props" />
   </ImportGroup>
@@ -149,7 +149,7 @@
     <Import Project="..\lz4dll.props" />
     <Import Project="..\lzmadll.props" />
     <Import Project="..\lzodll.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x64Fuse.props" />
     <Import Project="..\externalDeps.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,7 +159,7 @@
     <Import Project="..\lz4dll.props" />
     <Import Project="..\lzmadll.props" />
     <Import Project="..\lzodll.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x64Fuse.props" />
     <Import Project="..\zlibRelease.props" />
     <Import Project="..\externalDeps.props" />
   </ImportGroup>
@@ -171,7 +171,7 @@
     <Import Project="..\lz4stat.props" />
     <Import Project="..\lzmastat.props" />
     <Import Project="..\lzostat.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x64Fuse.props" />
     <Import Project="..\zlibRelease.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseClang-Static|x64'" Label="PropertySheets">
@@ -181,7 +181,7 @@
     <Import Project="..\lz4stat.props" />
     <Import Project="..\lzmastat.props" />
     <Import Project="..\lzostat.props" />
-    <Import Project="..\WinFsp.props" />
+    <Import Project="..\x64Fuse.props" />
     <Import Project="..\zlibRelease.props" />
     <Import Project="..\externalDeps.props" />
   </ImportGroup>

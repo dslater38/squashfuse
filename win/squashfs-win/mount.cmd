@@ -43,8 +43,6 @@ for /F %%I in ('whoami.exe') do (
 "!LAUNCHCTL!" start squashfs !SQUASHINST! !SQUASHFILE! !SQUASHDIR! !SQUASHUSERNAME! !SQUASHGROUPNAME!
 
 
-
-
 goto :END
 
 :LIST
