@@ -2,7 +2,7 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Version of FUSE API to use */
-#define FUSE_USE_VERSION 26
+#define FUSE_USE_VERSION 30
 
 /* Define if FUSE xattr operations take a position argument */
 /* #undef FUSE_XATTR_POSITION */

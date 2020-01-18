@@ -134,6 +134,11 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)doc\*.css $(Outdir)
+xcopy $(ProjectDir)doc\images $(Outdir)images /S /Y /I
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -147,6 +152,11 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)doc\*.css $(Outdir)
+xcopy $(ProjectDir)doc\images $(Outdir)images /S /Y /I
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -164,6 +174,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)doc\*.css $(Outdir)
+xcopy $(ProjectDir)doc\images $(Outdir)images /S /Y /I
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">
     <ClCompile>
@@ -181,6 +196,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)doc\*.css $(Outdir)
+xcopy $(ProjectDir)doc\images $(Outdir)images /S /Y /I
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -197,6 +217,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)doc\*.css $(Outdir)
+xcopy $(ProjectDir)doc\images $(Outdir)images /S /Y /I
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">
     <ClCompile>
@@ -214,6 +239,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)doc\*.css $(Outdir)
+xcopy $(ProjectDir)doc\images $(Outdir)images /S /Y /I
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="win-squashfs.c" />
@@ -223,6 +253,41 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="squashfuse-win.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="doc\help.md">
+      <FileType>Document</FileType>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)help.html;%(Outputs)</Outputs>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</TreatOutputAsContent>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</BuildInParallel>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">$(OutDir)help.html;%(Outputs)</Outputs>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">true</TreatOutputAsContent>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">true</BuildInParallel>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)help.html;%(Outputs)</Outputs>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</TreatOutputAsContent>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</BuildInParallel>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)help.html;%(Outputs)</Outputs>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</TreatOutputAsContent>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</BuildInParallel>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">$(OutDir)help.html;%(Outputs)</Outputs>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">true</TreatOutputAsContent>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">true</BuildInParallel>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)help.html;%(Outputs)</Outputs>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</TreatOutputAsContent>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</BuildInParallel>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">curl --form input_files[]=@%(FullPath) --form other_files[]=@%(Rootdir)%(DIRECTORY)\github.css --form from=markdown --form to=html --form css=github.css -o$(Outdir)\%(Filename).html http://c.docverter.com/convert 
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|Win32'">curl --form input_files[]=@%(FullPath) --form other_files[]=@%(Rootdir)%(DIRECTORY)\github.css --form from=markdown --form to=html --form css=github.css -o$(Outdir)\%(Filename).html http://c.docverter.com/convert 
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">curl --form input_files[]=@%(FullPath) --form other_files[]=@%(Rootdir)%(DIRECTORY)\github.css --form from=markdown --form to=html --form css=github.css -o$(Outdir)\%(Filename).html http://c.docverter.com/convert 
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">curl --form input_files[]=@%(FullPath) --form other_files[]=@%(Rootdir)%(DIRECTORY)\github.css --form from=markdown --form to=html --form css=github.css -o$(Outdir)\%(Filename).html http://c.docverter.com/convert 
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseMT|x64'">curl --form input_files[]=@%(FullPath) --form other_files[]=@%(Rootdir)%(DIRECTORY)\github.css --form from=markdown --form to=html --form css=github.css -o$(Outdir)\%(Filename).html http://c.docverter.com/convert 
+</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">curl --form input_files[]=@%(FullPath) --form other_files[]=@%(Rootdir)%(DIRECTORY)\github.css --form from=markdown --form to=html --form css=github.css -o$(Outdir)\%(Filename).html http://c.docverter.com/convert 
+</Command>
+    </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

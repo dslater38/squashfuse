@@ -1,8 +1,9 @@
 @echo off
 
+setlocal ENABLEEXTENSIONS ENABLEDELAYEDEXPANSION
+
 if "%SQFS_DEBUG%"=="1" echo on
 
-setlocal
 
 if "%1"=="" goto USAGE
 if "%1"=="-?" goto USAGE
@@ -28,9 +29,7 @@ for /F %%I in ( "%SQUASHDIR%" )  do (
 	)	
 )
 
-rem for %%I in ( "%SQUASHDIR%" )  do set "SQUASHINST=%%~nI"
-
-"%WinFspInstallDir%bin\launchctl-%ARCH%.exe" stop squashfs %SQUASHINST%
+"!LAUNCHCTL!" stop squashfs !SQUASHINST!
 
 goto :END
 
