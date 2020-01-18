@@ -32,7 +32,7 @@
 #include <fuse_lowlevel.h>
 #endif
 
-// #include <sys/stat.h>
+#include <sys/stat.h>
 
 /* Common functions for FUSE high- and low-level clients */
 

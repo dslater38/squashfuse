@@ -25,7 +25,7 @@ static char *sqfs_parse_unc_path(const char *arg);
 static char *squashfuse_path();
 
 // const char *PROGNAME = "d:\\Dev\\squashfuse\\win\\x64\\Debug\\squashfuse.exe";
-const char *volumePrefix = "--VolumePrefix=%s";
+const char *VOLUMEPREFIX = "--VolumePrefix=%s";
 
 #define SQUASHFS_ARGS                      \
     "-orellinks",                       \
@@ -33,14 +33,32 @@ const char *volumePrefix = "--VolumePrefix=%s";
     "-oUserKnownHostsFile=/dev/null",   \
     "-oStrictHostKeyChecking=no"
 
+static void log_cmdline(int argc, char **argv)
+{
+	FILE *fp = fopen("c:\\Users\\dslat\\win-squashfs.log", "w+");
+	if (fp)
+	{
+		for (int i = 0; i < argc; ++i)
+		{
+			fprintf(fp,"%s ", argv[i]);
+		}
+		fprintf(fp,"\n");
+		fflush(fp);
+		fclose(fp);
+	}
+}
+
+const char *GETOPTSTR = "U:u:g:";
+
 int main(int argc, char **argv)
 {
-	if (argc == 3) {
+	log_cmdline(argc, argv);
+	if (argc >= 3) {
+		char buffer[256];
 		const char *unc_path = argv[1];
 		const char *drive = argv[2];
-		char *archivePath = sqfs_parse_unc_path(unc_path);
-		char buffer[256];
-		sprintf_s(buffer, sizeof(buffer), volumePrefix, unc_path);
+		char *volumePrefix = NULL;
+
 		char *PROGNAME = squashfuse_path();
 		char FNAME[_MAX_FNAME];
 		char EXT[_MAX_EXT];
@@ -48,9 +66,33 @@ int main(int argc, char **argv)
 		char ProgName[_MAX_FNAME + _MAX_EXT + 1];
 		strcpy_s(ProgName, sizeof(ProgName), FNAME);
 		strcat_s(ProgName, sizeof(ProgName), EXT);
+
+		char *archivePath = sqfs_parse_unc_path(unc_path);
+		if(NULL != archivePath) {
+			sprintf_s(buffer, sizeof(buffer), VOLUMEPREFIX, unc_path);
+			volumePrefix = buffer;
+		} else {
+			archivePath = _strdup(unc_path);
+		}
+
 		const char *squashfs_args[256] = {
-			ProgName, buffer, "-f", archivePath, drive, (void *)0
+			ProgName
 		};
+
+		size_t i = 0;
+		if(NULL != volumePrefix) {
+			squashfs_args[++i] = buffer;
+			squashfs_args[++i] = "-f";
+		}
+
+		for (int j = 3; j < argc; ++j) {
+			squashfs_args[++i] = argv[j];
+		}
+
+		squashfs_args[++i] = archivePath;
+		squashfs_args[++i] = drive;
+
+		squashfs_args[++i] = NULL;
 
 		int retVal = (int)_spawnv(_P_WAIT ,PROGNAME, squashfs_args);
 		if (retVal == -1) {

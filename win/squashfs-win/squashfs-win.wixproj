@@ -89,6 +89,7 @@
     <Content Include="findWinFsp.cmd" />
     <Content Include="mount.cmd" />
     <Content Include="register.cmd" />
+    <Content Include="squashfs_env.cmd" />
     <Content Include="umount.cmd" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />

@@ -1,8 +1,9 @@
 @echo off
 
+setlocal ENABLEEXTENSIONS ENABLEDELAYEDEXPANSION
+
 if "%SQFS_DEBUG%"=="1" echo on
 
-setlocal 
 
 if "%1"=="-?" goto USAGE
 
@@ -15,12 +16,12 @@ if "%1"=="" goto LIST
 set "SQUASHFILE=%~f1"
 set "SQUASHDIR=%~f2"
 
-if "%SQUASHDIR%"=="" (
+if "!SQUASHDIR!"=="" (
     set "SQUASHDIR=%~dpn1"
 )
 
 
-for /F %%I in ( "%SQUASHDIR%" )  do (
+for /F %%I in ( "!SQUASHDIR!" )  do (
 	rem if we were passed a drive i.e .z:
 	if "%%~dI"=="%%~I" (
 		set  "SQUASHINST=%%~dI"
@@ -34,14 +35,18 @@ for /F %%I in ( "%SQUASHDIR%" )  do (
 	)	
 )
 
+for /F %%I in ('whoami.exe') do (
+    set "SQUASHUSERNAME=--UserName=%%~I"
+    set "SQUASHGROUPNAME=--GroupName=%%~I"
+)
 
-"%WinFspInstallDir%bin\launchctl-%ARCH%.exe" start squashfs %SQUASHINST% %SQUASHFILE% %SQUASHDIR%
+"!LAUNCHCTL!" start squashfs !SQUASHINST! !SQUASHFILE! !SQUASHDIR! !SQUASHUSERNAME! !SQUASHGROUPNAME!
 
 
 goto :END
 
 :LIST
-"%WinFspInstallDir%bin\launchctl-%ARCH%.exe" list 
+"!LAUNCHCTL!" list 
 
 :USAGE
 echo Usage: mount [squashfs_file] [directory]

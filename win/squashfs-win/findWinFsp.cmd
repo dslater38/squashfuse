@@ -14,8 +14,7 @@ if "%WinFspInstallDir%" == "" (
 	exit /b 1
 ) else (
 
-	if "%WinFspInstallDir:~-1%" neq "\" (
-
-		set "WinFspInstallDir=%WinFspInstallDir%\"
-	)
+	if "%WinFspInstallDir:~-1%" neq "\"  set "WinFspInstallDir=%WinFspInstallDir%\"
+    
+    set "LAUNCHCTL=%WinFspInstallDir%bin\launchctl-%ARCH%.exe"
 )
