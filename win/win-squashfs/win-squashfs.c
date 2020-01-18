@@ -35,7 +35,8 @@ const char *VOLUMEPREFIX = "--VolumePrefix=%s";
 
 static void log_cmdline(int argc, char **argv)
 {
-	FILE *fp = fopen("c:\\Users\\dslat\\win-squashfs.log", "w+");
+	FILE *fp = NULL;
+	auto err = fopen_s(&fp,"c:\\Users\\dslat\\win-squashfs.log", "w+");
 	if (fp)
 	{
 		for (int i = 0; i < argc; ++i)

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
-  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="UserMacros">
+    <LIBNAME>winfsp</LIBNAME>
+  </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)..\3rdparty\winfsp\inc;$(ProjectDir)..\3rdparty\winfsp\inc\fuse3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN_FUSE=0;FSP_DLLNAME="$(LIBNAME)-$(PlatformTarget).dll";%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)..\3rdparty\winfsp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -13,5 +16,9 @@
       <DelayLoadDLLs>winfsp-$(PlatformTarget).dll</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BuildMacro Include="LIBNAME">
+      <Value>$(LIBNAME)</Value>
+    </BuildMacro>
+  </ItemGroup>
 </Project>
