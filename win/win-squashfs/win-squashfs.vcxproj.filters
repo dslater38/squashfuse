@@ -33,6 +33,8 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="doc\help.md" />
+    <CustomBuild Include="doc\help.md">
+      <Filter>doc</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

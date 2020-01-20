@@ -46,12 +46,16 @@ for /F %%I in ('whoami.exe') do (
 goto :END
 
 :LIST
-"!LAUNCHCTL!" list 
+echo "[3;35m
+"!LAUNCHCTL!" list | more /E +1
 
 :USAGE
 echo Usage: mount [squashfs_file] [directory]
 echo mounts squashfs file [squashfs_file] on directory mount point [directory]
 echo Note: unlike Unix mount, [directory] must not exist.
+echo If run with no arguments, displays this help message and lists all mounted 
+echo filesystems.
+
 
 
 :END

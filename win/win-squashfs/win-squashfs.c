@@ -85,11 +85,11 @@ int main(int argc, char **argv)
 			squashfs_args[++i] = buffer;
 			squashfs_args[++i] = "-f";
 		}
-
+#if WIN_FUSE==0
 		for (int j = 3; j < argc; ++j) {
 			squashfs_args[++i] = argv[j];
 		}
-
+#endif
 		squashfs_args[++i] = archivePath;
 		squashfs_args[++i] = drive;
 
