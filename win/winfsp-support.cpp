@@ -29,19 +29,28 @@ struct IUnknown;
 #include <signal.h>
 #include <process.h>
 
+#if WIN_FUSE==1
+#define FSP_LIBPATH L"opt\\libfuse\\bin\\"
+#define INSTALL_KEY L"Software\\WinFuse"
+#define FSP_DLLNAME L"fuse3-x64.dll"
+#else
+#define FSP_LIBPATH L"bin\\"
+#if defined(_WIN64)
+#define INSTALL_KEY L"Software\\WOW6432Node\\WinFsp"
+#define FSP_DLLNAME L"winfsp-x64.dll"
+#else
+#define INSTALL_KEY L"Software\\WinFsp"
+#define FSP_DLLNAME L"winfsp-x86.dll"
+#endif
+#endif
+
 extern "C"
 {
 #include "../squashfuse.h"
 
-	static inline
-		NTSTATUS FspLoad(PVOID *PModule)
+	static NTSTATUS FspLoad(PVOID *PModule)
 	{
-//#if defined(_WIN64)
-//#define FSP_DLLNAME                     "fuse3-x64.dll"
-//#else
-//#define FSP_DLLNAME                     "fuse3-x86.dll"
-//#endif
-#define FSP_DLLPATH                     "opt\\libfuse\\bin\\" FSP_DLLNAME
+#define FSP_DLLPATH                     FSP_LIBPATH FSP_DLLNAME
 
 		WINADVAPI
 			LSTATUS
@@ -67,7 +76,7 @@ extern "C"
 		Module = LoadLibraryW(L"" FSP_DLLNAME);
 		if (0 == Module)
 		{
-			Result = RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"Software\\WinFuse",
+			Result = RegOpenKeyExW(HKEY_LOCAL_MACHINE, INSTALL_KEY,
 				0, KEY_READ , &RegKey);
 			if (ERROR_SUCCESS == Result)
 			{

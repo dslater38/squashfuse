@@ -22,7 +22,7 @@
 #include <ctype.h>
 
 static char *sqfs_parse_unc_path(const char *arg);
-static char *squashfuse_path();
+// static char *squashfuse_path();
 
 // const char *PROGNAME = "d:\\Dev\\squashfuse\\win\\x64\\Debug\\squashfuse.exe";
 const char *VOLUMEPREFIX = "--VolumePrefix=%s";
@@ -33,40 +33,53 @@ const char *VOLUMEPREFIX = "--VolumePrefix=%s";
     "-oUserKnownHostsFile=/dev/null",   \
     "-oStrictHostKeyChecking=no"
 
-static void log_cmdline(int argc, char **argv)
+static void log_cmdline(int argc, const wchar_t **argv)
 {
 	FILE *fp = NULL;
-	auto err = fopen_s(&fp,"c:\\Users\\dslat\\win-squashfs.log", "w+");
+	auto err = _wfopen_s(&fp,L"c:\\Users\\dslat\\win-squashfs.log", L"w+");
 	if (fp)
 	{
 		for (int i = 0; i < argc; ++i)
 		{
-			fprintf(fp,"%s ", argv[i]);
+			fwprintf(fp,L"%s ", argv[i]);
 		}
-		fprintf(fp,"\n");
+		fwprintf(fp,L"\n");
 		fflush(fp);
 		fclose(fp);
 	}
 }
 
-const char *GETOPTSTR = "U:u:g:";
-
-int main(int argc, char **argv)
+static void log_cmdlineA(int argc, const char **argv)
 {
-	log_cmdline(argc, argv);
+	FILE *fp = NULL;
+	auto err = fopen_s(&fp, "c:\\Users\\dslat\\squashfuse.log", "w+");
+	if (fp)
+	{
+		for (int i = 0; i < argc; ++i)
+		{
+			fprintf(fp, "%s ", argv[i]);
+		}
+		fprintf(fp, "\n");
+		fflush(fp);
+		fclose(fp);
+	}
+}
+
+int ansi_main(int argc, char **argv)
+{
 	if (argc >= 3) {
 		char buffer[256];
 		const char *unc_path = argv[1];
 		const char *drive = argv[2];
 		char *volumePrefix = NULL;
 
-		char *PROGNAME = squashfuse_path();
-		char FNAME[_MAX_FNAME];
-		char EXT[_MAX_EXT];
-		_splitpath_s(PROGNAME, NULL, 0, NULL, 0, FNAME, _MAX_FNAME, EXT, _MAX_EXT);
-		char ProgName[_MAX_FNAME + _MAX_EXT + 1];
-		strcpy_s(ProgName, sizeof(ProgName), FNAME);
-		strcat_s(ProgName, sizeof(ProgName), EXT);
+		//char *PROGNAME = squashfuse_path();
+		//char FNAME[_MAX_FNAME];
+		//char EXT[_MAX_EXT];
+		//_splitpath_s(PROGNAME, NULL, 0, NULL, 0, FNAME, _MAX_FNAME, EXT, _MAX_EXT);
+		//char ProgName[_MAX_FNAME + _MAX_EXT + 1];
+		//strcpy_s(ProgName, sizeof(ProgName), FNAME);
+		//strcat_s(ProgName, sizeof(ProgName), EXT);
 
 		char *archivePath = sqfs_parse_unc_path(unc_path);
 		if(NULL != archivePath) {
@@ -77,7 +90,7 @@ int main(int argc, char **argv)
 		}
 
 		const char *squashfs_args[256] = {
-			ProgName
+			argv[0]
 		};
 
 		size_t i = 0;
@@ -95,45 +108,82 @@ int main(int argc, char **argv)
 
 		squashfs_args[++i] = NULL;
 
-		int retVal = (int)_spawnv(_P_WAIT ,PROGNAME, squashfs_args);
-		if (retVal == -1) {
-			fprintf(stderr, "Error: _spawnv failed. errorno %d\n", errno);
-		}
-		free(PROGNAME);
+		log_cmdlineA((int)i, squashfs_args);
+
+		// int retVal = (int)_spawnv(_P_WAIT ,PROGNAME, squashfs_args);
+		extern int main(int, const char **);
+		int retVal = main((int)i, squashfs_args);
+		//if (retVal == -1) {
+		//	fprintf(stderr, "Error: _spawnv failed. errorno %d\n", errno);
+		//}
+		// free(PROGNAME);
 		free(archivePath);
 		return retVal;
 	}
 	return 1;
 }
 
-#ifdef _M_X64
-#define WIN_SQUASHFS_KEY L"SOFTWARE\\WOW6432Node\\WinFsp\\Services\\squashfs"
-#else
-#define WIN_SQUASHFS_KEY L"SOFTWARE\\WinFsp\\Services\\squashfs"
-#endif
+extern int glb__WinFspLoaded;
 
-static
-char *squashfuse_path()
+int wmain(int argc, wchar_t *wargv[], wchar_t *wenvp[])
 {
-	HKEY hKey;
-	LSTATUS status = RegOpenKeyEx(HKEY_LOCAL_MACHINE, WIN_SQUASHFS_KEY, 0, KEY_READ, &hKey);
-	if (ERROR_SUCCESS == status) {
-		DWORD bufSize = _MAX_PATH;
-		char *buffer = (char *)calloc(_MAX_PATH, 3);
-		if (buffer) {
-			status = RegQueryValueExA(hKey, "Executable", NULL, NULL, buffer, &bufSize);
-			if (ERROR_SUCCESS == status) {
-				char drive[_MAX_DRIVE];
-				char path[_MAX_PATH];
-
-				_splitpath_s(buffer, drive, _MAX_DRIVE, path, _MAX_PATH, NULL, 0, NULL, 0);
-				_makepath_s(buffer, _MAX_PATH, drive, path, "squashfuse", ".exe");
-				return buffer;
-			}
-		}
+	log_cmdline(argc, wargv);
+	if (glb__WinFspLoaded != 0)
+	{
+		return glb__WinFspLoaded;
 	}
-	return NULL;
+	int total_size = 0;
+	for (int i = 0; i < argc; ++i)
+	{
+		total_size += (int)(wcslen(wargv[i]) + 1) * sizeof(char);
+	}
+	total_size += argc * sizeof(char *);
+
+	char **argv = (char **)malloc(total_size);
+	if (argv)
+	{
+		char *pArg = (char *)(argv + argc);
+		total_size -= sizeof(char *)*argc;
+		for (int i = 0; i < argc; ++i)
+		{
+			int numChars = WideCharToMultiByte(CP_UTF8, 0, wargv[i], -1, pArg, total_size, NULL, NULL);
+			argv[i] = pArg;
+			pArg += numChars;
+		}
+		int retVal = ansi_main(argc, argv);
+		free(argv);
+		return retVal;
+	}
 }
+//
+//#ifdef _M_X64
+//#define WIN_SQUASHFS_KEY L"SOFTWARE\\WOW6432Node\\WinFsp\\Services\\squashfs"
+//#else
+//#define WIN_SQUASHFS_KEY L"SOFTWARE\\WinFsp\\Services\\squashfs"
+//#endif
+//
+//static
+//char *squashfuse_path()
+//{
+//	HKEY hKey;
+//	LSTATUS status = RegOpenKeyEx(HKEY_LOCAL_MACHINE, WIN_SQUASHFS_KEY, 0, KEY_READ, &hKey);
+//	if (ERROR_SUCCESS == status) {
+//		DWORD bufSize = _MAX_PATH;
+//		char *buffer = (char *)calloc(_MAX_PATH, 3);
+//		if (buffer) {
+//			status = RegQueryValueExA(hKey, "Executable", NULL, NULL, buffer, &bufSize);
+//			if (ERROR_SUCCESS == status) {
+//				char drive[_MAX_DRIVE];
+//				char path[_MAX_PATH];
+//
+//				_splitpath_s(buffer, drive, _MAX_DRIVE, path, _MAX_PATH, NULL, 0, NULL, 0);
+//				_makepath_s(buffer, _MAX_PATH, drive, path, "squashfuse", ".exe");
+//				return buffer;
+//			}
+//		}
+//	}
+//	return NULL;
+//}
 
 static
 char *sqfs_parse_unc_path(const char *arg)
