@@ -3,7 +3,7 @@ name: Integration test build.
 on:
   push:
     tags-ignore: 'v*'
-    branches: '*master*'
+    branches: '*'
 
 jobs:
   build:
