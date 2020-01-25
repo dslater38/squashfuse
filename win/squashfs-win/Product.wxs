@@ -123,13 +123,13 @@
         <Shortcut Id="ApplicationStartMenuShortcut"
                   Name="$(var.MyProductName) Command Line"
                   Description="$(var.MyProductName) Command Line"
-                  Arguments="/K &#x22;[#squashfs_env]&#x22;"
+                  Arguments="/K &#x22;[BINDIR]\squashfs_env.cmd&#x22;"
                   Icon="icon.ico"
                   Target="[%ComSpec]" />
         <Shortcut Id="ApplicationHelpMenuShortcut"
                   Name="$(var.MyProductName) Help"
                   Description="$(var.MyProductName) Help"
-                  Target="[#help_doc]" />
+                  Target="[DOCDIR]\help.html" />
 
         <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\$(var.MyProductName)\squashfs_env" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
@@ -137,13 +137,6 @@
       </Component>
     </DirectoryRef>
     
-    <DirectoryRef Id="TARGETDIR">
-      <Directory Id="dir99DE416F55C8960850D5A4FCA3758AD4" Name="Release" />
-    </DirectoryRef>
-
-
-
-
     <Feature
         Id="F.Main"
         Level="1"
@@ -164,56 +157,7 @@
     </Feature>
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
     <UIRef Id="WixUI_InstallDir" />
-    <!-- skip the license agreement dialog; higher Order takes priority (weird) -->
-    <!--  <UI Id="FeatureTree">
-      <UIRef Id="WixUI_InstallDir" />-->
-      
-<!--      
-      
-      <UIRef Id="WixUI_FeatureTree" />
-      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="LicenseAgreementDlg" />
-      <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="CustomizeDlg" />
-      <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" /> -->
-      
-<!--      
-      <Publish
-          Dialog="WelcomeDlg"
-          Control="Next"
-          Event="NewDialog"
-          Value="CustomizeDlg"
-          Order="10">NOT Installed</Publish>
-      <Publish
-          Dialog="CustomizeDlg"
-          Control="Back"
-          Event="NewDialog"
-          Value="WelcomeDlg"
-          Order="10">NOT Installed</Publish>
--->          
-    <!-- </UI> -->
-    <!--<UI Id="FeatureTree">
-      <UIRef Id="WixUI_Mondo" />
-      <Publish
-          Dialog="WelcomeDlg"
-          Control="Next"
-          Event="NewDialog"
-          Value="CustomizeDlg"
-          Order="10">NOT Installed</Publish>
-      
-      <Publish
-          Dialog="LicenseAgreementDlg"
-          Control="Next"
-          Event="NewDialog"
-          Value="WelcomeDlg"
-          Order="10">NOT Installed</Publish>
-
-      <Publish
-          Dialog="CustomizeDlg"
-          Control="Back"
-          Event="NewDialog"
-          Value="WelcomeDlg"
-          Order="10">NOT Installed</Publish>
-    </UI>-->
-    
+          
     <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
     

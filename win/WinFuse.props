@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
-  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="UserMacros">
+    <LIBNAME>fuse3</LIBNAME>
+  </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Program Files\WinFuse\opt\libfuse\include;C:\Program Files\WinFuse\opt\libfuse\include\fuse3;C:\Program Files %28x86%29\WinFsp\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN_FUSE=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\3rdparty\libfuse\include;$(ProjectDir)..\3rdparty\libfuse\include\fuse3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN_FUSE=1;FSP_DLLNAME="$(LIBNAME)-$(PlatformTarget).dll";%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Program Files\WinFuse\opt\libfuse\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>fuse3-$(PlatformTarget).lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <DelayLoadDLLs>fuse3-$(PlatformTarget).dll</DelayLoadDLLs>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\3rdparty\libfuse\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(LIBNAME)-$(PlatformTarget).lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>$(LIBNAME)-$(PlatformTarget).dll</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BuildMacro Include="LIBNAME">
+      <Value>$(LIBNAME)</Value>
+    </BuildMacro>
+  </ItemGroup>
 </Project>
