@@ -3,12 +3,13 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
     <LIBNAME>winfsp</LIBNAME>
+    <LIBPATH>bin\\</LIBPATH>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)..\3rdparty\winfsp\inc;$(ProjectDir)..\3rdparty\winfsp\inc\fuse3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN_FUSE=0;FSP_DLLNAME="$(LIBNAME)-$(PlatformTarget).dll";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN_FUSE=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)..\3rdparty\winfsp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -19,6 +20,9 @@
   <ItemGroup>
     <BuildMacro Include="LIBNAME">
       <Value>$(LIBNAME)</Value>
+    </BuildMacro>
+    <BuildMacro Include="LIBPATH">
+      <Value>$(LIBPATH)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

@@ -3,8 +3,8 @@
   <Fragment>
     <DirectoryRef Id="BINDIR">
       <Component Id="static_binaries" Guid="{99683914-B6BD-444D-B6B3-E7CB923B6B93}">
-        <File Id="squashfuse_win.exe" KeyPath="yes" Source="$(var.SourceDir)\squashfuse-win.exe" />
-        <File Id="squashfuse.exe" KeyPath="no" Source="$(var.SourceDir)\squashfuse.exe" />
+        <File Id="squashfuse.exe" KeyPath="yes" Source="$(var.SourceDir)\squashfuse.exe" />
+        <!--<File Id="squashfuse.exe" KeyPath="no" Source="$(var.SourceDir)\squashfuse.exe" />-->
         <File Id="squashfuse_extract.exe" KeyPath="no" Source="$(var.SourceDir)\squashfuse_extract.exe" />
         <File Id="squashfuse_ls.exe" KeyPath="no" Source="$(var.SourceDir)\squashfuse_ls.exe" />
         <File Id="squashfuse.dll" KeyPath="no" Source="$(var.SourceDir)\squashfuse.dll" />
@@ -14,12 +14,12 @@
         <File Id="squashfs_env" KeyPath="no" Source="$(var.LibDir)\..\..\..\..\squashfs-win\squashfs_env.cmd" />
       </Component>
       <?if $(var.Static) = 0?>
-      <Component Id="dynamic_libs">
+      <Component Id="dynamic_libs" Guid="{6A5567CE-B8CA-4C48-8082-C04BC8A9547E}">
         <File Id="liblz4.dll" KeyPath="yes" Source="$(var.LibDir)\liblz4.dll" />
-        <File Id="liblzma.dll" KeyPath="yes" Source="$(var.LibDir)\liblzma.dll" />
-        <File Id="libzstd.dll" KeyPath="yes" Source="$(var.LibDir)\libzstd.dll" />
-        <File Id="lzo2.dll" KeyPath="yes" Source="$(var.LibDir)\lzo2.dll" />
-        <File Id="zlibwapi.dll" KeyPath="yes" Source="$(var.LibDir)\zlibwapi.dll" />
+        <File Id="liblzma.dll" KeyPath="no" Source="$(var.LibDir)\liblzma.dll" />
+        <File Id="libzstd.dll" KeyPath="no" Source="$(var.LibDir)\libzstd.dll" />
+        <File Id="lzo2.dll" KeyPath="no" Source="$(var.LibDir)\lzo2.dll" />
+        <File Id="zlibwapi.dll" KeyPath="no" Source="$(var.LibDir)\zlibwapi.dll" />
       </Component>
       <?endif?>
 

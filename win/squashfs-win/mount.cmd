@@ -46,12 +46,19 @@ for /F %%I in ('whoami.exe') do (
 goto :END
 
 :LIST
-"!LAUNCHCTL!" list 
+rem change the forground color to bright green
+FORFILES.EXE /P %~dps0 /M %~nxs0 /C "CMD.EXE /C ECHO 0x1B[1;32m
+"!LAUNCHCTL!" list | more /E +1
+rem reset the colors
+FORFILES.EXE /P %~dps0 /M %~nxs0 /C "CMD.EXE /C ECHO 0x1B[0;m
 
 :USAGE
 echo Usage: mount [squashfs_file] [directory]
 echo mounts squashfs file [squashfs_file] on directory mount point [directory]
 echo Note: unlike Unix mount, [directory] must not exist.
+echo If run with no arguments, displays this help message and lists all mounted 
+echo filesystems.
+
 
 
 :END
