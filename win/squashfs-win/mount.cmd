@@ -46,8 +46,11 @@ for /F %%I in ('whoami.exe') do (
 goto :END
 
 :LIST
-echo "[3;35m
+rem change the forground color to bright green
+FORFILES.EXE /P %~dps0 /M %~nxs0 /C "CMD.EXE /C ECHO 0x1B[1;32m
 "!LAUNCHCTL!" list | more /E +1
+rem reset the colors
+FORFILES.EXE /P %~dps0 /M %~nxs0 /C "CMD.EXE /C ECHO 0x1B[0;m
 
 :USAGE
 echo Usage: mount [squashfs_file] [directory]

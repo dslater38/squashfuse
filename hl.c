@@ -76,7 +76,7 @@ static void *sqfs_hl_op_init(struct fuse_conn_info *conn, struct fuse_config *co
 }
 
 static int sqfs_hl_op_getattr(const char *path, struct fuse_stat *st, struct fuse_file_info *fi) {
-	sqfs *fs;
+	sqfs *fs=NULL;
 	sqfs_inode inode;
 
 	sqfs_inode *pInode = NULL;
@@ -279,21 +279,6 @@ static sqfs_hl *sqfs_hl_open(const char *path, size_t offset) {
 		free(hl);
 	}
 	return NULL;
-}
-
-static void log_cmdline(int argc, char **argv)
-{
-	FILE *fp = fopen("c:\\Users\\dslat\\squashfuse.log", "w+");
-	if (fp)
-	{
-		for (int i = 0; i < argc; ++i)
-		{
-			fprintf(fp, "%s ", argv[i]);
-		}
-		fprintf(fp, "\n");
-		fflush(fp);
-		fclose(fp);
-	}
 }
 
 int main(int argc, char *argv[]) {
