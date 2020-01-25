@@ -7,5 +7,6 @@
 **/Debug
 **/Release
 **/x86
+*.deleteme
 swap.c.inc
 swap.h.inc

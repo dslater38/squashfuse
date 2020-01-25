@@ -3,7 +3,7 @@
 <?define UpgradeCode64="E8ED1064-EE50-473b-918F-CE15C23CC059"?>
 <?define UpgradeCode32="5DED678E-52A3-41ea-AC23-A6C83FA6497F"?>
 <?define MyProductName="SQUASHFS-Win"?>
-<?define MyVersion="0.1.103"?>
+<?define MyVersion="0.5.0"?>
 <?define MyDescription="SquashFs for Windows"?>
 
 <?if $(var.MyArch) = x64?>
@@ -99,7 +99,7 @@
             <RegistryValue
                 Type="string"
                 Name="Executable"
-                Value="[INSTALLDIR]bin\squashfuse-win.exe"
+                Value="[INSTALLDIR]bin\squashfuse.exe"
                 KeyPath="yes" />
             <RegistryValue
                 Type="string"
