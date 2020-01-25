@@ -114,7 +114,7 @@ static sqfs_err sqfs_decompressor_lzma(void *in, size_t insz,
 		return SQFS_ERR;
 	}
 
-	strm.next_in = in + LZMA_HEADER_SIZE;
+	strm.next_in = (uint8_t *)in + LZMA_HEADER_SIZE;
 	strm.avail_in = insz - LZMA_HEADER_SIZE;
 
 	res = lzma_code(&strm, LZMA_FINISH);
