@@ -28,7 +28,7 @@
 #include "squashfuse.h"
 
 #include <fuse.h>
-#ifdef WIN_FUSE
+#if WIN_FUSE==1
 #include <fuse_lowlevel.h>
 #endif
 

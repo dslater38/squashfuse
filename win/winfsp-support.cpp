@@ -36,11 +36,11 @@ extern "C"
 	static inline
 		NTSTATUS FspLoad(PVOID *PModule)
 	{
-#if defined(_WIN64)
-#define FSP_DLLNAME                     "fuse3-x64.dll"
-#else
-#define FSP_DLLNAME                     "fuse3-x86.dll"
-#endif
+//#if defined(_WIN64)
+//#define FSP_DLLNAME                     "fuse3-x64.dll"
+//#else
+//#define FSP_DLLNAME                     "fuse3-x86.dll"
+//#endif
 #define FSP_DLLPATH                     "opt\\libfuse\\bin\\" FSP_DLLNAME
 
 		WINADVAPI
