@@ -27,9 +27,17 @@
 
 #include "squashfuse.h"
 
+#if FUSE_USE_VERSION >= 30
+#include <fuse3/fuse.h>
+/* WinFsp Fuse headers do not include this file. */
+#ifndef FUSE3_WINFSP_FUSE_H_INCLUDED
+#include <fuse3/fuse_lowlevel.h>
+#endif
+#else
 #include <fuse.h>
 #if WIN_FUSE==1
 #include <fuse_lowlevel.h>
+#endif
 #endif
 
 #include <sys/stat.h>

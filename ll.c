@@ -34,6 +34,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <signal.h>
+#include <time.h>
 #include <unistd.h>
 
 static const double SQFS_TIMEOUT = DBL_MAX;
@@ -44,18 +45,57 @@ static const double SQFS_TIMEOUT = DBL_MAX;
 /* timeout, in seconds, after which we will automatically unmount */
 static unsigned int idle_timeout_secs = 0;
 /* last access timestamp */
-static time_t last_access = 0;
+static time_t last_access;
 /* count of files and directories currently open.  drecement after
  * last_access for correctness. */
 static sig_atomic_t open_refcount = 0;
 /* same as lib/fuse_signals.c */
 static struct fuse_session *fuse_instance = NULL;
 
+static void update_access_time(void) {
+	/* We only need to track access time if we have an idle timeout,
+	 * don't bother with expensive operations if idle_timeout is 0.
+	 */
+	if (idle_timeout_secs) {
+        struct timespec now;
+        clock_gettime(CLOCK_MONOTONIC, &now);
+#ifdef SQFS_MULTITHREADED
+		__atomic_store_n(&last_access, now.tv_sec, __ATOMIC_RELEASE);
+#else
+		last_access = now.tv_sec;
+#endif
+	}
+}
+
+static void update_open_refcount(int delta) {
+#ifdef SQFS_MULTITHREADED
+	__atomic_fetch_add(&open_refcount, delta, __ATOMIC_RELEASE);
+#else
+	open_refcount += delta;
+#endif
+}
+
+static inline time_t get_access_time(void) {
+#ifdef SQFS_MULTITHREADED
+	return __atomic_load_n(&last_access, __ATOMIC_ACQUIRE);
+#else
+	return last_access;
+#endif
+}
+
+static inline sig_atomic_t get_open_refcount(void) {
+#ifdef SQFS_MULTITHREADED
+	return __atomic_load_n(&open_refcount, __ATOMIC_ACQUIRE);
+#else
+	return open_refcount;
+#endif
+}
+
 static void sqfs_ll_op_getattr(fuse_req_t req, fuse_ino_t ino,
 		struct fuse_file_info *fi) {
 	sqfs_ll_i lli;
 	struct stat st;
-	last_access = time(NULL);
+	update_access_time();
 	if (sqfs_ll_iget(req, &lli, ino))
 		return;
 	
@@ -70,7 +110,7 @@ static void sqfs_ll_op_getattr(fuse_req_t req, fuse_ino_t ino,
 static void sqfs_ll_op_opendir(fuse_req_t req, fuse_ino_t ino,
 		struct fuse_file_info *fi) {
 	sqfs_ll_i *lli;
-	last_access = time(NULL);
+	update_access_time();
 	
 	fi->fh = (intptr_t)NULL;
 	
@@ -85,7 +125,7 @@ static void sqfs_ll_op_opendir(fuse_req_t req, fuse_ino_t ino,
 			fuse_reply_err(req, ENOTDIR);
 		} else {
 			fi->fh = (intptr_t)lli;
-			++open_refcount;
+			update_open_refcount(1);
 			fuse_reply_open(req, fi);
 			return;
 		}
@@ -95,14 +135,14 @@ static void sqfs_ll_op_opendir(fuse_req_t req, fuse_ino_t ino,
 
 static void sqfs_ll_op_create(fuse_req_t req, fuse_ino_t parent, const char *name,
 			      mode_t mode, struct fuse_file_info *fi) {
-	last_access = time(NULL);
+	update_access_time();
 	fuse_reply_err(req, EROFS);
 }
 
 static void sqfs_ll_op_releasedir(fuse_req_t req, fuse_ino_t ino,
 		struct fuse_file_info *fi) {
-	last_access = time(NULL);
-	--open_refcount;
+	update_access_time();
+	update_open_refcount(-1);
 	free((sqfs_ll_i*)(intptr_t)fi->fh);
 	fuse_reply_err(req, 0); /* yes, this is necessary */
 }
@@ -131,7 +171,7 @@ static void sqfs_ll_op_readdir(fuse_req_t req, fuse_ino_t ino, size_t size,
 	sqfs_ll_i *lli = (sqfs_ll_i*)(intptr_t)fi->fh;
 	int err = 0;
 	
-	last_access = time(NULL);
+	update_access_time();
 	if (sqfs_dir_open(&lli->ll->fs, &lli->inode, &dir, off))
 		err = EINVAL;
 	if (!err && !(bufpos = buf = malloc(size)))
@@ -172,7 +212,7 @@ static void sqfs_ll_op_lookup(fuse_req_t req, fuse_ino_t parent,
 	bool found;
 	sqfs_inode inode;
 	
-	last_access = time(NULL);
+	update_access_time();
 	if (sqfs_ll_iget(req, &lli, parent))
 		return;
 	
@@ -189,10 +229,17 @@ static void sqfs_ll_op_lookup(fuse_req_t req, fuse_ino_t parent,
 		return;
 	}
 	if (!found) {
-		fuse_reply_err(req, ENOENT);
+		// Returning with zero inode indicates not found with
+		// timeout, i.e. future lookups of this name will not generate
+		// fuse requests.
+		struct fuse_entry_param fentry;
+		memset(&fentry, 0, sizeof(fentry));
+		fentry.attr_timeout = fentry.entry_timeout = SQFS_TIMEOUT;
+		fentry.ino = 0;
+		fuse_reply_entry(req, &fentry);
 		return;
 	}
-	
+
 	if (sqfs_inode_get(&lli.ll->fs, &inode, sqfs_dentry_inode(&entry))) {
 		fuse_reply_err(req, ENOENT);
 	} else {
@@ -214,7 +261,7 @@ static void sqfs_ll_op_open(fuse_req_t req, fuse_ino_t ino,
 	sqfs_inode *inode;
 	sqfs_ll *ll;
 	
-	last_access = time(NULL);
+	update_access_time();
 	if (fi->flags & (O_WRONLY | O_RDWR)) {
 		fuse_reply_err(req, EROFS);
 		return;
@@ -234,7 +281,7 @@ static void sqfs_ll_op_open(fuse_req_t req, fuse_ino_t ino,
 	} else {
 		fi->fh = (intptr_t)inode;
 		fi->keep_cache = 1;
-		++open_refcount;
+		update_open_refcount(1);
 		fuse_reply_open(req, fi);
 		return;
 	}
@@ -245,8 +292,8 @@ static void sqfs_ll_op_release(fuse_req_t req, fuse_ino_t ino,
 		struct fuse_file_info *fi) {
 	free((sqfs_inode*)(intptr_t)fi->fh);
 	fi->fh = 0;
-	last_access = time(NULL);
-	--open_refcount;
+	update_access_time();
+	update_open_refcount(-1);
 	fuse_reply_err(req, 0);
 }
 
@@ -263,7 +310,7 @@ static void sqfs_ll_op_read(fuse_req_t req, fuse_ino_t ino,
 		return;
 	}
 	
-	last_access = time(NULL);
+	update_access_time();
 	osize = size;
 	err = sqfs_read_range(&ll->fs, inode, off, &osize, buf);
 	if (err) {
@@ -280,7 +327,7 @@ static void sqfs_ll_op_readlink(fuse_req_t req, fuse_ino_t ino) {
 	char *dst;
 	size_t size;
 	sqfs_ll_i lli;
-	last_access = time(NULL);
+	update_access_time();
 	if (sqfs_ll_iget(req, &lli, ino))
 		return;
 	
@@ -304,7 +351,7 @@ static void sqfs_ll_op_listxattr(fuse_req_t req, fuse_ino_t ino, size_t size) {
 	char *buf;
 	int ferr;
 	
-	last_access = time(NULL);
+	update_access_time();
 	if (sqfs_ll_iget(req, &lli, ino))
 		return;
 
@@ -342,7 +389,7 @@ static void sqfs_ll_op_getxattr(fuse_req_t req, fuse_ino_t ino,
 	}
 #endif
 	
-	last_access = time(NULL);
+	update_access_time();
 	if (sqfs_ll_iget(req, &lli, ino))
 		return;
 	
@@ -364,41 +411,100 @@ static void sqfs_ll_op_getxattr(fuse_req_t req, fuse_ino_t ino,
 static void sqfs_ll_op_forget(fuse_req_t req, fuse_ino_t ino,
 		unsigned long nlookup) {
 	sqfs_ll_i lli;
-	last_access = time(NULL);
+	update_access_time();
 	sqfs_ll_iget(req, &lli, SQFS_FUSE_INODE_NONE);
 	lli.ll->ino_forget(lli.ll, ino, nlookup);
 	fuse_reply_none(req);
 }
 
 
-/* Helpers to abstract out FUSE 2.5 vs 2.6+ differences */
+/* Helpers to abstract out FUSE 2.5 vs 3.0+ differences */
 
 typedef struct {
 	int fd;
+	struct fuse_session *session;
+#if FUSE_USE_VERSION < 30
 	struct fuse_chan *ch;
+#endif
 } sqfs_ll_chan;
 
-static sqfs_err sqfs_ll_mount(sqfs_ll_chan *ch, const char *mountpoint,
-		struct fuse_args *args) {
-	#ifdef HAVE_NEW_FUSE_UNMOUNT
-		ch->ch = fuse_mount(mountpoint, args);
-	#else
-		ch->fd = fuse_mount(mountpoint, args);
-		if (ch->fd == -1)
-			return SQFS_ERR;
-		ch->ch = fuse_kern_chan_new(ch->fd);
-	#endif
-	return ch->ch ? SQFS_OK : SQFS_ERR;
+#if FUSE_USE_VERSION >= 30
+static sqfs_err sqfs_ll_mount(
+		sqfs_ll_chan *ch,
+		const char *mountpoint,
+		struct fuse_args *args,
+        struct fuse_lowlevel_ops *ops,
+        size_t ops_size,
+        void *userdata) {
+	ch->session = fuse_session_new(args, ops, ops_size, userdata);
+	if (!ch->session) {
+		return SQFS_ERR;
+	}
+	if (fuse_session_mount(ch->session, mountpoint)) {
+		fuse_session_destroy(ch->session);
+		ch->session = NULL;
+		return SQFS_ERR;
+	}
+	return SQFS_OK;
 }
 
 static void sqfs_ll_unmount(sqfs_ll_chan *ch, const char *mountpoint) {
-	#ifdef HAVE_NEW_FUSE_UNMOUNT
-		fuse_unmount(mountpoint, ch->ch);
-	#else
-		close(ch->fd);
-		fuse_unmount(mountpoint);
-	#endif
+	fuse_session_unmount(ch->session);
+	fuse_session_destroy(ch->session);
+	ch->session = NULL;
 }
+
+#else /* FUSE_USE_VERSION >= 30 */
+
+static void sqfs_ll_unmount(sqfs_ll_chan *ch, const char *mountpoint) {
+	if (ch->session) {
+#if HAVE_DECL_FUSE_SESSION_REMOVE_CHAN
+		fuse_session_remove_chan(ch->ch);
+#endif
+		fuse_session_destroy(ch->session);
+	}
+#ifdef HAVE_NEW_FUSE_UNMOUNT
+	fuse_unmount(mountpoint, ch->ch);
+#else
+	close(ch->fd);
+	fuse_unmount(mountpoint);
+#endif
+}
+
+static sqfs_err sqfs_ll_mount(
+		sqfs_ll_chan *ch,
+		const char *mountpoint,
+		struct fuse_args *args,
+		struct fuse_lowlevel_ops *ops,
+		size_t ops_size,
+		void *userdata) {
+#ifdef HAVE_NEW_FUSE_UNMOUNT
+	ch->ch = fuse_mount(mountpoint, args);
+	if (!ch->ch) {
+		return SQFS_ERR;
+	}
+#else
+	ch->fd = fuse_mount(mountpoint, args);
+	if (ch->fd == -1)
+		return SQFS_ERR;
+	ch->ch = fuse_kern_chan_new(ch->fd);
+	if (!ch->ch) {
+		close(ch->fd);
+		return SQFS_ERR;
+	}
+#endif
+
+	ch->session = fuse_lowlevel_new(&args,
+			ops, sizeof(*ops), userdata);
+	if (!ch->session) {
+		sqfs_ll_unmount(ch, mountpoint);
+		return SQFS_ERR;
+	}
+	fuse_session_add_chan(ch->session, ch->ch);
+	return SQFS_OK;
+}
+
+#endif /* FUSE_USE_VERSION >= 30 */
 
 /* Idle unmount timeout management is based on signal handling from
    fuse (see set_one_signal_handler and exit_handler in libfuse's
@@ -416,16 +522,20 @@ static void alarm_tick(int sig) {
 		return;
 	}
 
-	if (open_refcount == 0 && time(NULL) - last_access > idle_timeout_secs) {
-		fuse_session_exit(fuse_instance);
-		return;
+	if (get_open_refcount() == 0) {
+        struct timespec now;
+        clock_gettime(CLOCK_MONOTONIC, &now);
+        if (now.tv_sec - get_access_time() > idle_timeout_secs) {
+            fuse_session_exit(fuse_instance);
+            return;
+        }
 	}
 	alarm(1);  /* always reset our alarm */
 }
 
 static void setup_idle_timeout(struct fuse_session *se, unsigned int timeout_secs) {
-	last_access = time(NULL);
 	idle_timeout_secs = timeout_secs;
+	update_access_time();
 
 	struct sigaction sa;
 	memset(&sa, 0, sizeof(struct sigaction));
@@ -472,9 +582,15 @@ static sqfs_ll *sqfs_ll_open(const char *path, size_t offset) {
 int main(int argc, char *argv[]) {
 	struct fuse_args args;
 	sqfs_opts opts;
-	
-	char *mountpoint = NULL;
-	int mt, fg;
+
+#if FUSE_USE_VERSION >= 30
+	struct fuse_cmdline_opts fuse_cmdline_opts;
+#else
+	struct {
+		char *mountpoint;
+		int mt, foreground;
+	} fuse_cmdline_opts;
+#endif
 	
 	int err;
 	sqfs_ll *ll;
@@ -513,9 +629,16 @@ int main(int argc, char *argv[]) {
 	if (fuse_opt_parse(&args, &opts, fuse_opts, sqfs_opt_proc) == -1)
 		sqfs_usage(argv[0], true);
 
-	if (fuse_parse_cmdline(&args, &mountpoint, &mt, &fg) == -1)
+#if FUSE_USE_VERSION >= 30
+	if (fuse_parse_cmdline(&args, &fuse_cmdline_opts) != 0)
+#else
+	if (fuse_parse_cmdline(&args,
+                           &fuse_cmdline_opts.mountpoint,
+                           &fuse_cmdline_opts.mt,
+                           &fuse_cmdline_opts.foreground) == -1)
+#endif
 		sqfs_usage(argv[0], true);
-	if (mountpoint == NULL)
+	if (fuse_cmdline_opts.mountpoint == NULL)
 		sqfs_usage(argv[0], true);
 	
 	/* OPEN FS */
@@ -525,34 +648,39 @@ int main(int argc, char *argv[]) {
 	if (!err) {
 		sqfs_ll_chan ch;
 		err = -1;
-		if (sqfs_ll_mount(&ch, mountpoint, &args) == SQFS_OK) {
-			struct fuse_session *se = fuse_lowlevel_new(&args,
-				&sqfs_ll_ops, sizeof(sqfs_ll_ops), ll);	
-			if (se != NULL) {
-				if (sqfs_ll_daemonize(fg) != -1) {
-					if (fuse_set_signal_handlers(se) != -1) {
-						if (opts.idle_timeout_secs) {
-							setup_idle_timeout(se, opts.idle_timeout_secs);
-						}
-						fuse_session_add_chan(se, ch.ch);
-						/* FIXME: multithreading */
-						err = fuse_session_loop(se);
-						teardown_idle_timeout();
-						fuse_remove_signal_handlers(se);
-						#if HAVE_DECL_FUSE_SESSION_REMOVE_CHAN
-							fuse_session_remove_chan(ch.ch);
-						#endif
-					}
+		if (sqfs_ll_mount(
+                        &ch,
+                        fuse_cmdline_opts.mountpoint,
+                        &args,
+                        &sqfs_ll_ops,
+                        sizeof(sqfs_ll_ops),
+                        ll) == SQFS_OK) {
+			if (sqfs_ll_daemonize(fuse_cmdline_opts.foreground) != -1) {
+				if (fuse_set_signal_handlers(ch.session) != -1) {
+					if (opts.idle_timeout_secs) {
+						setup_idle_timeout(ch.session, opts.idle_timeout_secs);
+                    }
+#ifdef SQFS_MULTITHREADED
+                    if (!fuse_cmdline_opts.singlethread) {
+                        struct fuse_loop_config config;
+                        config.clone_fd = 1;
+                        config.max_idle_threads = 10;
+                        err = fuse_session_loop_mt(ch.session, &config);
+                    }
+                    else
+#endif
+                        err = fuse_session_loop(ch.session);
+					teardown_idle_timeout();
+					fuse_remove_signal_handlers(ch.session);
 				}
-				fuse_session_destroy(se);
 			}
 			sqfs_ll_destroy(ll);
-			sqfs_ll_unmount(&ch, mountpoint);
+			sqfs_ll_unmount(&ch, fuse_cmdline_opts.mountpoint);
 		}
 	}
 	fuse_opt_free_args(&args);
 	free(ll);
-	free(mountpoint);
+	free(fuse_cmdline_opts.mountpoint);
 	
 	return -err;
 }

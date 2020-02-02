@@ -101,6 +101,25 @@ extern "C" {
 	unsigned short sqfs_inode_mode_to_stat_mode(uint32_t mode);
 
 
+	__inline int __atomic_add_fetch(int *ptr, int val, int memmode)
+	{
+		((void)memmode);
+		return InterlockedAdd((LONG *)ptr, val);
+	}
+
+	__inline int __atomic_sub_fetch(int *ptr, int val, int memmode)
+	{
+		((void)memmode);
+		return InterlockedAdd((LONG *)ptr, -val);
+	}
+
+#ifndef __ATOMIC_ACQUIRE
+#define __ATOMIC_ACQUIRE 2
+#endif
+#ifndef __ATOMIC_RELEASE
+#define __ATOMIC_RELEASE 3
+#endif
+
 #ifdef __cplusplus
 }
 #endif

@@ -4,6 +4,7 @@ AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_HEADERS([config.h])
 AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE([foreign -Wall subdir-objects])
+AC_USE_SYSTEM_EXTENSIONS
 AM_SILENT_RULES(yes)
 AM_PROG_AR
 LT_INIT
@@ -17,11 +18,9 @@ AC_PROG_SED
 AC_PROG_CPP
 AC_SYS_LARGEFILE
 AM_PROG_CC_C_O
-SQ_PROG_CPP_POSIX_2001
 SQ_PROG_CC_WALL
 
-AC_DEFINE([_POSIX_C_SOURCE], [200112L], [POSIX 2001 compatibility])
-AC_DEFINE([FUSE_USE_VERSION], [26], [Version of FUSE API to use])
+#AC_DEFINE([SQFS_MULTITHREADED], [1], [Multithreaded request processing in low-level driver])
 
 # Non-POSIX declarations
 SQ_CHECK_DECL_MAKEDEV
@@ -47,12 +46,16 @@ AS_IF([test "x$sq_fuse_found" = xyes],[
 ])
 SQ_FUSE_RESULT
 
+SQ_FUSE_MULTITHREADED
+
 # Misc
 SQ_CHECK_PROG_MAKE_EXPORT
 AC_CHECK_TYPE([__le16],[
 	AC_DEFINE([HAVE_LINUX_TYPES_LE16],1,
 		[Define if <linux/types.h> defines the type __le16])
 ],,[#include <linux/types.h>])
+AC_CHECK_HEADERS([asm/byteorder.h])
+AC_C_INLINE
 
 
 # Other options

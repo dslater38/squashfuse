@@ -89,9 +89,9 @@ void sqfs_swapin32(uint32_t *v) { ((void)v);  }
 void sqfs_swapin64(uint64_t *v) { ((void)v);  }
 
 
-void sqfs_swapin16_internal(__le16 *v) { ((void)v);  }
-void sqfs_swapin32_internal(__le32 *v) { ((void)v); }
-void sqfs_swapin64_internal(__le64 *v) { ((void)v); }
+//void sqfs_swapin16_internal(__le16 *v) { ((void)v);  }
+//void sqfs_swapin32_internal(__le32 *v) { ((void)v); }
+//void sqfs_swapin64_internal(__le64 *v) { ((void)v); }
 
 #endif
 
