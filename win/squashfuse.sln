@@ -24,10 +24,15 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "squashfs-win", "squashfs-wi
 	ProjectSection(ProjectDependencies) = postProject
 		{E9250E5B-D78C-433A-A4F9-D8CFFFA9B7E7} = {E9250E5B-D78C-433A-A4F9-D8CFFFA9B7E7}
 		{45D30A63-AAB9-4A37-976D-E0DBE1972431} = {45D30A63-AAB9-4A37-976D-E0DBE1972431}
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3} = {0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}
 		{19949FC9-5879-49CF-9FBB-1E833E96A20E} = {19949FC9-5879-49CF-9FBB-1E833E96A20E}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "external_dependencies", "external_dependencies\external_dependencies.vcxproj", "{4A94847F-8858-405C-AD8A-85D7824FBE50}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "squashfsExtPS", "squashfsExtPS\squashfsExtPS.vcxproj", "{AFFC120A-B12B-4C98-9FE7-E1D14098B3D8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "squashfsExt", "squashfsExt\squashfsExt.vcxproj", "{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,6 +142,30 @@ Global
 		{4A94847F-8858-405C-AD8A-85D7824FBE50}.ReleaseMT|Win32.Build.0 = ReleaseMT|Win32
 		{4A94847F-8858-405C-AD8A-85D7824FBE50}.ReleaseMT|x64.ActiveCfg = ReleaseMT|x64
 		{4A94847F-8858-405C-AD8A-85D7824FBE50}.ReleaseMT|x64.Build.0 = ReleaseMT|x64
+		{AFFC120A-B12B-4C98-9FE7-E1D14098B3D8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AFFC120A-B12B-4C98-9FE7-E1D14098B3D8}.Debug|x64.ActiveCfg = Debug|x64
+		{AFFC120A-B12B-4C98-9FE7-E1D14098B3D8}.Release|Win32.ActiveCfg = Release|Win32
+		{AFFC120A-B12B-4C98-9FE7-E1D14098B3D8}.Release|x64.ActiveCfg = Release|x64
+		{AFFC120A-B12B-4C98-9FE7-E1D14098B3D8}.ReleaseClang-Static|Win32.ActiveCfg = Release|Win32
+		{AFFC120A-B12B-4C98-9FE7-E1D14098B3D8}.ReleaseClang-Static|x64.ActiveCfg = Release|x64
+		{AFFC120A-B12B-4C98-9FE7-E1D14098B3D8}.ReleaseMT|Win32.ActiveCfg = Release|Win32
+		{AFFC120A-B12B-4C98-9FE7-E1D14098B3D8}.ReleaseMT|x64.ActiveCfg = ReleaseMT|x64
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.Debug|Win32.Build.0 = Debug|Win32
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.Debug|x64.ActiveCfg = Debug|x64
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.Debug|x64.Build.0 = Debug|x64
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.Release|Win32.ActiveCfg = Release|Win32
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.Release|Win32.Build.0 = Release|Win32
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.Release|x64.ActiveCfg = Release|x64
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.Release|x64.Build.0 = Release|x64
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.ReleaseClang-Static|Win32.ActiveCfg = Release|Win32
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.ReleaseClang-Static|Win32.Build.0 = Release|Win32
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.ReleaseClang-Static|x64.ActiveCfg = Release|x64
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.ReleaseClang-Static|x64.Build.0 = Release|x64
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.ReleaseMT|Win32.ActiveCfg = Release|Win32
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.ReleaseMT|Win32.Build.0 = Release|Win32
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.ReleaseMT|x64.ActiveCfg = ReleaseMT|x64
+		{0B364DA2-7FDD-4B4E-A160-CEAB27EB0DC3}.ReleaseMT|x64.Build.0 = ReleaseMT|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

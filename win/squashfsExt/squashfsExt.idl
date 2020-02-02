@@ -1,0 +1,35 @@
+// squashfsExt.idl : IDL source for squashfsExt
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (squashfsExt.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(ed6efc4a-9ac5-4cfa-a786-91402383349b),
+	pointer_default(unique)
+]
+interface IsqfsExt : IUnknown
+{
+};
+[
+	uuid(66cf5020-0cb0-4836-adbf-49d3ed36f5cc),
+	version(1.0),
+]
+library squashfsExtLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(eaca1da7-a6db-42b5-883e-6d4051dbef1c)
+	]
+	coclass sqfsExt
+	{
+		[default] interface IShellExtInit;
+		interface IContextMenu;
+	};
+};
+
+import "shobjidl.idl";

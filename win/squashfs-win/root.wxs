@@ -12,6 +12,7 @@
         <File Id="findWinFsp.cmd" KeyPath="no" Source="$(var.LibDir)\..\..\..\..\squashfs-win\findWinFsp.cmd" />
         <File Id="umount.cmd" KeyPath="no" Source="$(var.LibDir)\..\..\..\..\squashfs-win\umount.cmd" />
         <File Id="squashfs_env" KeyPath="no" Source="$(var.LibDir)\..\..\..\..\squashfs-win\squashfs_env.cmd" />
+        <File Id="squashfsExt.dll" KeyPath="no" Source="$(var.SourceDir)\squashfsExt.dll" />
       </Component>
       <?if $(var.Static) = 0?>
       <Component Id="dynamic_libs" Guid="{6A5567CE-B8CA-4C48-8082-C04BC8A9547E}">
