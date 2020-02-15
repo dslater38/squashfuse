@@ -1,0 +1,13 @@
+HKCR
+{
+	NoRemove squashfile
+	{
+		NoRemove ShellEx
+		{
+			NoRemove ContextMenuHandlers
+			{
+				ForceRemove squashfsExt = s '{eaca1da7-a6db-42b5-883e-6d4051dbef1c}'
+			}
+		}
+	}
+}

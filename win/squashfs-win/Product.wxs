@@ -5,51 +5,52 @@
 <?define MyProductName="SQUASHFS-Win"?>
 <?define MyVersion="0.5.0"?>
 <?define MyDescription="SquashFs for Windows"?>
+<?define squashfsClsid="{eaca1da7-a6db-42b5-883e-6d4051dbef1c}"?>
 
 <?if $(var.MyArch) = x64?>
-  <?define UpgradeCode="$(var.UpgradeCode64)"?>
-  <?define OtherUpgradeCode="$(var.UpgradeCode32)"?>
-  <?define ProgramFilesFolder="ProgramFiles64Folder"?>
-  <?define LauncherRegistryKey="Software\WOW6432Node\WinFsp\Services"?>
-  <?define ProductName="$(var.MyProductName) ($(var.MyArch))"?>
+<?define UpgradeCode="$(var.UpgradeCode64)"?>
+<?define OtherUpgradeCode="$(var.UpgradeCode32)"?>
+<?define ProgramFilesFolder="ProgramFiles64Folder"?>
+<?define LauncherRegistryKey="Software\WOW6432Node\WinFsp\Services"?>
+<?define ProductName="$(var.MyProductName) ($(var.MyArch))"?>
 <?else?>
-  <?define UpgradeCode="$(var.UpgradeCode32)"?>
-  <?define OtherUpgradeCode="$(var.UpgradeCode64)"?>
-  <?define ProgramFilesFolder="ProgramFilesFolder"?>
-  <?define LauncherRegistryKey="Software\WinFsp\Services"?>
+<?define UpgradeCode="$(var.UpgradeCode32)"?>
+<?define OtherUpgradeCode="$(var.UpgradeCode64)"?>
+<?define ProgramFilesFolder="ProgramFilesFolder"?>
+<?define LauncherRegistryKey="Software\WinFsp\Services"?>
 <?define ProductName="$(var.MyProductName)"?>
 <?endif?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
-  <Product Id="*" 
-           Name="$(var.ProductName)" 
-           Language="1033" 
+  <Product Id="*"
+           Name="$(var.ProductName)"
+           Language="1033"
            Version="$(var.MyVersion)"
-           Manufacturer="$(var.MyProductName)" 
+           Manufacturer="$(var.MyProductName)"
            UpgradeCode="$(var.UpgradeCode)">
 
 
     <Package Description="$(var.MyProductName) ($(var.MyArch)) - $(var.MyDescription)"
-             InstallerVersion="200" 
-             Compressed="yes" 
+             InstallerVersion="200"
+             Compressed="yes"
              InstallScope="perMachine" />
 
     <!--DisallowUpgradeErrorMessage="An older version of $(var.MyProductName) is already installed. You must uninstall it before you can install this version." -->
-    
-	<MajorUpgrade
-      Schedule="afterInstallInitialize" 
-      Disallow="no" 
-      AllowDowngrades="no" 
-      AllowSameVersionUpgrades="yes" 
-      DowngradeErrorMessage="A newer version of $(var.ProductName) is already installed." />
-    
+
+    <MajorUpgrade
+        Schedule="afterInstallInitialize"
+        Disallow="no"
+        AllowDowngrades="no"
+        AllowSameVersionUpgrades="yes"
+        DowngradeErrorMessage="A newer version of $(var.ProductName) is already installed." />
+
     <Media Id="1" Cabinet="SQUASHFS_Win.cab" EmbedCab="yes" />
-    
+
     <Property Id="OTHERINSTALLED">
       <ProductSearch UpgradeCode="$(var.OtherUpgradeCode)" Minimum="0.0.0.0" />
     </Property>
-    
+
     <Condition Message="A version of $(var.MyProductName) with a different computer architecture is already installed. You must uninstall it before you can install this version.">
       NOT OTHERINSTALLED
     </Condition>
@@ -79,7 +80,7 @@
         </Directory>
       </Directory>
     </Directory>
-    
+
     <DirectoryRef Id="INSTALLDIR">
       <Component Id="C.INSTALLDIR" Guid="{C953BBC7-D7FF-43cf-9FBD-EBEF214677FB}">
         <RegistryValue
@@ -116,6 +117,87 @@
           </RegistryKey>
         </RegistryKey>
       </Component>
+      <Component Id="C.squashfs.shellext" Guid="{757E998A-63E2-403E-95B4-A19A2DAEC3C5}">
+
+
+        <RegistryKey Root="HKCR" Key="CLSID" >
+
+          <RegistryKey
+              Key="$(var.squashfsClsid)" >
+            <RegistryValue Type="string"
+                            Value="sqfsExt class"
+                            KeyPath="yes" />
+            <RegistryValue
+              Name="Version"
+              Type="string"
+              Value="1.0" />
+
+            <RegistryKey Key="InprocServer32" >
+              <RegistryValue Type="string"
+                              Value="[INSTALLDIR]bin\squashfsExt.dll" />
+              <RegistryValue
+                Name="ThreadingModel"
+                Type="string"
+                Value="Apartment" />
+            </RegistryKey>
+          </RegistryKey>
+        </RegistryKey>
+
+
+
+      </Component>
+      <Component Id="C.squashfs.squashfile" Guid="{8A1BF9AB-C60F-42A4-96D6-B8D64E3B6864}">
+
+
+        <RegistryKey
+          Root="HKCR"
+          Key="squashfile" >
+          <RegistryValue Type="string" Value="" KeyPath="yes"/>
+          <RegistryKey Key="ShellEx\ContextMenuHandlers\squashfsExt" >
+            <RegistryValue
+              Type="string"
+              Value="$(var.squashfsClsid)" />
+          </RegistryKey>
+          <RegistryKey Key="DefaultIcon" >
+            <RegistryValue
+              Type="string"
+              Value="&quot;[INSTALLDIR]bin\squashfuse.exe&quot;,0" />
+          </RegistryKey>
+        </RegistryKey>
+
+
+
+      </Component>
+      <Component Id="C.squashfs.squashfile.approved" Guid="{06CD963E-6637-45F4-99E8-C90AF7BA5F88}">
+
+
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions">
+          <RegistryKey Key="Approved" >
+            <RegistryValue
+              Name="$(var.squashfsClsid)"
+              Type="string"
+              Value="Squash Filesystem"
+              KeyPath="yes"/>
+          </RegistryKey>
+        </RegistryKey>
+
+
+      </Component>
+      <Component Id="C.squashfs.sqfext" Guid="{3413EABD-FFEE-4921-82AA-A027C0381BBE}">
+        <RegistryKey Root="HKCR" Key=".sqf" >
+          <RegistryValue Type="string" Value="squashfile" KeyPath="yes" />
+        </RegistryKey>
+      </Component>
+      <Component Id="C.squashfs.sqfsext" Guid="{3413EABD-FFEE-4921-82AA-B027C0381BBE}">
+        <RegistryKey Root="HKCR" Key=".sqfs" >
+          <RegistryValue Type="string" Value="squashfile" KeyPath="yes" />
+        </RegistryKey>
+      </Component>
+      <Component Id="C.squashfs.squashext" Guid="{3413EABD-FFEE-4921-82AA-C027C0381BBE}">
+        <RegistryKey Root="HKCR" Key=".squash" >
+          <RegistryValue Type="string" Value="squashfile" KeyPath="yes" />
+        </RegistryKey>
+      </Component>
     </DirectoryRef>
 
     <DirectoryRef Id="ApplicationProgramsFolder">
@@ -136,7 +218,7 @@
         <RegistryValue Root="HKCU" Key="Software\$(var.MyProductName)\help_doc" Name="installed" Type="integer" Value="1" KeyPath="no"/>
       </Component>
     </DirectoryRef>
-    
+
     <Feature
         Id="F.Main"
         Level="1"
@@ -149,6 +231,12 @@
         Absent="disallow">
       <ComponentRef Id="C.INSTALLDIR" />
       <ComponentRef Id="C.squashfs.reg" />
+      <ComponentRef Id="C.squashfs.shellext"/>
+      <ComponentRef Id="C.squashfs.squashfile"/>
+      <ComponentRef Id="C.squashfs.squashfile.approved"/>
+      <ComponentRef Id="C.squashfs.sqfext"/>
+      <ComponentRef Id="C.squashfs.sqfsext"/>
+      <ComponentRef Id="C.squashfs.squashext"/>
       <ComponentGroupRef Id="C.Main" />
       <ComponentRef Id="ApplicationShortcut" />
       <?if $(var.Static) = 0?>
@@ -157,12 +245,12 @@
     </Feature>
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
     <UIRef Id="WixUI_InstallDir" />
-          
+
     <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
-    
+
     <Icon Id="icon.ico" SourceFile="..\squashfuse.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
-    
+
   </Product>
 </Wix>
