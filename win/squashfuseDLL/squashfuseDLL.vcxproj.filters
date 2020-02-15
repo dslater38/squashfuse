@@ -78,6 +78,9 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\pthread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="squashfuse.def">
@@ -146,7 +149,10 @@
     <ClCompile Include="..\..\util.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\WinMutex.c">
+    <ClCompile Include="..\..\cache_mt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\WinMutex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

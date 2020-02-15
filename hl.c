@@ -71,12 +71,20 @@ static void sqfs_hl_op_destroy(void *user_data) {
 	free(hl);
 }
 
-static void *sqfs_hl_op_init(struct fuse_conn_info *conn, struct fuse_config *conf) {
+static void *sqfs_hl_op_init(struct fuse_conn_info *conn
+#if FUSE_USE_VERSION >= 30
+			     ,struct fuse_config *cfg
+#endif
+			     ) {
 	return fuse_get_context()->private_data;
 }
 
-static int sqfs_hl_op_getattr(const char *path, struct fuse_stat *st, struct fuse_file_info *fi) {
-	sqfs *fs=NULL;
+static int sqfs_hl_op_getattr(const char *path, struct stat *st
+#if FUSE_USE_VERSION >= 30
+			      , struct fuse_file_info *fi
+#endif
+			      ) {
+	sqfs *fs;
 	sqfs_inode inode;
 
 	sqfs_inode *pInode = NULL;
@@ -129,7 +137,11 @@ static int sqfs_hl_op_releasedir(const char *path,
 }
 
 static int sqfs_hl_op_readdir(const char *path, void *buf,
-		fuse_fill_dir_t filler, fuse_off_t offset, struct fuse_file_info *fi, enum fuse3_readdir_flags flags) {
+		fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi
+#if FUSE_USE_VERSION >= 30
+	,enum fuse_readdir_flags flags
+#endif
+	) {
 	sqfs_err err;
 	sqfs *fs;
 	sqfs_inode *inode;
@@ -149,8 +161,13 @@ static int sqfs_hl_op_readdir(const char *path, void *buf,
 	while (sqfs_dir_next(fs, &dir, &entry, &err)) {
 		sqfs_off_t doff = sqfs_dentry_next_offset(&entry);
 		st.st_mode = sqfs_dentry_mode(&entry);
-		if (filler(buf, sqfs_dentry_name(&entry), &st, doff, flags))
+		if (filler(buf, sqfs_dentry_name(&entry), &st, doff
+#if FUSE_USE_VERSION >= 30
+			   , 0 // flags
+#endif
+		     )) {
 			return 0;
+		}
 	}
 	if (err)
 		return -EIO;

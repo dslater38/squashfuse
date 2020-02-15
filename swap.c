@@ -27,6 +27,7 @@
 #ifdef BIG_ENDIAN
 
 /* #define SWAP(BITS) \
+
 	void sqfs_swapin##BITS(uint##BITS##_t *v) { \
 		int i; \
 		uint8_t *c = (uint8_t*)v; \

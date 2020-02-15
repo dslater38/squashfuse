@@ -99,13 +99,21 @@ void sqfs_usage(char *progname, bool fuse_usage) {
 	fprintf(stderr, "Usage: %s [options] ARCHIVE MOUNTPOINT\n",
 		progname ? progname : PACKAGE_NAME);
 	if (fuse_usage) {
+#if FUSE_USE_VERSION >= 30 && !defined(FUSE_WINFSP_FUSE_H_INCLUDED)	// WinFsp FUSE doesn't define fuse_cmdline_help
+		fuse_cmdline_help();
+#else
 		struct fuse_args args = FUSE_ARGS_INIT(0, NULL);
 		fuse_opt_add_arg(&args, ""); /* progname */
 		fuse_opt_add_arg(&args, "-ho");
 		fprintf(stderr, "\n");
+// <<<<<<< HEAD
 		/* fuse_parse_cmdline(&args, NULL, NULL, NULL); */
 		fuse_parse_cmdline(&args, NULL);
 		sqfs_print_compression_info();
+// =======
+//		fuse_parse_cmdline(&args, NULL, NULL, NULL);
+#endif
+// >>>>>>> 5f54439e463b79a1694b779abf1bece558bb0858
 	}
 	exit(-2);
 }

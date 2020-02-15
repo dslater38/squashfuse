@@ -31,6 +31,10 @@
 #include <stdint.h>
 #include <sys/types.h>
 
+#ifdef SQFS_MULTITHREADED
+#include <pthread.h>
+#endif
+
 #ifdef _WIN32
 	#include <win32.h>
 #else
@@ -59,11 +63,32 @@ typedef struct sqfs_inode sqfs_inode;
 typedef struct {
 	size_t size;
 	void *data;
+	int refcount;
 } sqfs_block;
 
 typedef struct {
 	sqfs_off_t block;
 	size_t offset;
 } sqfs_md_cursor;
+
+/* Increment the refcount on the block. */
+static inline void sqfs_block_ref(sqfs_block *block) {
+#ifdef SQFS_MULTITHREADED
+	__atomic_add_fetch(&block->refcount, 1, __ATOMIC_RELAXED);
+#else
+	++(block->refcount);
+#endif
+}
+
+/* decrement the refcount on the block, return non-zero if we held the last
+ * reference.
+ */
+static inline int sqfs_block_deref(sqfs_block *block) {
+#ifdef SQFS_MULTITHREADED
+	return __atomic_sub_fetch(&block->refcount, 1, __ATOMIC_ACQ_REL) == 0;
+#else
+	return ((--(block->refcount)) == 0);
+#endif
+}
 
 #endif
