@@ -79,7 +79,7 @@ static void *sqfs_hl_op_init(struct fuse_conn_info *conn
 	return fuse_get_context()->private_data;
 }
 
-static int sqfs_hl_op_getattr(const char *path, struct stat *st
+static int sqfs_hl_op_getattr(const char *path, struct fuse_stat *st
 #if FUSE_USE_VERSION >= 30
 			      , struct fuse_file_info *fi
 #endif
@@ -137,7 +137,7 @@ static int sqfs_hl_op_releasedir(const char *path,
 }
 
 static int sqfs_hl_op_readdir(const char *path, void *buf,
-		fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi
+		fuse_fill_dir_t filler, fuse_off_t offset, struct fuse_file_info *fi
 #if FUSE_USE_VERSION >= 30
 	,enum fuse_readdir_flags flags
 #endif

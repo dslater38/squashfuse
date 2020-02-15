@@ -11,3 +11,7 @@
 swap.c.inc
 swap.h.inc
 squashfsExtPS
+*.aps
+squashfsExt/squashfsExt_i.c
+squashfsExt/squashfsExt_i.h
+squashfsExt/squashfsExt_p.c
