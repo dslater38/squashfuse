@@ -1,0 +1,10 @@
+
+/^struct squashfs_/,/^}/{
+	s/^struct \(squashfs_\([^ \t\r\n\v\f]*\)\).*/void sqfs_swapin_\2(struct \1 *s){/p;t decl
+	s/};/}/p;t
+	s/^[ \t\r\n\v\f]*__le\([0-9]*\)[ \t\r\n\v\f]*\([a-z_]*\);$/sqfs_swapin\1_internal(\&s->\2);/p
+}
+d
+:decl
+s/{/;/
+w swap.h.inc.foo2
