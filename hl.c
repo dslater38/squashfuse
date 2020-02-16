@@ -344,7 +344,9 @@ int main(int argc, char *argv[]) {
 	if (!hl)
 		return -1;
 
+#ifndef SQFS_MULTITHREADED
 	fuse_opt_add_arg(&args, "-s"); /* single threaded */
+#endif
 	ret = fuse_main(args.argc, args.argv, &sqfs_hl_ops, hl);
 	fuse_opt_free_args(&args);
 	return ret;
