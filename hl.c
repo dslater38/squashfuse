@@ -81,29 +81,17 @@ static void *sqfs_hl_op_init(struct fuse_conn_info *conn
 	return fuse_get_context()->private_data;
 }
 
-static int sqfs_hl_op_getattr(const char *path, struct stat *st
+static int sqfs_hl_op_getattr(const char *path, struct fuse_stat *st
 #if FUSE_USE_VERSION >= 30
 			      , struct fuse_file_info *fi
 #endif
 			      ) {
 	sqfs *fs;
 	sqfs_inode inode;
+	if (sqfs_hl_lookup(&fs, &inode, path))
+		return -ENOENT;
 
-	sqfs_inode *pInode = NULL;
-
-	if (NULL != fi) {
-		if (sqfs_hl_lookup(&fs, NULL, NULL))
-			return -ENOENT;
-		pInode = (sqfs_inode*)(intptr_t)fi->fh;
-	}
-	
-	if (NULL == pInode) {
-		if (sqfs_hl_lookup(&fs, &inode, path))
-			return -ENOENT; 
-		pInode = &inode;
-	}
-
-	if (sqfs_stat(fs, pInode, st))
+	if (sqfs_stat(fs, &inode, st))
 		return -ENOENT;
 
 	return 0;
@@ -139,7 +127,7 @@ static int sqfs_hl_op_releasedir(const char *path,
 }
 
 static int sqfs_hl_op_readdir(const char *path, void *buf,
-		fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi
+		fuse_fill_dir_t filler, fuse_off_t offset, struct fuse_file_info *fi
 #if FUSE_USE_VERSION >= 30
 	,enum fuse_readdir_flags flags
 #endif
