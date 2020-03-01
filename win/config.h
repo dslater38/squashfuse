@@ -144,3 +144,13 @@
 
 /* POSIX 2001 compatibility */
 #define _POSIX_C_SOURCE 200112L
+
+#define statvfs fuse_statvfs
+
+typedef unsigned short mode_t;
+
+#include <sys/stat.h>
+
+#define st_atime st_atim.tv_sec      /* Backward compatibility */
+#define st_mtime st_mtim.tv_sec
+#define st_ctime st_ctim.tv_sec

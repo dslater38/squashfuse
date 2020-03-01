@@ -64,6 +64,7 @@ EXPORTS
     sqfs_xattr_value
 	sqfs_xattr_find
 	sqfs_xattr_lookup
+	sqfs_statfs
 	sqfs_stat
 	sqfs_listxattr
 	sqfs_usage

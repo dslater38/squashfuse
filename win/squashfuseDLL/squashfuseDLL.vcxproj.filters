@@ -149,5 +149,8 @@
     <ClCompile Include="..\WinMutex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\stat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

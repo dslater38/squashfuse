@@ -475,6 +475,7 @@
     <ClCompile Include="..\..\nonstd-pread.c" />
     <ClCompile Include="..\..\nonstd-stat.c" />
     <ClCompile Include="..\..\stack.c" />
+    <ClCompile Include="..\..\stat.c" />
     <ClCompile Include="..\..\swap.c" />
     <ClCompile Include="..\..\table.c" />
     <ClCompile Include="..\..\traverse.c" />

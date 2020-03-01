@@ -1,0 +1,8 @@
+﻿  Checking for required files
+EXEC : error : MIDL will not generate DLLDATA.C unless you have at least 1 interface in the main project.
+D:\Software\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppCommon.targets(128,5): error MSB3073: The command "if exist dlldata.c goto :END
+D:\Software\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppCommon.targets(128,5): error MSB3073: echo Error: MIDL will not generate DLLDATA.C unless you have at least 1 interface in the main project.
+D:\Software\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppCommon.targets(128,5): error MSB3073: Exit 1
+D:\Software\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppCommon.targets(128,5): error MSB3073: :END
+D:\Software\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppCommon.targets(128,5): error MSB3073: 
+D:\Software\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppCommon.targets(128,5): error MSB3073: :VCEnd" exited with code 1.
