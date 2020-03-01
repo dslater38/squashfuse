@@ -1,0 +1,85 @@
+
+
+/* this ALWAYS GENERATED file contains the IIDs and CLSIDs */
+
+/* link this file in with the server and any clients */
+
+
+ /* File created by MIDL compiler version 8.00.0603 */
+/* at Sun Feb 02 09:55:07 2020
+ */
+/* Compiler settings for squashfsExt.idl:
+    Oicf, W1, Zp8, env=Win64 (32b run), target_arch=AMD64 8.00.0603 
+    protocol : all , ms_ext, c_ext, robust
+    error checks: allocation ref bounds_check enum stub_data 
+    VC __declspec() decoration level: 
+         __declspec(uuid()), __declspec(selectany), __declspec(novtable)
+         DECLSPEC_UUID(), MIDL_INTERFACE()
+*/
+/* @@MIDL_FILE_HEADING(  ) */
+
+#pragma warning( disable: 4049 )  /* more than 64k source lines */
+
+
+#ifdef __cplusplus
+extern "C"{
+#endif 
+
+
+#include <rpc.h>
+#include <rpcndr.h>
+
+#ifdef _MIDL_USE_GUIDDEF_
+
+#ifndef INITGUID
+#define INITGUID
+#include <guiddef.h>
+#undef INITGUID
+#else
+#include <guiddef.h>
+#endif
+
+#define MIDL_DEFINE_GUID(type,name,l,w1,w2,b1,b2,b3,b4,b5,b6,b7,b8) \
+        DEFINE_GUID(name,l,w1,w2,b1,b2,b3,b4,b5,b6,b7,b8)
+
+#else // !_MIDL_USE_GUIDDEF_
+
+#ifndef __IID_DEFINED__
+#define __IID_DEFINED__
+
+typedef struct _IID
+{
+    unsigned long x;
+    unsigned short s1;
+    unsigned short s2;
+    unsigned char  c[8];
+} IID;
+
+#endif // __IID_DEFINED__
+
+#ifndef CLSID_DEFINED
+#define CLSID_DEFINED
+typedef IID CLSID;
+#endif // CLSID_DEFINED
+
+#define MIDL_DEFINE_GUID(type,name,l,w1,w2,b1,b2,b3,b4,b5,b6,b7,b8) \
+        const type name = {l,w1,w2,{b1,b2,b3,b4,b5,b6,b7,b8}}
+
+#endif !_MIDL_USE_GUIDDEF_
+
+MIDL_DEFINE_GUID(IID, IID_IsqfsExt,0xed6efc4a,0x9ac5,0x4cfa,0xa7,0x86,0x91,0x40,0x23,0x83,0x34,0x9b);
+
+
+MIDL_DEFINE_GUID(IID, LIBID_squashfsExtLib,0x66cf5020,0x0cb0,0x4836,0xad,0xbf,0x49,0xd3,0xed,0x36,0xf5,0xcc);
+
+
+MIDL_DEFINE_GUID(CLSID, CLSID_sqfsExt,0xeaca1da7,0xa6db,0x42b5,0x88,0x3e,0x6d,0x40,0x51,0xdb,0xef,0x1c);
+
+#undef MIDL_DEFINE_GUID
+
+#ifdef __cplusplus
+}
+#endif
+
+
+

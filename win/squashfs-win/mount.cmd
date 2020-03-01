@@ -40,17 +40,29 @@ for /F %%I in ('whoami.exe') do (
     set "SQUASHGROUPNAME=--GroupName=%%~I"
 )
 
-"!LAUNCHCTL!" start squashfs !SQUASHINST! !SQUASHFILE! !SQUASHDIR! !SQUASHUSERNAME! !SQUASHGROUPNAME!
+"!LAUNCHCTL!" start squashfs !SQUASHFILE! !SQUASHFILE! !SQUASHDIR! !SQUASHUSERNAME! !SQUASHGROUPNAME!
 
 
 goto :END
 
 :LIST
+rem echo on
 rem change the forground color to bright green
-FORFILES.EXE /P %~dps0 /M %~nxs0 /C "CMD.EXE /C ECHO 0x1B[1;32m
-"!LAUNCHCTL!" list | more /E +1
+FORFILES.EXE /P %~dps0 /M %~nxs0 /C "CMD.EXE /C ECHO | SET /P=^"0x1B[1;32m^""	
+echo ========================================================================
+echo                   Mounted Filesystems                                   
+echo ________________________________________________________________________
+for /F "tokens=2* skip=1" %%L in ('"c:\Program Files (x86)\WinFsp\bin\launchctl-x64.exe" list') do ( 
+ echo %%L
+)
+echo ________________________________________________________________________
+FORFILES.EXE /P %~dps0 /M %~nxs0 /C "CMD.EXE /C ECHO | SET /P=^"0x1B[0;m^""
+
+rem "!LAUNCHCTL!" list | more /E +1
+
+
 rem reset the colors
-FORFILES.EXE /P %~dps0 /M %~nxs0 /C "CMD.EXE /C ECHO 0x1B[0;m
+
 
 :USAGE
 echo Usage: mount [squashfs_file] [directory]
